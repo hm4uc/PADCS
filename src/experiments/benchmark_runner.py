@@ -2,8 +2,8 @@
 Benchmark Runner — Chạy batch thí nghiệm tự động + lưu kết quả CSV.
 
 Cung cấp:
-  • run_single()  — Chạy 1 lần MA, trả về dict metrics.
-  • run_batch()   — Chạy N lần, lưu CSV, in summary.
+  • run_single()  - Chạy 1 lần PADCS, trả về dict metrics.
+  • run_batch()   - Chạy N lần, lưu CSV, in summary.
   • create_fixed_prefs() — Tạo UserPreferences cho chế độ Fixed Score.
 
 Usage:
@@ -21,7 +21,7 @@ import pandas as pd
 sys.path.insert(0, os.path.join(os.path.dirname(__file__), '..'))
 
 from services.data_loader import load_solomon_instance
-from services.algorithm.ma_engine import MemeticAlgorithm
+from services.algorithm.padcs_engine import PADCS
 from models.requests import UserPreferences
 
 
@@ -109,7 +109,7 @@ def run_single(
     ga_params: dict = None,
 ) -> dict:
     """
-    Chạy 1 lần MA, trả về dict metrics.
+    Chạy 1 lần PADCS, trả về dict metrics.
 
     Parameters
     ----------
@@ -132,16 +132,16 @@ def run_single(
     flags = ablation_flags or {}
     params = ga_params or {}
 
-    ma = MemeticAlgorithm(
+    solver = PADCS(
         user_prefs=user_prefs,
         pois=pois,
         instance_name=instance_name,
         **flags,
         **params,
     )
-    response = ma.run()
+    response = solver.run()
 
-    best = ma.best_individual
+    best = solver.best_individual
     route_ids = [p.id for p in best.route]
 
     # Đếm category distribution trong route
@@ -159,9 +159,9 @@ def run_single(
         "total_cost": best.total_cost,
         "total_duration": response.total_duration,
         "execution_time": response.execution_time,
-        "generations_run": ma.actual_gens,
+        "generations_run": solver.actual_gens,
         "route_ids": json.dumps(route_ids),
-        "convergence_log": json.dumps(ma.convergence_log),
+        "convergence_log": json.dumps(solver.convergence_log),
         **{f"cat_{cat}": cnt for cat, cnt in cat_counts.items()},
     }
 
@@ -177,7 +177,7 @@ def run_batch(
     ga_params: dict = None,
 ) -> pd.DataFrame:
     """
-    Chạy N lần MA, lưu kết quả CSV, in summary.
+    Chạy N lần PADCS, lưu kết quả CSV, in summary.
 
     Returns
     -------

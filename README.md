@@ -1,6 +1,6 @@
-# TOPTW-MemeticAlgorithm
+# PADCS
 
-**A Memetic Algorithm (MA) for the Team Orienteering Problem with Time Windows (TOPTW) - Personalized Travel Itinerary Optimization**
+**A Personalized Adaptive Destructive-Constructive Search (PADCS) - Personalized Travel Itinerary Optimization**
 
 > Thesis project - Faculty of Information Technology, VNU University of Engineering and Technology
 
@@ -8,7 +8,7 @@
 
 This system solves the **Team Orienteering Problem with Time Windows (TOPTW)** with user-dependent scoring. Unlike classic TOPTW where each POI has a fixed profit, our model computes personalized scores based on user preferences across 6 interest categories, subject to budget and time window constraints.
 
-The solver implements a **Memetic Algorithm (MA)** - a Genetic Algorithm hybridized with local search operators - exposed via a REST API.
+The solver implements a **Personalized Adaptive Destructive-Constructive Search (PADCS)** - a Genetic Algorithm hybridized with local search operators - exposed via a REST API.
 
 ## Algorithm Design
 
@@ -44,7 +44,7 @@ The solver implements a **Memetic Algorithm (MA)** - a Genetic Algorithm hybridi
 ## Project Structure
 
 ```
-TOPTW-MemeticAlgorithm/
+PADCS/
 ├── src/
 │   ├── main.py                     # FastAPI entry point
 │   ├── api/                        # API routes
@@ -52,7 +52,7 @@ TOPTW-MemeticAlgorithm/
 │   ├── models/                     # Pydantic & Domain models
 │   ├── services/                   # Logic & Data loading
 │   │   ├── algorithm/              # Memetic Algorithm core
-│   │   │   ├── ma_engine.py        # Main loop
+│   │   │   ├── padcs_engine.py      # Main loop
 │   │   │   ├── initialization.py   # Init strategies
 │   │   │   ├── fitness.py          # Fitness & Constraints
 │   │   │   └── operators/          # GA Operators (OX1, 2-opt, Repair)

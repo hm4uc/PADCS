@@ -2,7 +2,7 @@ from fastapi import APIRouter, HTTPException
 import logging
 from models.requests import UserPreferences
 from models.responses import OptimizationResponse
-from services.algorithm.ma_engine import MemeticAlgorithm
+from services.algorithm.padcs_engine import PADCS
 from services.data_loader import load_solomon_instance
 
 router = APIRouter()
@@ -15,11 +15,11 @@ logger = logging.getLogger(__name__)
     summary="Tối ưu hóa lộ trình du lịch",
     description=(
         "Nhận sở thích người dùng (ngân sách, khung giờ, mức quan tâm 5 loại hình) "
-        "và trả về lộ trình tối ưu sử dụng thuật toán Memetic Algorithm (MA).\n\n"
+        "và trả về lộ trình tối ưu sử dụng phương pháp Tìm kiếm hủy-dựng thích nghi cá nhân hóa (PADCS).\n\n"
         "**Quy trình xử lý:**\n"
         "1. Pydantic validation: kiểm tra instance_name, budget, khung thời gian, interests → 422 nếu sai định dạng.\n"
         "2. Business validation: kiểm tra start_node_id có tồn tại trong instance đã chọn → 400 nếu không hợp lệ.\n"
-        "3. Chạy MA tối ưu lộ trình → 500 nếu lỗi hệ thống.\n"
+        "3. Chạy PADCS tối ưu lộ trình → 500 nếu lỗi hệ thống.\n"
         "4. Kiểm tra kết quả: route rỗng hoặc chỉ có Depot → 404.\n\n"
         "**Loại hình điểm tham quan (interests):**\n"
         "- `history_culture`: Lịch sử - Văn hóa\n"
@@ -100,13 +100,13 @@ async def optimize_itinerary(request: UserPreferences):
                 ),
             )
 
-        # - Run MA -
-        ma_solver = MemeticAlgorithm(
+        # - Run PADCS -
+        solver = PADCS(
             request,
             pois=pois,
             instance_name=request.instance_name,
         )
-        result = ma_solver.run()
+        result = solver.run()
 
         # - Edge Case 7: GA trả về route rỗng [Depot, Depot] -
         if not result:

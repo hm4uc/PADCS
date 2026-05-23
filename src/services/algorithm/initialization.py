@@ -1,9 +1,9 @@
 """
-Khởi tạo quần thể cho Thuật toán Memetic (MA).
+Khởi tạo quần thể cho thuật toán PADCS.
 
 Triển khai hai chiến lược từ Botelho et al. (2010) và Labadie et al. (2012):
-  • Chiến lược 1 – Heuristic chèn ngẫu nhiên (80% quần thể, 80 cá thể)
-  • Chiến lược 2 – Khởi tạo ngẫu nhiên thuần túy (20% quần thể, 20 cá thể)
+  • Chiến lược 1 - Heuristic chèn ngẫu nhiên (80% quần thể, 80 cá thể)
+  • Chiến lược 2 - Khởi tạo ngẫu nhiên thuần túy (20% quần thể, 20 cá thể)
 
 Tổng kích thước quần thể: 100 (cố định).
 """

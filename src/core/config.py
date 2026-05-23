@@ -1,5 +1,5 @@
 """
-Cấu hình trung tâm cho toàn bộ hệ thống TOPTW-MemeticAlgorithm.
+Cấu hình trung tâm cho toàn bộ hệ thống TOPTW-PADCS.
 
 Tập trung tất cả hằng số, hệ số phạt và tham số GA mặc định
 để dễ dàng điều chỉnh mà không cần tìm rải rác trong nhiều file.
@@ -15,7 +15,7 @@ RANDOM_COUNT:    int = 20     # 20% → Pure Random
 RCL_SIZE:        int = 3      # Top-k candidates trong Restricted Candidate List
 
 # =============================================================================
-#  GA TUNABLE DEFAULTS  (có thể override khi khởi tạo MemeticAlgorithm)
+#  GA TUNABLE DEFAULTS  (có thể override khi khởi tạo PADCS)
 # =============================================================================
 
 DEFAULT_MUTATION_RATE:     float = 0.3
