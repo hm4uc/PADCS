@@ -97,17 +97,8 @@ Interactive API docs available at `http://localhost:8000/docs` after starting th
 
 ### Install & Run
 
-Bạn có hai cách để khởi chạy FastAPI server (chọn một trong hai):
-
-**Cách 1: Chạy từ thư mục gốc (Khuyên dùng - Tiện lợi nhất)**
 ```bash
-# Đứng tại thư mục gốc PADCS/
-uvicorn main:app --reload --app-dir src
-```
-*(Tham số `--app-dir src` sẽ tự động thêm thư mục `src` vào PYTHONPATH, giúp tránh các lỗi ModuleNotFoundError).*
-
-**Cách 2: Di chuyển vào thư mục src rồi chạy**
-```bash
+pip install -r requirements.txt
 cd src
 uvicorn main:app --reload
 ```
