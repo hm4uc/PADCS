@@ -124,10 +124,10 @@ def greedy_refill(
         individual.route = route
         return individual
 
-    # Xáo trộn trước khi sort để phá tie giữa các POI có cùng score.
+    # Xáo trộn trước khi sort để phá tie giữa các POI có cùng score
     random.shuffle(unvisited)
 
-    # Sắp xếp theo score cá nhân hóa (baseline)
+    # Sắp xếp theo score cá nhân hóa
     weights = user_prefs.interest_weights
     unvisited.sort(
         key=lambda p: p.base_score * weights.get(p.category, 0.0),
@@ -135,6 +135,7 @@ def greedy_refill(
     )
 
     for candidate in unvisited:
+        # Danh sách các lựa chọn chèn cho POI hiện tại (vị trí chèn, chi phí tăng thêm)
         insert_options: list[tuple[int, float]] = []
 
         for pos in range(1, len(route)):

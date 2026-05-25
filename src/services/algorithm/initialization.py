@@ -30,12 +30,12 @@ def _labadie_ratio(
     user_prefs: UserPreferences,
 ) -> float:
     """
-    Tỷ lệ ưu tiên Labadie (baseline).
+    Tỷ lệ ưu tiên Labadie cá nhân hóa.
 
-    Công thức GỐC (Labadie 2012):
-        ratio = (POI.score × interest_weight) / distance(current, POI)
+    Công thức Labadie 2012 (Không có cá nhân hóa):
+        ratio = POI.score / distance(current, POI)
 
-    Công thức:
+    Công thức cải tiến trong PADCS (Tích hợp cá nhân hóa):
         ratio = (POI.score × interest_weight) / distance(current, POI)
 
     Parameters
@@ -139,7 +139,7 @@ def _create_random_individual(
 
 
 # =============================================================================
-#  PUBLIC API: Tạo quần thể ban đầu đầy đủ
+#  Tạo quần thể ban đầu đầy đủ
 # =============================================================================
 
 def initialize_population(
