@@ -147,7 +147,7 @@ def _insertion_mutation(
     inserted_any = False
 
     for candidate in unvisited:
-        insert_options: list[tuple[int, float]] = []
+        insert_options: list[tuple[int, float]] = [] # (vị trí chèn, cost increase)
 
         for pos in range(1, len(route)):
             prev_poi = route[pos - 1]

@@ -5,7 +5,7 @@ Chế độ: Fixed Scores (all weights = 1.0), Budget = ∞
 Mục đích: Chứng minh MA cạnh tranh với state-of-the-art.
 
 Usage:
-    cd backend
+    cd src
     py -m experiments.exp1_benchmark
 """
 
@@ -13,7 +13,7 @@ import os
 import sys
 import argparse
 
-sys.path.insert(0, os.path.join(os.path.dirname(__file__), '..'))
+sys.path.insert(0, os.path.abspath(os.path.join(os.path.dirname(__file__), '..')))
 
 from experiments.benchmark_runner import run_batch, create_fixed_prefs, parse_instances_arg
 

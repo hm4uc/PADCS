@@ -31,7 +31,7 @@ import json
 import argparse
 import pandas as pd
 
-sys.path.insert(0, os.path.join(os.path.dirname(__file__), '..'))
+sys.path.insert(0, os.path.abspath(os.path.join(os.path.dirname(__file__), '..')))
 
 from experiments.benchmark_runner import run_batch, create_fixed_prefs, parse_instances_arg
 

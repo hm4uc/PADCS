@@ -201,5 +201,5 @@ def initialize_population(
     assert len(population) == POPULATION_SIZE, (
         f"Expected {POPULATION_SIZE} individuals, got {len(population)}"
     )
-    
+
     return population

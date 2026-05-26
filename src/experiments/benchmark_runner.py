@@ -18,7 +18,7 @@ import argparse
 import pandas as pd
 
 # - Thêm backend vào path -
-sys.path.insert(0, os.path.join(os.path.dirname(__file__), '..'))
+sys.path.insert(0, os.path.abspath(os.path.join(os.path.dirname(__file__), '..')))
 
 from services.data_loader import load_solomon_instance
 from services.algorithm.padcs_engine import PADCS

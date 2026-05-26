@@ -212,6 +212,8 @@ class PADCS:
         if not self.use_insertion_mutation:
             return {"2opt": 0.5, "swap": 0.5, "insertion": 0.0}
 
+        # Tầng 1 - Feed-forward theo Generation Progress
+        # Giảm dần Insert, tăng 2-opt và Swap khi tiến gần cuối thời gian
         progress = gen / max(self.generations - 1, 1)
 
         p_insert = ADAPTIVE_INSERT_START + (ADAPTIVE_INSERT_END - ADAPTIVE_INSERT_START) * progress
@@ -219,12 +221,14 @@ class PADCS:
         p_swap = max(0.0, 1.0 - p_insert - p_2opt)
 
         # Tầng 2 - feedback theo stagnation
+        # Khi Fitness tốt nhất đứng im qua ADAPTIVE_STAGNATION_TRIGGER thế hệ
         if gens_without_improvement >= ADAPTIVE_STAGNATION_TRIGGER:
             p_2opt += 0.10
             p_swap -= 0.05
             p_insert -= 0.05
 
         # Tầng 2 - feedback theo diversity
+        # Khi độ đa dạng quần thể giảm dưới ngưỡng ADAPTIVE_LOW_DIVERSITY_THRESHOLD
         diversity_ratio = unique_routes / max(self.population_size, 1)
         if diversity_ratio < ADAPTIVE_LOW_DIVERSITY_THRESHOLD:
             p_swap += 0.10
@@ -232,6 +236,7 @@ class PADCS:
             p_insert -= 0.05
 
         # Tầng 2 - feedback theo insert fail-rate gần đây
+        # Khi tỷ lệ thất bại của việc chèn POI vượt ngưỡng ADAPTIVE_INSERT_FAIL_TRIGGER
         if insert_fail_rate >= ADAPTIVE_INSERT_FAIL_TRIGGER:
             p_insert -= 0.10
             p_2opt += 0.10
