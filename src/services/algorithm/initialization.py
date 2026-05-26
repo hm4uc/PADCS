@@ -201,19 +201,5 @@ def initialize_population(
     assert len(population) == POPULATION_SIZE, (
         f"Expected {POPULATION_SIZE} individuals, got {len(population)}"
     )
-
-    # --- Summary log ---
-    if use_heuristic_init and heuristic_count > 0:
-        heuristic_lens = [len(ind.route) for ind in population[:heuristic_count]]
-        random_lens = [len(ind.route) for ind in population[heuristic_count:]]
-        print(f"[Init] Population created: {POPULATION_SIZE} individuals")
-        print(f"       Heuristic ({heuristic_count}): avg route length = "
-              f"{sum(heuristic_lens)/len(heuristic_lens):.1f}")
-        print(f"       Random    ({random_count}):  avg route length = "
-              f"{sum(random_lens)/len(random_lens):.1f}")
-    else:
-        all_lens = [len(ind.route) for ind in population]
-        print(f"[Init] Population created: {POPULATION_SIZE} individuals (100% Random)")
-        print(f"       Avg route length = {sum(all_lens)/len(all_lens):.1f}")
-
+    
     return population
