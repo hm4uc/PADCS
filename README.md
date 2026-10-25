@@ -10,6 +10,20 @@
 
 ---
 
+## 🎬 Live Interactive Demo
+
+<p align="center">
+  <img src="docs/assets/demo.gif" alt="PADCS Interactive Tour Optimization Demo" width="100%"/>
+</p>
+
+<p align="center">
+  <em>🎮 <b>Real-Time End-to-End Workflow:</b> Traveler specifies budget & interest ratings &rarr; PADCS solves multi-constraint TOPTW &rarr; Generates an optimal minute-by-minute day tour.</em>
+</p>
+
+> 💡 **Interactive Web App**: You can also open [`docs/demo.html`](docs/demo.html) directly in any web browser to play with preset profiles, adjust sliders, and watch real-time route evolution.
+
+---
+
 ## 📌 Overview
 
 **PADCS** (*Personalized Adaptive Destructive-Constructive Search*) is a hybrid Memetic Algorithm designed for solving the **Team Orienteering Problem with Time Windows (TOPTW)** with personalized multi-category scoring and realistic budget constraints.
@@ -277,8 +291,9 @@ PADCS/
 ├── README.md                       # Main academic & technical documentation
 ├── requirements.txt                # Python package dependencies
 ├── references/                     # Academic literature & benchmark papers
-├── docs/                           # Documentation assets
-│   └── assets/                     # Vector diagrams & graphic assets
+├── docs/                           # Documentation & Interactive Demos
+│   ├── demo.html                   # Standalone interactive tour planner web simulation
+│   └── assets/                     # Vector diagrams, animations & demo assets
 └── src/
     ├── main.py                     # FastAPI application bootstrap & CORS
     ├── api/                        # Route definitions (/api/optimize)
