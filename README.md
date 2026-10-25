@@ -15,7 +15,7 @@
 **PADCS** (*Personalized Adaptive Destructive-Constructive Search*) is a hybrid Memetic Algorithm designed for solving the **Team Orienteering Problem with Time Windows (TOPTW)** with personalized multi-category scoring and realistic budget constraints.
 
 Developed as a graduation thesis project at the **Faculty of Information Technology, VNU University of Engineering and Technology (VNU-UET)**, PADCS optimizes single-day travel itineraries by balancing:
-- **Personalized Category Scores**: User interest ratings across 6 categories (History, Nature, Food, Shopping, Entertainment, Nightlife) with normalized weights.
+- **Personalized Category Scores**: User interest ratings across 6 categories (`history_culture`, `nature_parks`, `food_drink`, `shopping`, `entertainment`, `nightlife_wellness`) normalized to sum to 6.0.
 - **Temporal Constraints**: Specific visit time windows $[O_i, C_i]$ per Point of Interest (POI) and hard return deadlines to the depot.
 - **Budgetary Constraints**: Category-specific ticket and service prices derived from Hanoi tourism economic statistics.
 - **Wait Time Penalization**: Idle waiting minimization to ensure seamless travel scheduling.
@@ -24,126 +24,66 @@ The system is packaged with a high-performance **FastAPI** backend and an extens
 
 ---
 
-## 🏗️ System Architecture
+## 🧬 Algorithm Flowchart (Memetic Algorithm for P-OPTW)
 
-The following diagram illustrates the end-to-end architecture of PADCS, spanning client interfaces, API routing, contract validation, data caching, the core heuristic engine, and the benchmark testbed:
-
-```mermaid
-flowchart TD
-    subgraph Client ["Client & Consumer Layer"]
-        WebClient["Web / Mobile Application"]
-        Swagger["Swagger UI / OpenAPI Documentation<br/>(http://localhost:8000/docs)"]
-    end
-
-    subgraph APILayer ["FastAPI API Layer (src/api)"]
-        Router["APIRouter: POST /api/optimize"]
-        CORS["CORSMiddleware (Cross-Origin Setup)"]
-    end
-
-    subgraph ContractLayer ["Contract & Validation Layer (src/models)"]
-        UserPrefs["UserPreferences (Pydantic)<br/>- Budget & Time Windows [Start, End]<br/>- 6-Category Interests (1-5 Stars)<br/>- Hour-to-Minute Conversion"]
-        Validation["Business Validation<br/>- Instance Name Check<br/>- Start Node ID Validity"]
-        OptResponse["OptimizationResponse & ItineraryItem<br/>- Formatted Timelines (HH:MM)<br/>- Itemized Scores, Costs & Distances"]
-    end
-
-    subgraph DataLayer ["Data Management (src/data & src/services)"]
-        DataLoader["DataLoader: load_solomon_instance()"]
-        InstCache[("In-Memory Cache<br/>(_INSTANCE_CACHE)")]
-        ExtendedCSV[("Extended Solomon Benchmarks<br/>(*_extended.csv: Category + Price)")]
-    end
-
-    subgraph EngineLayer ["PADCS Core Engine (src/services/algorithm)"]
-        Engine["PADCS Engine<br/>(Memetic Metaheuristic)"]
-        DistMatrix["Pre-computed Euclidean Distance Matrix"]
-        InitModule["Initialization<br/>(80% Heuristic Insertion + 20% Random)"]
-        Operators["Depot-Safe Genetic Operators:<br/>- Order Crossover (OX1)<br/>- Adaptive-Lite Mutation<br/>- Destructive-Constructive Search"]
-        Fitness["Fitness & Constraint Evaluator<br/>(Time Windows, Budget, Wait Penalty)"]
-    end
-
-    subgraph Benchmarks ["Experimentation Suite (src/experiments)"]
-        ExpRunner["benchmark_runner.py"]
-        Exp1["Exp 1: vs Labadie GVNS (2012)"]
-        Exp2["Exp 2: Personalization Profiles"]
-        Exp3["Exp 3: Budget Tiers"]
-        Exp4["Exp 4: Ablation Studies"]
-        Exp5["Exp 5: Parameter Sensitivity"]
-    end
-
-    WebClient --> Router
-    Swagger --> Router
-    Router --> CORS
-    Router --> UserPrefs
-    UserPrefs --> Validation
-    Validation --> DataLoader
-    DataLoader --> InstCache
-    InstCache --> ExtendedCSV
-    DataLoader --> Engine
-    Engine --> DistMatrix
-    Engine --> InitModule
-    Engine --> Operators
-    Engine --> Fitness
-    Engine --> OptResponse
-    OptResponse --> Router
-
-    ExpRunner -.-> Engine
-    ExpRunner -.-> Exp1
-    ExpRunner -.-> Exp2
-    ExpRunner -.-> Exp3
-    ExpRunner -.-> Exp4
-    ExpRunner -.-> Exp5
-```
-
----
-
-## 🧬 PADCS Algorithmic Lifecycle
-
-PADCS combines global evolutionary exploration with aggressive **Destructive-Constructive Local Search** and a two-tier **Adaptive Mutation** mechanism:
+The core optimization workflow of PADCS—combining global genetic exploration, adaptive variation, and aggressive destructive-constructive local search—is structured as follows:
 
 ```mermaid
 flowchart TD
-    Start(["Client Request / Benchmark Instance"]) --> InitPop["1. Population Initialization<br/>- 80% Randomized Insertion Heuristic (Labadie-based)<br/>- 20% Pure Random Permutation<br/>- Initial Smart Repair + Greedy Refill on each individual<br/>- Depot-Safe Encoding: [0, p1, p2, ..., pn, 0]"]
+    Start((Start)) --> S1["<b>1. Population Init</b><br/>80% RCL + 20% Random<br/>(N = 100 individuals)"]
+    S1 --> S2["<b>2. Evaluate & Sort</b><br/>Repair & Refill each<br/>Calc fitness → Sort ↓"]
+    
+    S2 --> S3["<b>3. Selection</b><br/>Tournament (K=3)<br/>Select 2 Parents"]
+    S3 --> S4["<b>4. Crossover OX1</b><br/>Interior Crossover<br/>(Depot-safe principle)"]
+    S4 --> S5["<b>5. Mutation</b><br/>Adaptive-Lite<br/>(2-opt / Swap / Insert)"]
+    
+    S5 --> S6["<b>6. Smart Repair</b><br/>Ruin: bypass<br/>lowest ER POIs"]
+    S6 --> S7["<b>7. Greedy Refill</b><br/>Recreate: insert unvisited<br/>high-score POIs greedily"]
+    S7 --> S8["<b>8. Evaluate Fitness</b><br/>Calculate fitness<br/>and add to offspring pool"]
+    
+    S8 --> Decision{"<b>Pool Full?</b>"}
+    
+    Decision -- "<b>[No]</b> (Loop until size = N)" --> S3
+    Decision -- "<b>[Yes]</b>" --> S9["<b>9. Merged Replacement</b><br/>Merge parents + offspring<br/>Filter duplicates (Diversity)"]
+    
+    S9 --> S10["<b>10. Elitism & Stagnation</b><br/>Keep N best unique individuals<br/>Update stagnation counter"]
+    S10 --> S11["<b>11. Check Termination</b><br/>Generations ≥ 200 or<br/>Stagnation counter ≥ 25"]
+    
+    S11 -- "<b>[Next Gen]</b> (New Evolutionary Loop)" --> S3
+    S11 -- "<b>[Stop]</b>" --> Stop(((Stop)))
 
-    InitPop --> GenLoop{"Generation Loop<br/>(gen < 200 AND<br/>stagnation < 25)?"}
+    %% Color palette aligned with thesis presentation
+    classDef initStyle fill:#EBF3FB,stroke:#2B5C8F,stroke-width:2px,color:#1A365D;
+    classDef gaStyle fill:#FEF3E6,stroke:#D97724,stroke-width:2px,color:#7C3A00;
+    classDef lsStyle fill:#EDF7ED,stroke:#2E7D32,stroke-width:2px,color:#1B5E20;
+    classDef evalStyle fill:#F0F4F8,stroke:#4A6572,stroke-width:2px,color:#263238;
+    classDef decStyle fill:#FFFFFF,stroke:#333333,stroke-width:2px,color:#111111;
+    classDef repStyle fill:#FBEBF0,stroke:#A0395E,stroke-width:2px,color:#621B35;
+    classDef termStyle fill:#FDE8E8,stroke:#C62828,stroke-width:2px,color:#7F0000;
+    classDef terminal fill:#2B5C8F,stroke:#1A365D,stroke-width:2px,color:#FFFFFF;
 
-    subgraph EvolutionCycle ["Evolutionary Optimization Cycle"]
-        GenLoop -- "Yes" --> Telemetry["Generation Telemetry Analysis<br/>- Progress: gen / max_gen<br/>- Stagnation counter<br/>- Population diversity (unique routes ratio)<br/>- Rolling window insertion failure rate"]
-
-        Telemetry --> AdaptiveMut["Adaptive-Lite Mutation Probabilities<br/>- Level 1 (Progress Schedule): Insert 45% -> 15%, 2-opt 25% -> 55%<br/>- Level 2 (Population Feedback):<br/>  * High stagnation (>=8): Boost 2-opt (+0.10)<br/>  * Low diversity (<35%): Boost Swap (+0.10)<br/>  * High insertion fail (>=60%): Reduce Insert (-0.10), Boost 2-opt"]
-
-        AdaptiveMut --> Breeding["Breeding Offspring Population (Size = N)"]
-
-        subgraph Reproduction ["Reproduction & Destructive-Constructive Local Search"]
-            Breeding --> Tournament["Tournament Selection (k = 3)<br/>Select Parent 1 and Parent 2"]
-            Tournament --> OX1["Depot-Safe Order Crossover (OX1)<br/>Operates strictly on interior route[1:-1]"]
-            OX1 --> Mutate["Adaptive Mutation Execution<br/>Sample operator: 2-opt / Swap / Insertion"]
-            Mutate --> SmartRepair["Smart Repair (Destructive Search)<br/>Remove POIs with lowest Score/Time ratio<br/>until time & budget constraints satisfied"]
-            SmartRepair --> GreedyRefill["Greedy Refill (Constructive Search)<br/>Insert unvisited POIs with best marginal score/time"]
-            GreedyRefill --> EvalChild["Evaluate Child Fitness & Feasibility"]
-        end
-
-        EvalChild --> MergedPool["Merge (Parents + Offspring) -> Pool Size 2N"]
-        MergedPool --> ElitistSort["Sort Candidate Pool by Fitness Descending"]
-        ElitistSort --> DiversityFilter["Diversity Filter & Replacement<br/>- Eliminate duplicate routes via POI set hashing<br/>- Inject Diverse Repaired Individuals if needed<br/>- Select top N unique individuals"]
-        DiversityFilter --> UpdateBest["Update Best-Ever Individual<br/>- Fitness improved > threshold -> reset stagnation = 0<br/>- Else -> stagnation = stagnation + 1"]
-        UpdateBest --> GenLoop
-    end
-
-    GenLoop -- "No (Convergence or Max Gen reached)" --> BestSolution["Extract Best Feasible Route<br/>- Format arrival, wait, service, leave times (HH:MM)<br/>- Calculate total score, cost, distance, execution time"]
-    BestSolution --> End(["Return OptimizationResponse JSON"])
+    class S1,S2 initStyle;
+    class S3,S4,S5 gaStyle;
+    class S6,S7 lsStyle;
+    class S8 evalStyle;
+    class Decision decStyle;
+    class S9,S10 repStyle;
+    class S11 termStyle;
+    class Start,Stop terminal;
 ```
 
-### Key Algorithmic Components
+### Key Algorithmic Stages
 
-| Component | Technical Details |
-|---|---|
-| **Depot-Safe Encoding** | Routes strictly maintain `[Depot, POI_1, ..., POI_k, Depot]` structure. All operators target only `route[1:-1]`. |
-| **Hybrid Initialization** | 80% initialized via insertion heuristic with randomized greedy criteria; 20% random shuffle for initial exploration. |
-| **Order Crossover (OX1)** | Preserves relative interior order while preventing duplicate visits. |
-| **Adaptive-Lite Mutation** | Two-tier dynamic probabilities balancing 2-opt, Swap, and Insertion based on generation progress, diversity, and failure rates. |
-| **Destructive Search (Smart Repair)** | Sequentially prunes POIs yielding the lowest $\frac{\text{Score}}{\Delta\text{Time}}$ until all constraints (time windows, budget, return) are valid. |
-| **Constructive Search (Greedy Refill)** | Re-inserts unvisited POIs greedily maximizing marginal score gain per unit time. |
-| **Diversity Filter & Replacement** | $(\mu+\lambda)$ Merged Elitism with route hash duplicate rejection and automatic injection of diverse repaired individuals. |
-| **Early Stopping** | Terminates automatically when the best fitness shows no significant improvement for 25 consecutive generations. |
+| Step | Component | Technical Mechanism |
+|---|---|---|
+| **1-2** | **Population Initialization & Sorting** | 80% initialized via Restricted Candidate List (RCL) insertion heuristic + 20% random shuffle. Each individual is immediately repaired, refilled, evaluated, and sorted by fitness. |
+| **3** | **Tournament Selection** | $K=3$ tournament selection picks two distinct parent solutions with replacement. |
+| **4** | **OX1 Crossover** | Order Crossover (OX1) applied exclusively to interior nodes `route[1:-1]` to uphold the **Depot-Safe principle** `[0, ..., 0]`. |
+| **5** | **Adaptive-Lite Mutation** | 2-tier adaptive probability matrix dynamically tuning 2-opt, Swap, and Insertion operators based on generation progress and population telemetry (stagnation, diversity, failure rate). |
+| **6-7** | **Destructive-Constructive Local Search** | **Smart Repair** (Ruin): selectively prunes POIs with the lowest Efficiency Ratio $\text{ER} = \frac{\text{Score}}{\Delta\text{Time}}$ until all constraints are satisfied.<br/>**Greedy Refill** (Recreate): greedily inserts unvisited POIs offering maximum marginal score gain. |
+| **8** | **Offspring Evaluation** | Evaluates multi-penalty fitness and feasibility, appending offspring to the candidate pool until pool size equals $N$. |
+| **9-10** | **Merged Replacement & Elitism** | $(\mu+\lambda)$ elitist replacement merging parents and offspring ($2N$), filtering duplicate routes via POI set hashing to maintain genetic diversity, and preserving the top $N$ unique solutions. |
+| **11** | **Termination Check** | Stops when reaching maximum generations (200) or when search stagnates for $\ge 25$ consecutive generations. |
 
 ---
 
@@ -210,7 +150,6 @@ uvicorn main:app --reload --host 0.0.0.0 --port 8000
 
 - **API Base URL**: `http://localhost:8000`
 - **Interactive Swagger Docs**: `http://localhost:8000/docs`
-- **ReDoc UI**: `http://localhost:8000/redoc`
 
 ---
 
