@@ -26,51 +26,67 @@ The system is packaged with a high-performance **FastAPI** backend and an extens
 
 ## 🧬 Algorithm Flowchart (Memetic Algorithm for P-OPTW)
 
-The core optimization workflow of PADCS—combining global genetic exploration, adaptive variation, and aggressive destructive-constructive local search—is structured as follows:
+The complete optimization lifecycle of PADCS—combining global genetic exploration, adaptive variation, and aggressive destructive-constructive local search—is illustrated below:
+
+<p align="center">
+  <img src="docs/assets/algorithm_flow.svg" alt="Memetic Algorithm for P-OPTW - Core Lifecycle" width="100%"/>
+</p>
+
+<details>
+<summary><b>🔍 View Interactive Mermaid Diagram Code</b></summary>
 
 ```mermaid
-flowchart TD
-    Start((Start)) --> S1["<b>1. Population Init</b><br/>80% RCL + 20% Random<br/>(N = 100 individuals)"]
-    S1 --> S2["<b>2. Evaluate & Sort</b><br/>Repair & Refill each<br/>Calc fitness → Sort ↓"]
-    
-    S2 --> S3["<b>3. Selection</b><br/>Tournament (K=3)<br/>Select 2 Parents"]
-    S3 --> S4["<b>4. Crossover OX1</b><br/>Interior Crossover<br/>(Depot-safe principle)"]
-    S4 --> S5["<b>5. Mutation</b><br/>Adaptive-Lite<br/>(2-opt / Swap / Insert)"]
-    
-    S5 --> S6["<b>6. Smart Repair</b><br/>Ruin: bypass<br/>lowest ER POIs"]
-    S6 --> S7["<b>7. Greedy Refill</b><br/>Recreate: insert unvisited<br/>high-score POIs greedily"]
-    S7 --> S8["<b>8. Evaluate Fitness</b><br/>Calculate fitness<br/>and add to offspring pool"]
-    
-    S8 --> Decision{"<b>Pool Full?</b>"}
-    
-    Decision -- "<b>[No]</b> (Loop until size = N)" --> S3
-    Decision -- "<b>[Yes]</b>" --> S9["<b>9. Merged Replacement</b><br/>Merge parents + offspring<br/>Filter duplicates (Diversity)"]
-    
-    S9 --> S10["<b>10. Elitism & Stagnation</b><br/>Keep N best unique individuals<br/>Update stagnation counter"]
-    S10 --> S11["<b>11. Check Termination</b><br/>Generations ≥ 200 or<br/>Stagnation counter ≥ 25"]
-    
-    S11 -- "<b>[Next Gen]</b> (New Evolutionary Loop)" --> S3
-    S11 -- "<b>[Stop]</b>" --> Stop(((Stop)))
+flowchart LR
+    subgraph P1 ["1. Initialization"]
+        direction TB
+        Start((Start)) --> S1["<b>1. Population Init</b><br/>80% RCL + 20% Random<br/>(N = 100 individuals)"]
+        S1 --> S2["<b>2. Evaluate & Sort</b><br/>Repair & Refill each<br/>Calc fitness → Sort ↓"]
+    end
 
-    %% Color palette aligned with thesis presentation
+    subgraph P2 ["2. Genetic Reproduction"]
+        direction TB
+        S3["<b>3. Selection</b><br/>Tournament (K=3)<br/>Select 2 Parents"]
+        S3 --> S4["<b>4. Crossover OX1</b><br/>Interior Crossover<br/>(Depot-safe principle)"]
+        S4 --> S5["<b>5. Mutation</b><br/>Adaptive-Lite<br/>(2-opt / Swap / Insert)"]
+    end
+
+    subgraph P3 ["3. Destructive-Constructive Search"]
+        direction TB
+        S6["<b>6. Smart Repair</b><br/>Ruin: bypass<br/>lowest ER POIs"]
+        S6 --> S7["<b>7. Greedy Refill</b><br/>Recreate: insert unvisited<br/>high-score POIs greedily"]
+        S7 --> S8["<b>8. Evaluate Fitness</b><br/>Calculate fitness<br/>and add to offspring pool"]
+        S8 --> Decision{"<b>Pool Full?</b>"}
+    end
+
+    subgraph P4 ["4. Replacement & Termination"]
+        direction TB
+        S9["<b>9. Merged Replacement</b><br/>Merge parents + offspring<br/>Filter duplicates (Diversity)"]
+        S9 --> S10["<b>10. Elitism & Stagnation</b><br/>Keep N best unique individuals<br/>Update stagnation counter"]
+        S10 --> S11["<b>11. Check Termination</b><br/>Generations ≥ 200 or<br/>Stagnation counter ≥ 25"]
+        S11 --> Stop(((Stop)))
+    end
+
+    S2 --> S3
+    S5 --> S6
+    Decision -- "[Yes]" --> S9
+    Decision -.->|"[No] Loop size N"| S3
+    S11 -.->|"[Next Gen] New Loop"| S3
+
     classDef initStyle fill:#EBF3FB,stroke:#2B5C8F,stroke-width:2px,color:#1A365D;
     classDef gaStyle fill:#FEF3E6,stroke:#D97724,stroke-width:2px,color:#7C3A00;
     classDef lsStyle fill:#EDF7ED,stroke:#2E7D32,stroke-width:2px,color:#1B5E20;
-    classDef evalStyle fill:#F0F4F8,stroke:#4A6572,stroke-width:2px,color:#263238;
-    classDef decStyle fill:#FFFFFF,stroke:#333333,stroke-width:2px,color:#111111;
     classDef repStyle fill:#FBEBF0,stroke:#A0395E,stroke-width:2px,color:#621B35;
     classDef termStyle fill:#FDE8E8,stroke:#C62828,stroke-width:2px,color:#7F0000;
     classDef terminal fill:#2B5C8F,stroke:#1A365D,stroke-width:2px,color:#FFFFFF;
 
     class S1,S2 initStyle;
     class S3,S4,S5 gaStyle;
-    class S6,S7 lsStyle;
-    class S8 evalStyle;
-    class Decision decStyle;
+    class S6,S7,S8 lsStyle;
     class S9,S10 repStyle;
     class S11 termStyle;
     class Start,Stop terminal;
 ```
+</details>
 
 ### Key Algorithmic Stages
 
@@ -261,6 +277,8 @@ PADCS/
 ├── README.md                       # Main academic & technical documentation
 ├── requirements.txt                # Python package dependencies
 ├── references/                     # Academic literature & benchmark papers
+├── docs/                           # Documentation assets
+│   └── assets/                     # Vector diagrams & graphic assets
 └── src/
     ├── main.py                     # FastAPI application bootstrap & CORS
     ├── api/                        # Route definitions (/api/optimize)
