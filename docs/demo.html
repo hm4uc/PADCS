@@ -40,23 +40,32 @@
       -webkit-font-smoothing: antialiased;
     }
 
-    /* Top Navigation Deck */
+    /* Top Navigation Deck with generous padding & clean 2-tier structure */
     header {
-      height: 70px;
       background: var(--bg-panel);
       border-bottom: 1px solid var(--border-subtle);
-      padding: 0 24px;
+      padding: 18px 28px 16px 28px;
+      display: flex;
+      flex-direction: column;
+      gap: 14px;
+      flex-shrink: 0;
+      box-sizing: border-box;
+    }
+
+    .header-top-row {
       display: flex;
       justify-content: space-between;
       align-items: center;
-      flex-shrink: 0;
-      gap: 20px;
+      width: 100%;
+      gap: 16px;
     }
 
     .brand-section {
       display: flex;
       align-items: center;
       gap: 14px;
+      white-space: nowrap;
+      flex-shrink: 0;
     }
     .brand-badge {
       background: #1e293b;
@@ -65,47 +74,84 @@
       font-family: var(--mono-font);
       font-size: 0.85rem;
       font-weight: 700;
-      padding: 6px 10px;
+      padding: 6px 14px;
       border-radius: 4px;
       letter-spacing: 0.05em;
     }
     .brand-title h1 {
-      font-size: 1.15rem;
+      font-size: 1.25rem;
       font-weight: 800;
       color: #fff;
       letter-spacing: -0.01em;
+      line-height: 1.25;
+      margin: 0;
     }
     .brand-title p {
-      font-size: 0.78rem;
+      font-size: 0.76rem;
       color: var(--text-muted);
       font-weight: 500;
+      margin: 0;
+      margin-top: 3px;
     }
 
-    /* Squared Presets Control */
-    .preset-group {
+    /* Action button */
+    .btn-solve {
+      background: var(--accent);
+      color: #ffffff;
+      border: 1px solid rgba(255, 255, 255, 0.15);
+      padding: 10px 22px;
+      border-radius: 4px;
+      font-size: 0.85rem;
+      font-weight: 700;
+      font-family: var(--mono-font);
+      cursor: pointer;
       display: flex;
       align-items: center;
-      gap: 6px;
-      background: rgba(0, 0, 0, 0.3);
-      padding: 4px;
+      gap: 8px;
+      transition: background 0.15s ease, transform 0.1s ease;
+      letter-spacing: 0.03em;
+      white-space: nowrap;
+      flex-shrink: 0;
+    }
+    .btn-solve:hover {
+      background: var(--accent-hover);
+      transform: translateY(-1px);
+    }
+    .btn-solve:active {
+      transform: translateY(0);
+    }
+
+    /* Squared Presets Control Bar (Full width, 4 equal columns) */
+    .preset-group {
+      display: grid;
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+      gap: 10px;
+      background: rgba(0, 0, 0, 0.35);
+      padding: 6px;
       border-radius: 4px;
       border: 1px solid var(--border-subtle);
+      width: 100%;
+      box-sizing: border-box;
     }
     .preset-btn {
       background: transparent;
       border: 1px solid transparent;
       color: var(--text-muted);
-      padding: 8px 14px;
+      padding: 9px 12px;
       border-radius: 4px;
-      font-size: 0.82rem;
+      font-size: 0.8rem;
       font-weight: 700;
       cursor: pointer;
       display: flex;
       align-items: center;
+      justify-content: center;
       gap: 6px;
       transition: all 0.15s ease-in-out;
       font-family: var(--mono-font);
       letter-spacing: 0.02em;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
     }
     .preset-btn:hover {
       background: rgba(255, 255, 255, 0.05);
@@ -118,39 +164,16 @@
       box-shadow: 0 1px 3px rgba(0, 0, 0, 0.3);
     }
 
-    /* Sharp Primary Optimize Button */
-    .btn-solve {
-      background: var(--accent);
-      color: #ffffff;
-      border: 1px solid rgba(255, 255, 255, 0.15);
-      padding: 10px 20px;
-      border-radius: 4px;
-      font-size: 0.88rem;
-      font-weight: 700;
-      font-family: var(--mono-font);
-      cursor: pointer;
-      display: flex;
-      align-items: center;
-      gap: 8px;
-      transition: background 0.15s ease, transform 0.1s ease;
-      letter-spacing: 0.03em;
-    }
-    .btn-solve:hover {
-      background: var(--accent-hover);
-      transform: translateY(-1px);
-    }
-    .btn-solve:active {
-      transform: translateY(0);
-    }
-
     /* Main Workspace Grid */
     .workspace {
       flex: 1;
       display: grid;
       grid-template-columns: 56% 44%;
       gap: 16px;
-      padding: 16px 24px;
-      height: calc(100vh - 70px);
+      padding: 16px 28px 20px 28px;
+      height: calc(100vh - 146px);
+      box-sizing: border-box;
+      min-height: 0;
     }
 
     /* Left: Map Coordinate Canvas */
@@ -385,32 +408,131 @@
     .cat-shopping { background: #831843; color: #fbcfe8; }
     .cat-entertainment { background: #4c1d95; color: #ddd6fe; }
     .cat-nightlife { background: #312e81; color: #c7d2fe; }
+
+    /* Responsive Breakpoints */
+    @media (max-width: 1280px) {
+      .legend-list {
+        display: none;
+      }
+    }
+
+    @media (max-width: 1080px) {
+      html, body {
+        overflow-y: auto;
+        height: auto;
+        min-height: 100%;
+      }
+      header {
+        position: sticky;
+        top: 0;
+        z-index: 50;
+        padding: 16px 20px 14px 20px;
+      }
+      .workspace {
+        display: flex;
+        flex-direction: column;
+        height: auto;
+        padding: 16px 20px 24px 20px;
+        gap: 16px;
+      }
+      .panel-map {
+        height: 480px;
+        min-height: 420px;
+        width: 100%;
+      }
+      .panel-right {
+        height: auto;
+        width: 100%;
+      }
+      .itinerary-scroll {
+        max-height: 520px;
+      }
+    }
+
+    @media (max-width: 960px) {
+      .preset-group {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+      }
+      .preset-btn {
+        font-size: 0.76rem;
+        padding: 8px 8px;
+      }
+    }
+
+    @media (max-width: 640px) {
+      header {
+        padding: 14px 16px;
+        gap: 12px;
+      }
+      .header-top-row {
+        flex-direction: column;
+        align-items: stretch;
+        gap: 12px;
+      }
+      .brand-section {
+        justify-content: flex-start;
+      }
+      .btn-solve {
+        width: 100%;
+        justify-content: center;
+      }
+      .preset-group {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        gap: 6px;
+      }
+      .preset-btn {
+        font-size: 0.72rem;
+        padding: 8px 6px;
+      }
+      .workspace {
+        padding: 12px 14px 24px 14px;
+      }
+      .panel-map {
+        height: 380px;
+        min-height: 340px;
+      }
+      .panel-map-header {
+        padding: 0 12px;
+      }
+      .metrics-bar {
+        grid-template-columns: repeat(2, 1fr);
+      }
+    }
+
+    @media (max-width: 420px) {
+      .preset-group {
+        grid-template-columns: 1fr;
+      }
+    }
   </style>
 </head>
 <body>
 
   <!-- Top Navigation Deck -->
   <header>
-    <div class="brand-section">
-      <div class="brand-badge">PADCS</div>
-      <div class="brand-title">
-        <h1>Tour Itinerary Optimizer</h1>
-        <p>Adaptive Destructive-Constructive Search for TOPTW</p>
+    <!-- Row 1: Brand & Run Action Button -->
+    <div class="header-top-row">
+      <div class="brand-section">
+        <div class="brand-badge">PADCS</div>
+        <div class="brand-title">
+          <h1>Tour Itinerary Optimizer</h1>
+          <p>Adaptive Destructive-Constructive Search for TOPTW</p>
+        </div>
       </div>
+
+      <!-- Primary Action Button -->
+      <button class="btn-solve" id="btnOptimize">
+        <span>▶ RUN OPTIMIZATION</span>
+      </button>
     </div>
 
-    <!-- Presets -->
+    <!-- Row 2: Presets (Full-width 4-column Grid) -->
     <div class="preset-group">
       <button class="preset-btn active" data-preset="food_culture">[ 01: CULINARY & HERITAGE ]</button>
       <button class="preset-btn" data-preset="history_buff">[ 02: HISTORICAL SIGHTS ]</button>
       <button class="preset-btn" data-preset="nature_relax">[ 03: NATURE & LEISURE ]</button>
       <button class="preset-btn" data-preset="urban_lifestyle">[ 04: URBAN & NIGHTLIFE ]</button>
     </div>
-
-    <!-- Primary Action Button -->
-    <button class="btn-solve" id="btnOptimize">
-      <span>▶ RUN OPTIMIZATION</span>
-    </button>
   </header>
 
   <!-- Main Workspace -->
