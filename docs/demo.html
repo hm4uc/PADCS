@@ -3,444 +3,338 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>PADCS - Hệ thống gợi ý lịch trình du lịch cá nhân hóa thông minh</title>
+  <title>PADCS - AI Travel Itinerary Optimizer</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@600;700;800&display=swap" rel="stylesheet">
   <style>
     :root {
       --bg-dark: #0b0f19;
-      --card-bg: #141c2e;
-      --panel-border: rgba(255, 255, 255, 0.08);
-      --accent: #38bdf8;
-      --accent-glow: rgba(56, 189, 248, 0.25);
+      --panel-bg: rgba(17, 24, 39, 0.95);
+      --panel-border: rgba(255, 255, 255, 0.14);
+      --accent-cyan: #38bdf8;
+      --accent-glow: rgba(56, 189, 248, 0.4);
       --success: #10b981;
       --warning: #f59e0b;
-      --pink: #ec4899;
-      --purple: #8b5cf6;
-      --text-main: #f8fafc;
+      --text-main: #ffffff;
       --text-muted: #94a3b8;
     }
     * { box-sizing: border-box; margin: 0; padding: 0; }
-    body {
-      font-family: 'Plus Jakarta Sans', sans-serif;
+    html, body {
+      width: 100%;
+      height: 100%;
       background: var(--bg-dark);
       color: var(--text-main);
-      min-height: 100vh;
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      overflow: hidden;
       display: flex;
       flex-direction: column;
-      overflow-x: hidden;
     }
 
+    /* Top Navigation Bar */
     header {
-      background: rgba(20, 28, 46, 0.85);
-      backdrop-filter: blur(12px);
-      border-bottom: 1px solid var(--panel-border);
-      padding: 12px 24px;
+      height: 76px;
+      background: #0f172a;
+      border-bottom: 2px solid var(--panel-border);
+      padding: 0 28px;
       display: flex;
       justify-content: space-between;
       align-items: center;
-      position: sticky;
-      top: 0;
-      z-index: 100;
+      flex-shrink: 0;
+      gap: 20px;
     }
     .brand {
       display: flex;
       align-items: center;
-      gap: 12px;
+      gap: 14px;
     }
     .brand-icon {
-      width: 42px;
-      height: 42px;
-      border-radius: 10px;
-      background: linear-gradient(135deg, #38bdf8, #8b5cf6);
+      width: 48px;
+      height: 48px;
+      border-radius: 12px;
+      background: linear-gradient(135deg, #0284c7, #8b5cf6);
       display: flex;
       align-items: center;
       justify-content: center;
-      font-size: 22px;
-      box-shadow: 0 0 15px var(--accent-glow);
+      font-size: 26px;
+      box-shadow: 0 4px 14px rgba(2, 132, 199, 0.4);
     }
     .brand-title h1 {
-      font-size: 1.15rem;
+      font-size: 1.35rem;
       font-weight: 800;
       letter-spacing: -0.02em;
-      background: linear-gradient(90deg, #38bdf8, #c084fc);
+      background: linear-gradient(90deg, #38bdf8 0%, #a855f7 100%);
       -webkit-background-clip: text;
       -webkit-text-fill-color: transparent;
     }
     .brand-title p {
-      font-size: 0.75rem;
-      color: var(--text-muted);
-    }
-
-    .preset-bar {
-      display: flex;
-      gap: 8px;
-      align-items: center;
-    }
-    .preset-label {
-      font-size: 0.75rem;
+      font-size: 0.85rem;
       color: var(--text-muted);
       font-weight: 600;
-      margin-right: 4px;
-      text-transform: uppercase;
-      letter-spacing: 0.05em;
+    }
+
+    .presets-wrap {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      background: rgba(255, 255, 255, 0.04);
+      padding: 6px 10px;
+      border-radius: 28px;
+      border: 1px solid rgba(255, 255, 255, 0.08);
     }
     .preset-btn {
-      background: rgba(255, 255, 255, 0.05);
-      border: 1px solid var(--panel-border);
-      color: var(--text-main);
-      padding: 6px 14px;
+      background: transparent;
+      border: 1px solid transparent;
+      color: #cbd5e1;
+      padding: 9px 18px;
       border-radius: 20px;
-      font-size: 0.8rem;
-      font-weight: 600;
-      cursor: pointer;
-      display: flex;
-      align-items: center;
-      gap: 6px;
-      transition: all 0.2s ease;
-    }
-    .preset-btn:hover {
-      background: rgba(56, 189, 248, 0.15);
-      border-color: var(--accent);
-      transform: translateY(-1px);
-    }
-    .preset-btn.active {
-      background: var(--accent);
-      color: #04121d;
-      border-color: var(--accent);
-      box-shadow: 0 0 12px var(--accent-glow);
-    }
-
-    .dashboard {
-      flex: 1;
-      display: grid;
-      grid-template-columns: 320px 1fr 380px;
-      gap: 16px;
-      padding: 16px 20px;
-      max-width: 1750px;
-      margin: 0 auto;
-      width: 100%;
-    }
-
-    .panel {
-      background: var(--card-bg);
-      border: 1px solid var(--panel-border);
-      border-radius: 16px;
-      display: flex;
-      flex-direction: column;
-      overflow: hidden;
-      box-shadow: 0 8px 24px rgba(0, 0, 0, 0.25);
-    }
-    .panel-header {
-      padding: 14px 18px;
-      border-bottom: 1px solid var(--panel-border);
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      background: rgba(255, 255, 255, 0.02);
-    }
-    .panel-header h2 {
       font-size: 0.95rem;
       font-weight: 700;
+      cursor: pointer;
       display: flex;
       align-items: center;
       gap: 8px;
+      transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
     }
-    .panel-body {
-      padding: 16px 18px;
-      flex: 1;
-      overflow-y: auto;
+    .preset-btn:hover {
+      background: rgba(255, 255, 255, 0.08);
+      color: #fff;
     }
-
-    .form-group {
-      margin-bottom: 14px;
-    }
-    .form-label {
-      font-size: 0.8rem;
-      font-weight: 600;
-      color: var(--text-muted);
-      margin-bottom: 8px;
-      display: flex;
-      justify-content: space-between;
-    }
-    .form-val {
-      color: var(--accent);
-      font-weight: 700;
-    }
-    .range-slider {
-      width: 100%;
-      height: 6px;
-      background: rgba(255, 255, 255, 0.1);
-      border-radius: 4px;
-      outline: none;
-      -webkit-appearance: none;
-    }
-    .range-slider::-webkit-slider-thumb {
-      -webkit-appearance: none;
-      width: 16px;
-      height: 16px;
-      border-radius: 50%;
-      background: var(--accent);
-      cursor: pointer;
-      box-shadow: 0 0 8px var(--accent);
-    }
-
-    .category-row {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      padding: 7px 10px;
-      margin-bottom: 6px;
-      background: rgba(255, 255, 255, 0.03);
-      border-radius: 8px;
-      border: 1px solid transparent;
-      transition: all 0.15s ease;
-    }
-    .category-row:hover {
-      background: rgba(255, 255, 255, 0.06);
-      border-color: rgba(255, 255, 255, 0.1);
-    }
-    .cat-name {
-      display: flex;
-      align-items: center;
-      gap: 8px;
-      font-size: 0.8rem;
-      font-weight: 600;
-    }
-    .cat-tag {
-      width: 8px;
-      height: 8px;
-      border-radius: 50%;
-    }
-    .stars {
-      display: flex;
-      gap: 3px;
-      cursor: pointer;
-    }
-    .star {
-      color: rgba(255, 255, 255, 0.2);
-      font-size: 14px;
-      transition: color 0.15s;
-    }
-    .star.active {
-      color: #f59e0b;
-      text-shadow: 0 0 6px rgba(245, 158, 11, 0.5);
+    .preset-btn.active {
+      background: #0284c7;
+      color: #ffffff;
+      border-color: #38bdf8;
+      box-shadow: 0 0 16px rgba(56, 189, 248, 0.45);
     }
 
     .btn-optimize {
-      width: 100%;
-      padding: 12px;
-      border-radius: 12px;
-      border: none;
-      background: linear-gradient(135deg, #0284c7, #6366f1);
+      background: linear-gradient(135deg, #2563eb, #7c3aed);
       color: white;
-      font-size: 0.95rem;
-      font-weight: 700;
+      border: 1px solid rgba(255, 255, 255, 0.2);
+      padding: 12px 24px;
+      border-radius: 24px;
+      font-size: 1rem;
+      font-weight: 800;
       cursor: pointer;
-      box-shadow: 0 4px 16px rgba(2, 132, 199, 0.35);
-      transition: all 0.25s ease;
+      box-shadow: 0 4px 18px rgba(37, 99, 235, 0.5);
       display: flex;
       align-items: center;
-      justify-content: center;
-      gap: 8px;
-      margin-top: 10px;
+      gap: 10px;
+      transition: all 0.2s;
     }
     .btn-optimize:hover {
       transform: translateY(-2px);
-      box-shadow: 0 6px 20px rgba(2, 132, 199, 0.5);
+      box-shadow: 0 6px 22px rgba(37, 99, 235, 0.7);
     }
 
-    .algo-status-box {
-      margin-top: 14px;
-      background: rgba(0, 0, 0, 0.25);
-      border-radius: 10px;
-      padding: 12px;
-      border: 1px solid var(--panel-border);
-      font-size: 0.75rem;
-    }
-    .status-title {
-      font-weight: 700;
-      color: var(--accent);
-      margin-bottom: 6px;
-      display: flex;
-      justify-content: space-between;
-    }
-    .progress-bar-wrap {
-      width: 100%;
-      height: 6px;
-      background: rgba(255, 255, 255, 0.1);
-      border-radius: 3px;
-      overflow: hidden;
-      margin-bottom: 8px;
-    }
-    .progress-bar-fill {
-      height: 100%;
-      width: 100%;
-      background: linear-gradient(90deg, #38bdf8, #10b981);
-      transition: width 0.3s ease;
-    }
-    .algo-telemetry {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 4px;
-    }
-    .badge-chip {
-      background: rgba(255, 255, 255, 0.06);
-      padding: 2px 7px;
-      border-radius: 4px;
-      font-size: 0.7rem;
-      color: var(--text-muted);
-    }
-
-    .map-container {
-      position: relative;
+    /* Main Workspace */
+    .workspace {
       flex: 1;
+      display: grid;
+      grid-template-columns: 58% 42%;
+      gap: 20px;
+      padding: 20px 28px;
+      height: calc(100vh - 76px);
+      box-sizing: border-box;
+    }
+
+    /* Left: Map Area */
+    .map-box {
+      background: #0f172a;
+      border: 2px solid var(--panel-border);
+      border-radius: 20px;
+      position: relative;
+      overflow: hidden;
       display: flex;
       flex-direction: column;
-      background: radial-gradient(circle at center, #17233d 0%, #0c1220 100%);
+      box-shadow: 0 8px 30px rgba(0, 0, 0, 0.5);
+    }
+    .map-header {
+      position: absolute;
+      top: 18px;
+      left: 18px;
+      right: 18px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      z-index: 10;
+      pointer-events: none;
     }
     .map-legend {
-      position: absolute;
-      top: 12px;
-      left: 12px;
-      background: rgba(15, 23, 42, 0.85);
-      backdrop-filter: blur(8px);
+      background: rgba(15, 23, 42, 0.95);
+      backdrop-filter: blur(10px);
       border: 1px solid var(--panel-border);
-      border-radius: 8px;
-      padding: 8px 12px;
+      border-radius: 12px;
+      padding: 9px 18px;
       display: flex;
-      flex-wrap: wrap;
-      gap: 12px;
-      font-size: 0.75rem;
-      z-index: 10;
+      gap: 16px;
+      font-size: 0.85rem;
+      font-weight: 700;
+      pointer-events: auto;
+      box-shadow: 0 4px 16px rgba(0,0,0,0.4);
     }
     .legend-item {
       display: flex;
       align-items: center;
-      gap: 6px;
+      gap: 7px;
     }
     .legend-dot {
-      width: 10px;
-      height: 10px;
+      width: 12px;
+      height: 12px;
       border-radius: 50%;
     }
+    .algo-badge {
+      background: rgba(16, 185, 129, 0.22);
+      border: 1.5px solid #10b981;
+      color: #34d399;
+      padding: 8px 18px;
+      border-radius: 20px;
+      font-size: 0.88rem;
+      font-weight: 800;
+      pointer-events: auto;
+      backdrop-filter: blur(8px);
+      box-shadow: 0 4px 16px rgba(16, 185, 129, 0.25);
+      transition: all 0.3s;
+    }
+
     canvas#mapCanvas {
       width: 100%;
       height: 100%;
       display: block;
     }
 
-    .metrics-grid {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 10px;
-      margin-bottom: 14px;
-    }
-    .metric-card {
-      background: rgba(255, 255, 255, 0.03);
-      border: 1px solid var(--panel-border);
-      border-radius: 10px;
-      padding: 10px 12px;
-    }
-    .metric-title {
-      font-size: 0.7rem;
-      color: var(--text-muted);
-      font-weight: 600;
-      margin-bottom: 4px;
-    }
-    .metric-value {
-      font-size: 1.15rem;
-      font-weight: 800;
-      color: var(--text-main);
-    }
-    .metric-value.highlight { color: var(--accent); }
-    .metric-value.money { color: var(--success); }
-
-    .timeline {
+    /* Right: Itinerary & Stats */
+    .timeline-box {
+      background: #0f172a;
+      border: 2px solid var(--panel-border);
+      border-radius: 20px;
       display: flex;
       flex-direction: column;
-      gap: 10px;
+      overflow: hidden;
+      box-shadow: 0 8px 30px rgba(0, 0, 0, 0.5);
+    }
+    .kpi-row {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 12px;
+      padding: 18px 22px;
+      background: rgba(255, 255, 255, 0.03);
+      border-bottom: 2px solid var(--panel-border);
+    }
+    .kpi-card {
+      background: rgba(0, 0, 0, 0.35);
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      border-radius: 12px;
+      padding: 10px 14px;
+    }
+    .kpi-label {
+      font-size: 0.72rem;
+      color: var(--text-muted);
+      font-weight: 800;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      margin-bottom: 4px;
+    }
+    .kpi-val {
+      font-size: 1.35rem;
+      font-weight: 800;
+      color: #fff;
+    }
+    .kpi-val.accent { color: #38bdf8; text-shadow: 0 0 14px rgba(56, 189, 248, 0.4); }
+    .kpi-val.green { color: #10b981; }
+
+    .timeline-scroll {
+      flex: 1;
+      overflow-y: auto;
+      padding: 16px 22px;
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
       position: relative;
     }
-    .timeline::before {
+    .timeline-scroll::before {
       content: '';
       position: absolute;
-      left: 18px;
-      top: 15px;
-      bottom: 25px;
-      width: 2px;
-      background: rgba(255, 255, 255, 0.1);
+      left: 41px;
+      top: 24px;
+      bottom: 30px;
+      width: 2.5px;
+      background: rgba(255, 255, 255, 0.15);
     }
-    .timeline-item {
+
+    .t-item {
       display: flex;
-      gap: 14px;
+      gap: 16px;
+      background: rgba(255, 255, 255, 0.04);
+      border: 1.5px solid var(--panel-border);
+      border-radius: 14px;
+      padding: 14px 16px;
       position: relative;
-      background: rgba(255, 255, 255, 0.02);
-      border: 1px solid var(--panel-border);
-      border-radius: 12px;
-      padding: 10px 12px;
-      transition: all 0.2s ease;
+      transition: transform 0.2s, border-color 0.2s;
     }
-    .timeline-item:hover {
-      background: rgba(56, 189, 248, 0.08);
-      border-color: rgba(56, 189, 248, 0.3);
+    .t-item:hover {
       transform: translateX(4px);
+      border-color: rgba(56, 189, 248, 0.5);
     }
-    .t-step {
-      width: 26px;
-      height: 26px;
+    .t-circle {
+      width: 38px;
+      height: 38px;
       border-radius: 50%;
       background: #1e293b;
-      border: 2px solid var(--accent);
+      border: 2.5px solid var(--accent-cyan);
       display: flex;
       align-items: center;
       justify-content: center;
-      font-size: 0.75rem;
+      font-size: 1.05rem;
       font-weight: 800;
-      color: var(--accent);
+      color: #38bdf8;
       flex-shrink: 0;
       z-index: 2;
+      box-shadow: 0 0 12px rgba(56, 189, 248, 0.35);
     }
-    .t-content { flex: 1; }
-    .t-header {
+    .t-body { flex: 1; }
+    .t-top {
       display: flex;
       justify-content: space-between;
-      align-items: baseline;
-      margin-bottom: 2px;
+      align-items: center;
+      margin-bottom: 6px;
     }
     .t-name {
-      font-size: 0.85rem;
-      font-weight: 700;
-      color: var(--text-main);
+      font-size: 1.05rem;
+      font-weight: 800;
+      color: #fff;
+      letter-spacing: -0.01em;
     }
     .t-time {
-      font-size: 0.75rem;
-      font-weight: 700;
-      color: var(--accent);
+      font-size: 0.98rem;
+      font-weight: 800;
+      color: #38bdf8;
+      background: rgba(56, 189, 248, 0.12);
+      padding: 3px 10px;
+      border-radius: 8px;
     }
-    .t-sub {
-      font-size: 0.72rem;
-      color: var(--text-muted);
+    .t-bottom {
       display: flex;
       justify-content: space-between;
-      margin-top: 4px;
+      align-items: center;
+      font-size: 0.88rem;
     }
-    .t-badge {
-      display: inline-block;
-      padding: 1px 6px;
-      border-radius: 4px;
-      font-size: 0.65rem;
-      font-weight: 600;
+    .t-pill {
+      padding: 4px 10px;
+      border-radius: 6px;
+      font-size: 0.78rem;
+      font-weight: 800;
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
     }
 
-    .bg-history { background: #3b82f6; color: #fff; }
-    .bg-nature { background: #10b981; color: #fff; }
-    .bg-food { background: #f59e0b; color: #fff; }
-    .bg-shopping { background: #ec4899; color: #fff; }
-    .bg-entertainment { background: #8b5cf6; color: #fff; }
-    .bg-nightlife { background: #6366f1; color: #fff; }
-    .bg-depot { background: #e2e8f0; color: #0f172a; }
+    .bg-history { background: #2563eb; color: #fff; }
+    .bg-nature { background: #059669; color: #fff; }
+    .bg-food { background: #d97706; color: #fff; }
+    .bg-shopping { background: #db2777; color: #fff; }
+    .bg-entertainment { background: #7c3aed; color: #fff; }
+    .bg-nightlife { background: #4f46e5; color: #fff; }
+    .bg-depot { background: #f8fafc; color: #0f172a; }
   </style>
 </head>
 <body>
@@ -450,163 +344,66 @@
       <div class="brand-icon">🗺️</div>
       <div class="brand-title">
         <h1>PADCS AI Tour Planner</h1>
-        <p>Hệ thống tối ưu hóa lộ trình du lịch cá nhân hóa (Personalized TOPTW)</p>
+        <p>Hệ thống Tối ưu Lịch trình Du lịch Cá nhân hóa (TOPTW Hybrid-GA)</p>
       </div>
     </div>
 
-    <div class="preset-bar">
-      <span class="preset-label">Hồ sơ du khách mẫu:</span>
+    <div class="presets-wrap">
       <button class="preset-btn active" data-preset="food_culture">🍜 Ẩm thực & Di sản</button>
       <button class="preset-btn" data-preset="history_buff">🏛️ Lịch sử & Văn hóa</button>
-      <button class="preset-btn" data-preset="nature_relax">🌿 Thắng cảnh & Thư giãn</button>
+      <button class="preset-btn" data-preset="nature_relax">🌿 Thắng cảnh Sinh thái</button>
       <button class="preset-btn" data-preset="urban_lifestyle">🛍️ Giải trí Phố thị</button>
     </div>
+
+    <button class="btn-optimize" id="btnOptimize">
+      <span>🚀 Tối Ưu Lộ Trình</span>
+    </button>
   </header>
 
-  <main class="dashboard">
-
-    <!-- Column 1: Inputs -->
-    <section class="panel">
-      <div class="panel-header">
-        <h2>⚙️ 1. Nhu cầu du khách</h2>
+  <div class="workspace">
+    <!-- Left: Big Map Canvas -->
+    <div class="map-box">
+      <div class="map-header">
+        <div class="map-legend">
+          <div class="legend-item"><span class="legend-dot bg-depot"></span> Depot</div>
+          <div class="legend-item"><span class="legend-dot bg-history"></span> Di tích</div>
+          <div class="legend-item"><span class="legend-dot bg-food"></span> Ẩm thực</div>
+          <div class="legend-item"><span class="legend-dot bg-nature"></span> Thắng cảnh</div>
+          <div class="legend-item"><span class="legend-dot bg-entertainment"></span> Giải trí</div>
+        </div>
+        <div class="algo-badge" id="algoBadge">● Hội tụ tối ưu (Gen 26/200)</div>
       </div>
-      <div class="panel-body">
-        <div class="form-group">
-          <div class="form-label">
-            <span>Ngân sách chuyến đi:</span>
-            <span class="form-val" id="budgetVal">500,000 VND</span>
-          </div>
-          <input type="range" class="range-slider" id="budgetInput" min="100000" max="1500000" step="50000" value="500000">
-        </div>
-
-        <div class="form-group">
-          <div class="form-label">
-            <span>Khung giờ khả dụng:</span>
-            <span class="form-val">08:00 → 18:00 (10 tiếng)</span>
-          </div>
-        </div>
-
-        <div class="form-group">
-          <div class="form-label">
-            <span>Sở thích cá nhân (1-5 sao):</span>
-          </div>
-          
-          <div class="category-row">
-            <div class="cat-name"><span class="cat-tag bg-history"></span>🏛️ Lịch sử & Di tích</div>
-            <div class="stars" id="stars_history_culture">
-              <span class="star active">★</span><span class="star active">★</span><span class="star active">★</span><span class="star active">★</span><span class="star active">★</span>
-            </div>
-          </div>
-
-          <div class="category-row">
-            <div class="cat-name"><span class="cat-tag bg-food"></span>🍜 Ẩm thực đặc sản</div>
-            <div class="stars" id="stars_food_drink">
-              <span class="star active">★</span><span class="star active">★</span><span class="star active">★</span><span class="star active">★</span><span class="star active">★</span>
-            </div>
-          </div>
-
-          <div class="category-row">
-            <div class="cat-name"><span class="cat-tag bg-nature"></span>🌿 Thiên nhiên & Thắng cảnh</div>
-            <div class="stars" id="stars_nature_parks">
-              <span class="star active">★</span><span class="star active">★</span><span class="star active">★</span><span class="star">★</span><span class="star">★</span>
-            </div>
-          </div>
-
-          <div class="category-row">
-            <div class="cat-name"><span class="cat-tag bg-shopping"></span>🛍️ Mua sắm & Chợ</div>
-            <div class="stars" id="stars_shopping">
-              <span class="star active">★</span><span class="star">★</span><span class="star">★</span><span class="star">★</span><span class="star">★</span>
-            </div>
-          </div>
-
-          <div class="category-row">
-            <div class="cat-name"><span class="cat-tag bg-entertainment"></span>🎭 Giải trí & Nghệ thuật</div>
-            <div class="stars" id="stars_entertainment">
-              <span class="star active">★</span><span class="star active">★</span><span class="star">★</span><span class="star">★</span><span class="star">★</span>
-            </div>
-          </div>
-
-          <div class="category-row">
-            <div class="cat-name"><span class="cat-tag bg-nightlife"></span>🌙 Phố đêm & Thư giãn</div>
-            <div class="stars" id="stars_nightlife_wellness">
-              <span class="star active">★</span><span class="star active">★</span><span class="star">★</span><span class="star">★</span><span class="star">★</span>
-            </div>
-          </div>
-        </div>
-
-        <button class="btn-optimize" id="btnOptimize">
-          <span>🚀 Tối Ưu Hóa Lộ Trình</span>
-        </button>
-
-        <div class="algo-status-box">
-          <div class="status-title">
-            <span>Tiến trình giải thuật PADCS</span>
-            <span id="statusStep">Hội tụ tối ưu thành công</span>
-          </div>
-          <div class="progress-bar-wrap">
-            <div class="progress-bar-fill" id="progressBar"></div>
-          </div>
-          <div class="algo-telemetry">
-            <span class="badge-chip">Heuristic Init</span>
-            <span class="badge-chip">OX1 Crossover</span>
-            <span class="badge-chip">Smart Repair</span>
-            <span class="badge-chip">Greedy Refill</span>
-            <span class="badge-chip">Diversity Filter</span>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <!-- Column 2: Center Interactive Map -->
-    <section class="panel map-container">
-      <div class="map-legend">
-        <div class="legend-item"><span class="legend-dot bg-depot"></span> Khách sạn (Depot)</div>
-        <div class="legend-item"><span class="legend-dot bg-history"></span> Lịch sử</div>
-        <div class="legend-item"><span class="legend-dot bg-food"></span> Ẩm thực</div>
-        <div class="legend-item"><span class="legend-dot bg-nature"></span> Thiên nhiên</div>
-        <div class="legend-item"><span class="legend-dot bg-shopping"></span> Mua sắm</div>
-        <div class="legend-item"><span class="legend-dot bg-entertainment"></span> Giải trí</div>
-      </div>
-
       <canvas id="mapCanvas"></canvas>
-    </section>
+    </div>
 
-    <!-- Column 3: Output Tour Plan -->
-    <section class="panel">
-      <div class="panel-header">
-        <h2>📋 2. Lịch trình trong ngày</h2>
-      </div>
-      <div class="panel-body">
-        <div class="metrics-grid">
-          <div class="metric-card">
-            <div class="metric-title">ĐIỂM HÀI LÒNG</div>
-            <div class="metric-value highlight" id="metricScore">167.2</div>
-          </div>
-          <div class="metric-card">
-            <div class="metric-title">CHI PHÍ THỰC TẾ</div>
-            <div class="metric-value money" id="metricCost">400,000 đ</div>
-          </div>
-          <div class="metric-card">
-            <div class="metric-title">QUÃNG ĐƯỜNG</div>
-            <div class="metric-value" id="metricDistance">129.7 km</div>
-          </div>
-          <div class="metric-card">
-            <div class="metric-title">THỜI GIAN CHỜ</div>
-            <div class="metric-value" id="metricWait" style="color: #10b981;">0 phút</div>
-          </div>
+    <!-- Right: Tour Timeline & Key Metrics -->
+    <div class="timeline-box">
+      <div class="kpi-row">
+        <div class="kpi-card">
+          <div class="kpi-label">Hài lòng</div>
+          <div class="kpi-val accent" id="kpiScore">167.2</div>
         </div>
-
-        <h3 style="font-size: 0.8rem; text-transform: uppercase; letter-spacing: 0.05em; color: var(--text-muted); margin-bottom: 10px;">Thứ tự ghé thăm tối ưu:</h3>
-        
-        <div class="timeline" id="timelineList"></div>
+        <div class="kpi-card">
+          <div class="kpi-label">Chi phí</div>
+          <div class="kpi-val green" id="kpiCost">400k đ</div>
+        </div>
+        <div class="kpi-card">
+          <div class="kpi-label">Quãng đường</div>
+          <div class="kpi-val" id="kpiDist">129.7 km</div>
+        </div>
+        <div class="kpi-card">
+          <div class="kpi-label">Chờ rảnh</div>
+          <div class="kpi-val green" id="kpiWait">0 phút</div>
+        </div>
       </div>
-    </section>
 
-  </main>
+      <div class="timeline-scroll" id="timelineList"></div>
+    </div>
+  </div>
 
+  <script src="assets/demo_data_named.json" id="dataScript" type="application/json"></script>
   <script>
-    const DEMO_DATA = {"pois": [{"id": 0, "x": 40.0, "y": 50.0, "open_time": 0.0, "close_time": 1236.0, "duration": 0.0, "base_score": 0.0, "category": "depot", "price": 0.0, "readable_name": "Khách sạn trung tâm (Depot)"}, {"id": 1, "x": 45.0, "y": 68.0, "open_time": 912.0, "close_time": 967.0, "duration": 90.0, "base_score": 10.0, "category": "history_culture", "price": 30000.0, "readable_name": "Văn Miếu - Quốc Tử Giám"}, {"id": 2, "x": 45.0, "y": 70.0, "open_time": 825.0, "close_time": 870.0, "duration": 90.0, "base_score": 30.0, "category": "entertainment", "price": 100000.0, "readable_name": "Rạp Xiếc Trung Ương"}, {"id": 3, "x": 42.0, "y": 66.0, "open_time": 65.0, "close_time": 146.0, "duration": 90.0, "base_score": 10.0, "category": "history_culture", "price": 100000.0, "readable_name": "Hoàng Thành Thăng Long"}, {"id": 4, "x": 42.0, "y": 68.0, "open_time": 727.0, "close_time": 782.0, "duration": 90.0, "base_score": 10.0, "category": "history_culture", "price": 30000.0, "readable_name": "Bảo tàng Lịch sử Quốc gia"}, {"id": 5, "x": 42.0, "y": 65.0, "open_time": 15.0, "close_time": 67.0, "duration": 90.0, "base_score": 10.0, "category": "food_drink", "price": 300000.0, "readable_name": "Chùa Một Cột"}, {"id": 6, "x": 40.0, "y": 69.0, "open_time": 621.0, "close_time": 702.0, "duration": 90.0, "base_score": 20.0, "category": "shopping", "price": 0.0, "readable_name": "Phố Ẩm thực Tống Duy Tân"}, {"id": 7, "x": 40.0, "y": 66.0, "open_time": 170.0, "close_time": 225.0, "duration": 90.0, "base_score": 20.0, "category": "nature_parks", "price": 0.0, "readable_name": "Chợ Đồng Xuân"}, {"id": 8, "x": 38.0, "y": 68.0, "open_time": 255.0, "close_time": 324.0, "duration": 90.0, "base_score": 20.0, "category": "history_culture", "price": 50000.0, "readable_name": "Công viên Thống Nhất"}, {"id": 9, "x": 38.0, "y": 70.0, "open_time": 534.0, "close_time": 605.0, "duration": 90.0, "base_score": 10.0, "category": "food_drink", "price": 300000.0, "readable_name": "Bảo tàng Mỹ thuật Việt Nam"}, {"id": 10, "x": 35.0, "y": 66.0, "open_time": 357.0, "close_time": 410.0, "duration": 90.0, "base_score": 10.0, "category": "food_drink", "price": 800000.0, "readable_name": "Bún chả Hương Liên (Obama)"}, {"id": 11, "x": 35.0, "y": 69.0, "open_time": 448.0, "close_time": 505.0, "duration": 90.0, "base_score": 10.0, "category": "food_drink", "price": 800000.0, "readable_name": "Nhà hàng Chả cá Lã Vọng"}, {"id": 12, "x": 25.0, "y": 85.0, "open_time": 652.0, "close_time": 721.0, "duration": 90.0, "base_score": 20.0, "category": "food_drink", "price": 300000.0, "readable_name": "Ẩm thực Phố Cổ Tạ Hiện"}, {"id": 13, "x": 22.0, "y": 75.0, "open_time": 30.0, "close_time": 92.0, "duration": 90.0, "base_score": 30.0, "category": "history_culture", "price": 100000.0, "readable_name": "Bánh tôm Hồ Tây"}, {"id": 14, "x": 22.0, "y": 85.0, "open_time": 567.0, "close_time": 620.0, "duration": 90.0, "base_score": 10.0, "category": "history_culture", "price": 100000.0, "readable_name": "Nhà tù Hỏa Lò"}, {"id": 15, "x": 20.0, "y": 80.0, "open_time": 384.0, "close_time": 429.0, "duration": 90.0, "base_score": 40.0, "category": "entertainment", "price": 100000.0, "readable_name": "Cột cờ Hà Nội"}, {"id": 16, "x": 20.0, "y": 85.0, "open_time": 475.0, "close_time": 528.0, "duration": 90.0, "base_score": 40.0, "category": "nature_parks", "price": 0.0, "readable_name": "Nhà hát Lớn Hà Nội"}, {"id": 17, "x": 18.0, "y": 75.0, "open_time": 99.0, "close_time": 148.0, "duration": 90.0, "base_score": 20.0, "category": "food_drink", "price": 300000.0, "readable_name": "Vườn bách thảo Hà Nội"}, {"id": 18, "x": 15.0, "y": 75.0, "open_time": 179.0, "close_time": 254.0, "duration": 90.0, "base_score": 20.0, "category": "history_culture", "price": 100000.0, "readable_name": "Phở Bát Đàn truyền thống"}, {"id": 19, "x": 15.0, "y": 80.0, "open_time": 278.0, "close_time": 345.0, "duration": 90.0, "base_score": 10.0, "category": "food_drink", "price": 50000.0, "readable_name": "Đền Quán Thánh"}, {"id": 20, "x": 30.0, "y": 50.0, "open_time": 10.0, "close_time": 73.0, "duration": 90.0, "base_score": 10.0, "category": "entertainment", "price": 500000.0, "readable_name": "Cà phê Trứng Giảng"}, {"id": 21, "x": 30.0, "y": 52.0, "open_time": 914.0, "close_time": 965.0, "duration": 90.0, "base_score": 20.0, "category": "history_culture", "price": 100000.0, "readable_name": "Trung tâm Chiếu phim Quốc gia"}, {"id": 22, "x": 28.0, "y": 52.0, "open_time": 812.0, "close_time": 883.0, "duration": 90.0, "base_score": 20.0, "category": "entertainment", "price": 100000.0, "readable_name": "Đền Ngọc Sơn - Cầu Thê Húc"}, {"id": 23, "x": 28.0, "y": 55.0, "open_time": 732.0, "close_time": 777.0, "duration": 90.0, "base_score": 10.0, "category": "entertainment", "price": 200000.0, "readable_name": "Rạp Múa rối Nước Thăng Long"}, {"id": 24, "x": 25.0, "y": 50.0, "open_time": 65.0, "close_time": 144.0, "duration": 90.0, "base_score": 10.0, "category": "shopping", "price": 100000.0, "readable_name": "Sân vận động Hàng Đẫy"}, {"id": 25, "x": 25.0, "y": 52.0, "open_time": 169.0, "close_time": 224.0, "duration": 90.0, "base_score": 40.0, "category": "nature_parks", "price": 0.0, "readable_name": "Công viên / Thắng cảnh #25"}, {"id": 26, "x": 25.0, "y": 55.0, "open_time": 622.0, "close_time": 701.0, "duration": 90.0, "base_score": 10.0, "category": "shopping", "price": 100000.0, "readable_name": "Trung tâm Mua sắm #26"}, {"id": 27, "x": 23.0, "y": 52.0, "open_time": 261.0, "close_time": 316.0, "duration": 90.0, "base_score": 10.0, "category": "food_drink", "price": 300000.0, "readable_name": "Ẩm thực Hà Nội #27"}, {"id": 28, "x": 23.0, "y": 55.0, "open_time": 546.0, "close_time": 593.0, "duration": 90.0, "base_score": 20.0, "category": "history_culture", "price": 30000.0, "readable_name": "Di tích / Lịch sử #28"}, {"id": 29, "x": 20.0, "y": 50.0, "open_time": 358.0, "close_time": 405.0, "duration": 90.0, "base_score": 10.0, "category": "food_drink", "price": 300000.0, "readable_name": "Ẩm thực Hà Nội #29"}, {"id": 30, "x": 20.0, "y": 55.0, "open_time": 449.0, "close_time": 504.0, "duration": 90.0, "base_score": 10.0, "category": "food_drink", "price": 300000.0, "readable_name": "Ẩm thực Hà Nội #30"}, {"id": 31, "x": 10.0, "y": 35.0, "open_time": 200.0, "close_time": 237.0, "duration": 90.0, "base_score": 20.0, "category": "history_culture", "price": 30000.0, "readable_name": "Di tích / Lịch sử #31"}, {"id": 32, "x": 10.0, "y": 40.0, "open_time": 31.0, "close_time": 100.0, "duration": 90.0, "base_score": 30.0, "category": "history_culture", "price": 30000.0, "readable_name": "Di tích / Lịch sử #32"}, {"id": 33, "x": 8.0, "y": 40.0, "open_time": 87.0, "close_time": 158.0, "duration": 90.0, "base_score": 40.0, "category": "food_drink", "price": 150000.0, "readable_name": "Ẩm thực Hà Nội #33"}, {"id": 34, "x": 8.0, "y": 45.0, "open_time": 751.0, "close_time": 816.0, "duration": 90.0, "base_score": 20.0, "category": "food_drink", "price": 50000.0, "readable_name": "Chợ hoa Quảng Bá"}, {"id": 35, "x": 5.0, "y": 35.0, "open_time": 283.0, "close_time": 344.0, "duration": 90.0, "base_score": 10.0, "category": "food_drink", "price": 150000.0, "readable_name": "Ẩm thực Hà Nội #35"}, {"id": 36, "x": 5.0, "y": 45.0, "open_time": 665.0, "close_time": 716.0, "duration": 90.0, "base_score": 10.0, "category": "nature_parks", "price": 0.0, "readable_name": "Công viên / Thắng cảnh #36"}, {"id": 37, "x": 2.0, "y": 40.0, "open_time": 383.0, "close_time": 434.0, "duration": 90.0, "base_score": 20.0, "category": "food_drink", "price": 50000.0, "readable_name": "Ẩm thực Hà Nội #37"}, {"id": 38, "x": 0.0, "y": 40.0, "open_time": 479.0, "close_time": 522.0, "duration": 90.0, "base_score": 30.0, "category": "food_drink", "price": 800000.0, "readable_name": "Ẩm thực Hà Nội #38"}, {"id": 39, "x": 0.0, "y": 45.0, "open_time": 567.0, "close_time": 624.0, "duration": 90.0, "base_score": 20.0, "category": "history_culture", "price": 50000.0, "readable_name": "Di tích / Lịch sử #39"}, {"id": 40, "x": 35.0, "y": 30.0, "open_time": 264.0, "close_time": 321.0, "duration": 90.0, "base_score": 10.0, "category": "food_drink", "price": 50000.0, "readable_name": "Ẩm thực Hà Nội #40"}, {"id": 41, "x": 35.0, "y": 32.0, "open_time": 166.0, "close_time": 235.0, "duration": 90.0, "base_score": 10.0, "category": "nature_parks", "price": 0.0, "readable_name": "Công viên / Thắng cảnh #41"}, {"id": 42, "x": 33.0, "y": 32.0, "open_time": 68.0, "close_time": 149.0, "duration": 90.0, "base_score": 20.0, "category": "food_drink", "price": 50000.0, "readable_name": "Ẩm thực Hà Nội #42"}, {"id": 43, "x": 33.0, "y": 35.0, "open_time": 16.0, "close_time": 80.0, "duration": 90.0, "base_score": 10.0, "category": "history_culture", "price": 100000.0, "readable_name": "Di tích / Lịch sử #43"}, {"id": 44, "x": 32.0, "y": 30.0, "open_time": 359.0, "close_time": 412.0, "duration": 90.0, "base_score": 10.0, "category": "nature_parks", "price": 0.0, "readable_name": "Công viên / Thắng cảnh #44"}, {"id": 45, "x": 30.0, "y": 30.0, "open_time": 541.0, "close_time": 600.0, "duration": 90.0, "base_score": 10.0, "category": "history_culture", "price": 50000.0, "readable_name": "Di tích / Lịch sử #45"}, {"id": 46, "x": 30.0, "y": 32.0, "open_time": 448.0, "close_time": 509.0, "duration": 90.0, "base_score": 30.0, "category": "entertainment", "price": 200000.0, "readable_name": "Khu Vui chơi / Nghệ thuật #46"}, {"id": 47, "x": 30.0, "y": 35.0, "open_time": 1054.0, "close_time": 1127.0, "duration": 90.0, "base_score": 10.0, "category": "nightlife_wellness", "price": 200000.0, "readable_name": "Hồ Hoàn Kiếm (Dạo quanh)"}, {"id": 48, "x": 28.0, "y": 30.0, "open_time": 632.0, "close_time": 693.0, "duration": 90.0, "base_score": 10.0, "category": "food_drink", "price": 150000.0, "readable_name": "Ẩm thực Hà Nội #48"}, {"id": 49, "x": 28.0, "y": 35.0, "open_time": 1001.0, "close_time": 1066.0, "duration": 90.0, "base_score": 10.0, "category": "nightlife_wellness", "price": 100000.0, "readable_name": "Phố đi bộ / Nightlife #49"}, {"id": 50, "x": 26.0, "y": 32.0, "open_time": 815.0, "close_time": 880.0, "duration": 90.0, "base_score": 10.0, "category": "food_drink", "price": 300000.0, "readable_name": "Ẩm thực Hà Nội #50"}, {"id": 51, "x": 25.0, "y": 30.0, "open_time": 725.0, "close_time": 786.0, "duration": 90.0, "base_score": 10.0, "category": "history_culture", "price": 100000.0, "readable_name": "Di tích / Lịch sử #51"}, {"id": 52, "x": 25.0, "y": 35.0, "open_time": 912.0, "close_time": 969.0, "duration": 90.0, "base_score": 10.0, "category": "entertainment", "price": 100000.0, "readable_name": "Khu Vui chơi / Nghệ thuật #52"}, {"id": 53, "x": 44.0, "y": 5.0, "open_time": 286.0, "close_time": 347.0, "duration": 90.0, "base_score": 20.0, "category": "food_drink", "price": 150000.0, "readable_name": "Ẩm thực Hà Nội #53"}, {"id": 54, "x": 42.0, "y": 10.0, "open_time": 186.0, "close_time": 257.0, "duration": 90.0, "base_score": 40.0, "category": "entertainment", "price": 100000.0, "readable_name": "Khu Vui chơi / Nghệ thuật #54"}, {"id": 55, "x": 42.0, "y": 15.0, "open_time": 95.0, "close_time": 158.0, "duration": 90.0, "base_score": 10.0, "category": "history_culture", "price": 30000.0, "readable_name": "Di tích / Lịch sử #55"}, {"id": 56, "x": 40.0, "y": 5.0, "open_time": 385.0, "close_time": 436.0, "duration": 90.0, "base_score": 30.0, "category": "entertainment", "price": 500000.0, "readable_name": "Khu Vui chơi / Nghệ thuật #56"}, {"id": 57, "x": 40.0, "y": 15.0, "open_time": 35.0, "close_time": 87.0, "duration": 90.0, "base_score": 40.0, "category": "history_culture", "price": 100000.0, "readable_name": "Di tích / Lịch sử #57"}, {"id": 58, "x": 38.0, "y": 5.0, "open_time": 471.0, "close_time": 534.0, "duration": 90.0, "base_score": 30.0, "category": "food_drink", "price": 150000.0, "readable_name": "Bảo tàng Dân tộc học"}, {"id": 59, "x": 38.0, "y": 15.0, "open_time": 651.0, "close_time": 740.0, "duration": 90.0, "base_score": 10.0, "category": "history_culture", "price": 100000.0, "readable_name": "Di tích / Lịch sử #59"}, {"id": 60, "x": 35.0, "y": 5.0, "open_time": 562.0, "close_time": 629.0, "duration": 90.0, "base_score": 20.0, "category": "nature_parks", "price": 0.0, "readable_name": "Hồ Tây - Đường Thanh Niên"}, {"id": 61, "x": 50.0, "y": 30.0, "open_time": 531.0, "close_time": 610.0, "duration": 90.0, "base_score": 10.0, "category": "food_drink", "price": 150000.0, "readable_name": "Ẩm thực Hà Nội #61"}, {"id": 62, "x": 50.0, "y": 35.0, "open_time": 262.0, "close_time": 317.0, "duration": 90.0, "base_score": 20.0, "category": "entertainment", "price": 100000.0, "readable_name": "Khu Vui chơi / Nghệ thuật #62"}, {"id": 63, "x": 50.0, "y": 40.0, "open_time": 171.0, "close_time": 218.0, "duration": 90.0, "base_score": 50.0, "category": "nature_parks", "price": 0.0, "readable_name": "Công viên / Thắng cảnh #63"}, {"id": 64, "x": 48.0, "y": 30.0, "open_time": 632.0, "close_time": 693.0, "duration": 90.0, "base_score": 10.0, "category": "food_drink", "price": 800000.0, "readable_name": "Ẩm thực Hà Nội #64"}, {"id": 65, "x": 48.0, "y": 40.0, "open_time": 76.0, "close_time": 129.0, "duration": 90.0, "base_score": 10.0, "category": "nature_parks", "price": 0.0, "readable_name": "Công viên / Thắng cảnh #65"}, {"id": 66, "x": 47.0, "y": 35.0, "open_time": 826.0, "close_time": 875.0, "duration": 90.0, "base_score": 10.0, "category": "history_culture", "price": 50000.0, "readable_name": "Di tích / Lịch sử #66"}, {"id": 67, "x": 47.0, "y": 40.0, "open_time": 12.0, "close_time": 77.0, "duration": 90.0, "base_score": 10.0, "category": "history_culture", "price": 50000.0, "readable_name": "Di tích / Lịch sử #67"}, {"id": 68, "x": 45.0, "y": 30.0, "open_time": 734.0, "close_time": 777.0, "duration": 90.0, "base_score": 10.0, "category": "shopping", "price": 0.0, "readable_name": "Trung tâm Mua sắm #68"}, {"id": 69, "x": 45.0, "y": 35.0, "open_time": 916.0, "close_time": 969.0, "duration": 90.0, "base_score": 10.0, "category": "food_drink", "price": 50000.0, "readable_name": "Ẩm thực Hà Nội #69"}, {"id": 70, "x": 95.0, "y": 30.0, "open_time": 387.0, "close_time": 456.0, "duration": 90.0, "base_score": 30.0, "category": "entertainment", "price": 200000.0, "readable_name": "Khu Vui chơi / Nghệ thuật #70"}, {"id": 71, "x": 95.0, "y": 35.0, "open_time": 293.0, "close_time": 360.0, "duration": 90.0, "base_score": 20.0, "category": "nature_parks", "price": 0.0, "readable_name": "Công viên / Thắng cảnh #71"}, {"id": 72, "x": 53.0, "y": 30.0, "open_time": 450.0, "close_time": 505.0, "duration": 90.0, "base_score": 10.0, "category": "history_culture", "price": 100000.0, "readable_name": "Di tích / Lịch sử #72"}, {"id": 73, "x": 92.0, "y": 30.0, "open_time": 478.0, "close_time": 551.0, "duration": 90.0, "base_score": 10.0, "category": "history_culture", "price": 100000.0, "readable_name": "Di tích / Lịch sử #73"}, {"id": 74, "x": 53.0, "y": 35.0, "open_time": 353.0, "close_time": 412.0, "duration": 90.0, "base_score": 50.0, "category": "entertainment", "price": 500000.0, "readable_name": "Khu Vui chơi / Nghệ thuật #74"}, {"id": 75, "x": 45.0, "y": 65.0, "open_time": 997.0, "close_time": 1068.0, "duration": 90.0, "base_score": 20.0, "category": "nightlife_wellness", "price": 200000.0, "readable_name": "Kem Tràng Tiền & Tràng Tiền Plaza"}, {"id": 76, "x": 90.0, "y": 35.0, "open_time": 203.0, "close_time": 260.0, "duration": 90.0, "base_score": 10.0, "category": "nature_parks", "price": 0.0, "readable_name": "Công viên / Thắng cảnh #76"}, {"id": 77, "x": 88.0, "y": 30.0, "open_time": 574.0, "close_time": 643.0, "duration": 90.0, "base_score": 10.0, "category": "shopping", "price": 300000.0, "readable_name": "Trung tâm Mua sắm #77"}, {"id": 78, "x": 88.0, "y": 35.0, "open_time": 109.0, "close_time": 170.0, "duration": 90.0, "base_score": 20.0, "category": "shopping", "price": 0.0, "readable_name": "Trung tâm Mua sắm #78"}, {"id": 79, "x": 87.0, "y": 30.0, "open_time": 668.0, "close_time": 731.0, "duration": 90.0, "base_score": 10.0, "category": "history_culture", "price": 50000.0, "readable_name": "Di tích / Lịch sử #79"}, {"id": 80, "x": 85.0, "y": 25.0, "open_time": 769.0, "close_time": 820.0, "duration": 90.0, "base_score": 10.0, "category": "history_culture", "price": 100000.0, "readable_name": "Di tích / Lịch sử #80"}, {"id": 81, "x": 85.0, "y": 35.0, "open_time": 47.0, "close_time": 124.0, "duration": 90.0, "base_score": 30.0, "category": "food_drink", "price": 800000.0, "readable_name": "Ẩm thực Hà Nội #81"}, {"id": 82, "x": 75.0, "y": 55.0, "open_time": 369.0, "close_time": 420.0, "duration": 90.0, "base_score": 20.0, "category": "history_culture", "price": 50000.0, "readable_name": "Di tích / Lịch sử #82"}, {"id": 83, "x": 72.0, "y": 55.0, "open_time": 265.0, "close_time": 338.0, "duration": 90.0, "base_score": 10.0, "category": "food_drink", "price": 800000.0, "readable_name": "Ẩm thực Hà Nội #83"}, {"id": 84, "x": 70.0, "y": 58.0, "open_time": 458.0, "close_time": 523.0, "duration": 90.0, "base_score": 20.0, "category": "shopping", "price": 0.0, "readable_name": "Trung tâm Mua sắm #84"}, {"id": 85, "x": 68.0, "y": 60.0, "open_time": 555.0, "close_time": 612.0, "duration": 90.0, "base_score": 30.0, "category": "history_culture", "price": 100000.0, "readable_name": "Lăng Chủ tịch Hồ Chí Minh"}, {"id": 86, "x": 66.0, "y": 55.0, "open_time": 173.0, "close_time": 238.0, "duration": 90.0, "base_score": 10.0, "category": "shopping", "price": 0.0, "readable_name": "Trung tâm Mua sắm #86"}, {"id": 87, "x": 65.0, "y": 55.0, "open_time": 85.0, "close_time": 144.0, "duration": 90.0, "base_score": 20.0, "category": "history_culture", "price": 30000.0, "readable_name": "Di tích / Lịch sử #87"}, {"id": 88, "x": 65.0, "y": 60.0, "open_time": 645.0, "close_time": 708.0, "duration": 90.0, "base_score": 30.0, "category": "nature_parks", "price": 0.0, "readable_name": "Bảo tàng Phụ nữ Việt Nam"}, {"id": 89, "x": 63.0, "y": 58.0, "open_time": 737.0, "close_time": 802.0, "duration": 90.0, "base_score": 10.0, "category": "history_culture", "price": 100000.0, "readable_name": "Di tích / Lịch sử #89"}, {"id": 90, "x": 60.0, "y": 55.0, "open_time": 20.0, "close_time": 84.0, "duration": 90.0, "base_score": 10.0, "category": "history_culture", "price": 30000.0, "readable_name": "Di tích / Lịch sử #90"}, {"id": 91, "x": 60.0, "y": 60.0, "open_time": 836.0, "close_time": 889.0, "duration": 90.0, "base_score": 10.0, "category": "history_culture", "price": 30000.0, "readable_name": "Di tích / Lịch sử #91"}, {"id": 92, "x": 67.0, "y": 85.0, "open_time": 368.0, "close_time": 441.0, "duration": 90.0, "base_score": 20.0, "category": "nature_parks", "price": 0.0, "readable_name": "Công viên / Thắng cảnh #92"}, {"id": 93, "x": 65.0, "y": 85.0, "open_time": 475.0, "close_time": 518.0, "duration": 90.0, "base_score": 40.0, "category": "entertainment", "price": 200000.0, "readable_name": "Khu Vui chơi / Nghệ thuật #93"}, {"id": 94, "x": 65.0, "y": 82.0, "open_time": 285.0, "close_time": 336.0, "duration": 90.0, "base_score": 10.0, "category": "food_drink", "price": 50000.0, "readable_name": "Ẩm thực Hà Nội #94"}, {"id": 95, "x": 62.0, "y": 80.0, "open_time": 196.0, "close_time": 239.0, "duration": 90.0, "base_score": 30.0, "category": "shopping", "price": 100000.0, "readable_name": "Trung tâm Mua sắm #95"}, {"id": 96, "x": 60.0, "y": 80.0, "open_time": 95.0, "close_time": 156.0, "duration": 90.0, "base_score": 10.0, "category": "nature_parks", "price": 0.0, "readable_name": "Công viên / Thắng cảnh #96"}, {"id": 97, "x": 60.0, "y": 85.0, "open_time": 561.0, "close_time": 622.0, "duration": 90.0, "base_score": 30.0, "category": "history_culture", "price": 50000.0, "readable_name": "Di tích / Lịch sử #97"}, {"id": 98, "x": 58.0, "y": 75.0, "open_time": 30.0, "close_time": 84.0, "duration": 90.0, "base_score": 20.0, "category": "nature_parks", "price": 0.0, "readable_name": "Công viên / Thắng cảnh #98"}, {"id": 99, "x": 55.0, "y": 80.0, "open_time": 743.0, "close_time": 820.0, "duration": 90.0, "base_score": 10.0, "category": "nature_parks", "price": 0.0, "readable_name": "Chợ Đêm Phố Cổ"}, {"id": 100, "x": 55.0, "y": 85.0, "open_time": 647.0, "close_time": 726.0, "duration": 90.0, "base_score": 20.0, "category": "history_culture", "price": 50000.0, "readable_name": "Di tích / Lịch sử #100"}], "presets": {"food_culture": {"preset": {"id": "food_culture", "name": "Food & Heritage Explorer", "subtitle": "Top cultural sights & authentic street cuisine", "budget": 500000, "start_time": 8.0, "end_time": 18.0, "interests": {"history_culture": 5, "food_drink": 5, "nature_parks": 3, "entertainment": 2, "shopping": 1, "nightlife_wellness": 2}}, "summary": {"total_score": 167.21, "total_cost": 400000.0, "total_distance": 129.69, "total_duration": 9.66, "execution_time": 2.445}, "route": [{"order": 1, "id": 0, "name": "Khách sạn trung tâm (Depot)", "category": "depot", "travel_distance": null, "travel_time": null, "arrival": "08:00", "wait": 0, "start": "08:00", "leave": "08:00", "cost": 0.0, "score": 0.0}, {"order": 2, "id": 58, "name": "Bảo tàng Dân tộc học", "category": "food_drink", "travel_distance": 45.04, "travel_time": 45, "arrival": "08:45", "wait": 0, "start": "08:45", "leave": "10:15", "cost": 150000.0, "score": 59.02}, {"order": 3, "id": 60, "name": "Hồ Tây - Đường Thanh Niên", "category": "nature_parks", "travel_distance": 3.0, "travel_time": 3, "arrival": "10:18", "wait": 0, "start": "10:18", "leave": "11:48", "cost": 0.0, "score": 19.67}, {"order": 4, "id": 34, "name": "Chợ hoa Quảng Bá", "category": "food_drink", "travel_distance": 48.26, "travel_time": 48, "arrival": "12:36", "wait": 0, "start": "12:36", "leave": "14:06", "cost": 50000.0, "score": 39.34}, {"order": 5, "id": 22, "name": "Đền Ngọc Sơn - Cầu Thê Húc", "category": "entertainment", "travel_distance": 21.19, "travel_time": 21, "arrival": "14:27", "wait": 0, "start": "14:27", "leave": "15:57", "cost": 100000.0, "score": 9.84}, {"order": 6, "id": 21, "name": "Trung tâm Chiếu phim Quốc gia", "category": "history_culture", "travel_distance": 2.0, "travel_time": 2, "arrival": "15:59", "wait": 0, "start": "15:59", "leave": "17:29", "cost": 100000.0, "score": 39.34}, {"order": 7, "id": 0, "name": "Khách sạn trung tâm (Depot)", "category": "depot", "travel_distance": 10.2, "travel_time": 10, "arrival": "17:40", "wait": 0, "start": null, "leave": null, "cost": 0.0, "score": 0.0}], "convergence": [{"gen": 1, "best_fitness": 149.2393069286264, "avg_fitness": -7201.9834056738555, "score": 157.37704918032787}, {"gen": 2, "best_fitness": 167.21311475409837, "avg_fitness": -5278.644627595735, "score": 167.21311475409837}, {"gen": 3, "best_fitness": 167.21311475409837, "avg_fitness": -4751.768722604702, "score": 167.21311475409837}, {"gen": 4, "best_fitness": 167.21311475409837, "avg_fitness": -3995.5952317293086, "score": 167.21311475409837}, {"gen": 5, "best_fitness": 167.21311475409837, "avg_fitness": -3541.615117741443, "score": 167.21311475409837}, {"gen": 6, "best_fitness": 167.21311475409837, "avg_fitness": -3338.9575759123145, "score": 167.21311475409837}, {"gen": 7, "best_fitness": 167.21311475409837, "avg_fitness": -3240.0561473087064, "score": 167.21311475409837}, {"gen": 8, "best_fitness": 167.21311475409837, "avg_fitness": -2792.825529901396, "score": 167.21311475409837}, {"gen": 9, "best_fitness": 167.21311475409837, "avg_fitness": -2330.2066746053933, "score": 167.21311475409837}, {"gen": 10, "best_fitness": 167.21311475409837, "avg_fitness": -1946.0145377250983, "score": 167.21311475409837}, {"gen": 11, "best_fitness": 167.21311475409837, "avg_fitness": -1655.8001914216647, "score": 167.21311475409837}, {"gen": 12, "best_fitness": 167.21311475409837, "avg_fitness": -1437.7126433845565, "score": 167.21311475409837}, {"gen": 13, "best_fitness": 167.21311475409837, "avg_fitness": -1183.535768246246, "score": 167.21311475409837}, {"gen": 14, "best_fitness": 167.21311475409837, "avg_fitness": -1083.4302785239952, "score": 167.21311475409837}, {"gen": 15, "best_fitness": 167.21311475409837, "avg_fitness": -934.0020477492454, "score": 167.21311475409837}, {"gen": 16, "best_fitness": 167.21311475409837, "avg_fitness": -686.136650148811, "score": 167.21311475409837}, {"gen": 17, "best_fitness": 167.21311475409837, "avg_fitness": -587.6322334433044, "score": 167.21311475409837}, {"gen": 18, "best_fitness": 167.21311475409837, "avg_fitness": -489.8036146672394, "score": 167.21311475409837}, {"gen": 19, "best_fitness": 167.21311475409837, "avg_fitness": -390.9658850301606, "score": 167.21311475409837}, {"gen": 20, "best_fitness": 167.21311475409837, "avg_fitness": -297.0396689082792, "score": 167.21311475409837}, {"gen": 21, "best_fitness": 167.21311475409837, "avg_fitness": -140.2500428213791, "score": 167.21311475409837}, {"gen": 22, "best_fitness": 167.21311475409837, "avg_fitness": -79.03034829055858, "score": 167.21311475409837}, {"gen": 23, "best_fitness": 167.21311475409837, "avg_fitness": -18.307380098067, "score": 167.21311475409837}, {"gen": 24, "best_fitness": 167.21311475409837, "avg_fitness": 12.006806601822802, "score": 167.21311475409837}, {"gen": 25, "best_fitness": 167.21311475409837, "avg_fitness": 118.23447405530005, "score": 167.21311475409837}, {"gen": 26, "best_fitness": 167.21311475409837, "avg_fitness": 118.85258868293884, "score": 167.21311475409837}, {"gen": 27, "best_fitness": 167.21311475409837, "avg_fitness": 118.85258868293884, "score": 167.21311475409837}]}, "history_buff": {"preset": {"id": "history_buff", "name": "History & Culture Buff", "subtitle": "Ancient landmarks, temples & museums", "budget": 350000, "start_time": 8.0, "end_time": 17.5, "interests": {"history_culture": 5, "food_drink": 2, "nature_parks": 3, "entertainment": 1, "shopping": 1, "nightlife_wellness": 1}}, "summary": {"total_score": 252.63, "total_cost": 350000.0, "total_distance": 129.81, "total_duration": 8.92, "execution_time": 2.9267}, "route": [{"order": 1, "id": 0, "name": "Khách sạn trung tâm (Depot)", "category": "depot", "travel_distance": null, "travel_time": null, "arrival": "08:00", "wait": 0, "start": "08:00", "leave": "08:00", "cost": 0.0, "score": 0.0}, {"order": 2, "id": 85, "name": "Lăng Chủ tịch Hồ Chí Minh", "category": "history_culture", "travel_distance": 29.73, "travel_time": 30, "arrival": "08:30", "wait": 45, "start": "09:15", "leave": "10:45", "cost": 100000.0, "score": 94.74}, {"order": 3, "id": 100, "name": "Di tích lịch sử #100", "category": "history_culture", "travel_distance": 28.18, "travel_time": 28, "arrival": "11:13", "wait": 0, "start": "11:13", "leave": "12:43", "cost": 50000.0, "score": 63.16}, {"order": 4, "id": 89, "name": "Di tích lịch sử #89", "category": "history_culture", "travel_distance": 28.16, "travel_time": 28, "arrival": "13:11", "wait": 0, "start": "13:11", "leave": "14:41", "cost": 100000.0, "score": 31.58}, {"order": 5, "id": 21, "name": "Trung tâm Chiếu phim Quốc gia", "category": "history_culture", "travel_distance": 33.54, "travel_time": 34, "arrival": "15:15", "wait": 0, "start": "15:15", "leave": "16:45", "cost": 100000.0, "score": 63.16}, {"order": 6, "id": 0, "name": "Khách sạn trung tâm (Depot)", "category": "depot", "travel_distance": 10.2, "travel_time": 10, "arrival": "16:55", "wait": 0, "start": null, "leave": null, "cost": 0.0, "score": 0.0}], "convergence": [{"gen": 1, "best_fitness": 243.5780064462958, "avg_fitness": -6761.093746682607, "score": 252.6315789473684}, {"gen": 2, "best_fitness": 243.5780064462958, "avg_fitness": -5469.20153818823, "score": 252.6315789473684}, {"gen": 3, "best_fitness": 243.5780064462958, "avg_fitness": -4526.444396704504, "score": 252.6315789473684}, {"gen": 4, "best_fitness": 243.5780064462958, "avg_fitness": -3554.817758469482, "score": 252.6315789473684}, {"gen": 5, "best_fitness": 243.5780064462958, "avg_fitness": -2815.3074912949146, "score": 252.6315789473684}, {"gen": 6, "best_fitness": 243.5780064462958, "avg_fitness": -1857.0881816545818, "score": 252.6315789473684}, {"gen": 7, "best_fitness": 243.5780064462958, "avg_fitness": -1327.7960651547892, "score": 252.6315789473684}, {"gen": 8, "best_fitness": 243.5780064462958, "avg_fitness": -976.7147560985792, "score": 252.6315789473684}, {"gen": 9, "best_fitness": 243.5780064462958, "avg_fitness": -657.680490947013, "score": 252.6315789473684}, {"gen": 10, "best_fitness": 243.5780064462958, "avg_fitness": -415.01029694446913, "score": 252.6315789473684}, {"gen": 11, "best_fitness": 243.5780064462958, "avg_fitness": -311.80289984486205, "score": 252.6315789473684}, {"gen": 12, "best_fitness": 243.5780064462958, "avg_fitness": -179.27356357637134, "score": 252.6315789473684}, {"gen": 13, "best_fitness": 243.5780064462958, "avg_fitness": -93.9834044143192, "score": 252.6315789473684}, {"gen": 14, "best_fitness": 243.5780064462958, "avg_fitness": -70.77602820873007, "score": 252.6315789473684}, {"gen": 15, "best_fitness": 243.5780064462958, "avg_fitness": -47.02545911908149, "score": 252.6315789473684}, {"gen": 16, "best_fitness": 243.5780064462958, "avg_fitness": -43.76889392059203, "score": 252.6315789473684}, {"gen": 17, "best_fitness": 243.5780064462958, "avg_fitness": -16.165791669089632, "score": 252.6315789473684}, {"gen": 18, "best_fitness": 243.5780064462958, "avg_fitness": -13.137367879366058, "score": 252.6315789473684}, {"gen": 19, "best_fitness": 243.5780064462958, "avg_fitness": 1.6821466119309343, "score": 252.6315789473684}, {"gen": 20, "best_fitness": 243.5780064462958, "avg_fitness": 16.394114978558587, "score": 252.6315789473684}, {"gen": 21, "best_fitness": 243.5780064462958, "avg_fitness": 23.6120703148752, "score": 252.6315789473684}, {"gen": 22, "best_fitness": 243.5780064462958, "avg_fitness": 43.072100962237265, "score": 252.6315789473684}, {"gen": 23, "best_fitness": 243.5780064462958, "avg_fitness": 55.65597511335452, "score": 252.6315789473684}, {"gen": 24, "best_fitness": 243.5780064462958, "avg_fitness": 69.95782880506627, "score": 252.6315789473684}, {"gen": 25, "best_fitness": 243.5780064462958, "avg_fitness": 74.81346510928599, "score": 252.6315789473684}]}, "nature_relax": {"preset": {"id": "nature_relax", "name": "Nature & Scenic Leisure", "subtitle": "Lakes, open parks & peaceful relaxation", "budget": 200000, "start_time": 8.5, "end_time": 17.0, "interests": {"history_culture": 2, "food_drink": 3, "nature_parks": 5, "entertainment": 2, "shopping": 1, "nightlife_wellness": 3}}, "summary": {"total_score": 129.41, "total_cost": 200000.0, "total_distance": 89.85, "total_duration": 7.75, "execution_time": 2.5301}, "route": [{"order": 1, "id": 0, "name": "Khách sạn trung tâm (Depot)", "category": "depot", "travel_distance": null, "travel_time": null, "arrival": "08:30", "wait": 0, "start": "08:30", "leave": "08:30", "cost": 0.0, "score": 0.0}, {"order": 2, "id": 85, "name": "Lăng Chủ tịch Hồ Chí Minh", "category": "history_culture", "travel_distance": 29.73, "travel_time": 30, "arrival": "09:00", "wait": 15, "start": "09:15", "leave": "10:45", "cost": 100000.0, "score": 17.65}, {"order": 3, "id": 88, "name": "Bảo tàng Phụ nữ Việt Nam", "category": "nature_parks", "travel_distance": 3.0, "travel_time": 3, "arrival": "10:48", "wait": 0, "start": "10:48", "leave": "12:18", "cost": 0.0, "score": 70.59}, {"order": 4, "id": 99, "name": "Chợ Đêm Phố Cổ", "category": "nature_parks", "travel_distance": 22.36, "travel_time": 22, "arrival": "12:40", "wait": 0, "start": "12:40", "leave": "14:10", "cost": 0.0, "score": 23.53}, {"order": 5, "id": 2, "name": "Rạp Xiếc Trung Ương", "category": "entertainment", "travel_distance": 14.14, "travel_time": 14, "arrival": "14:25", "wait": 0, "start": "14:25", "leave": "15:55", "cost": 100000.0, "score": 17.65}, {"order": 6, "id": 0, "name": "Khách sạn trung tâm (Depot)", "category": "depot", "travel_distance": 20.62, "travel_time": 21, "arrival": "16:15", "wait": 0, "start": null, "leave": null, "cost": 0.0, "score": 0.0}], "convergence": [{"gen": 1, "best_fitness": 126.35819220480977, "avg_fitness": -4776.39205837488, "score": 129.41176470588238}, {"gen": 2, "best_fitness": 126.35819220480977, "avg_fitness": -4357.960819561807, "score": 129.41176470588238}, {"gen": 3, "best_fitness": 126.35819220480977, "avg_fitness": -3033.129372619136, "score": 129.41176470588238}, {"gen": 4, "best_fitness": 126.35819220480977, "avg_fitness": -2324.584071222008, "score": 129.41176470588238}, {"gen": 5, "best_fitness": 126.35819220480977, "avg_fitness": -1943.3473807176013, "score": 129.41176470588238}, {"gen": 6, "best_fitness": 126.35819220480977, "avg_fitness": -1877.5223324304275, "score": 129.41176470588238}, {"gen": 7, "best_fitness": 126.35819220480977, "avg_fitness": -1642.3224363958032, "score": 129.41176470588238}, {"gen": 8, "best_fitness": 126.35819220480977, "avg_fitness": -1458.7278864007917, "score": 129.41176470588238}, {"gen": 9, "best_fitness": 126.35819220480977, "avg_fitness": -1391.0350850677476, "score": 129.41176470588238}, {"gen": 10, "best_fitness": 126.35819220480977, "avg_fitness": -1222.0285536334518, "score": 129.41176470588238}, {"gen": 11, "best_fitness": 126.35819220480977, "avg_fitness": -1041.2286314179228, "score": 129.41176470588238}, {"gen": 12, "best_fitness": 126.35819220480977, "avg_fitness": -988.090495781033, "score": 129.41176470588238}, {"gen": 13, "best_fitness": 126.35819220480977, "avg_fitness": -937.342383683686, "score": 129.41176470588238}, {"gen": 14, "best_fitness": 126.35819220480977, "avg_fitness": -826.5744093746736, "score": 129.41176470588238}, {"gen": 15, "best_fitness": 126.35819220480977, "avg_fitness": -733.6941887094725, "score": 129.41176470588238}, {"gen": 16, "best_fitness": 126.35819220480977, "avg_fitness": -691.2727610056646, "score": 129.41176470588238}, {"gen": 17, "best_fitness": 126.35819220480977, "avg_fitness": -633.4347367580971, "score": 129.41176470588238}, {"gen": 18, "best_fitness": 126.35819220480977, "avg_fitness": -605.1141370054344, "score": 129.41176470588238}, {"gen": 19, "best_fitness": 126.35819220480977, "avg_fitness": -526.9960123773723, "score": 129.41176470588238}, {"gen": 20, "best_fitness": 126.35819220480977, "avg_fitness": -477.9219947462035, "score": 129.41176470588238}, {"gen": 21, "best_fitness": 126.35819220480977, "avg_fitness": -430.12544825916353, "score": 129.41176470588238}, {"gen": 22, "best_fitness": 126.35819220480977, "avg_fitness": -337.7441629272426, "score": 129.41176470588238}, {"gen": 23, "best_fitness": 126.35819220480977, "avg_fitness": -315.7300557098472, "score": 129.41176470588238}, {"gen": 24, "best_fitness": 126.35819220480977, "avg_fitness": -294.8678789388663, "score": 129.41176470588238}, {"gen": 25, "best_fitness": 126.35819220480977, "avg_fitness": -239.8881843025996, "score": 129.41176470588238}, {"gen": 26, "best_fitness": 126.35819220480977, "avg_fitness": -220.40629908459996, "score": 129.41176470588238}]}, "urban_lifestyle": {"preset": {"id": "urban_lifestyle", "name": "City Life & Entertainment", "subtitle": "Shopping districts, theaters & vibrant night venues", "budget": 800000, "start_time": 9.0, "end_time": 21.0, "interests": {"history_culture": 1, "food_drink": 4, "nature_parks": 1, "entertainment": 5, "shopping": 5, "nightlife_wellness": 5}}, "summary": {"total_score": 137.14, "total_cost": 800000.0, "total_distance": 111.65, "total_duration": 11.48, "execution_time": 3.0185}, "route": [{"order": 1, "id": 0, "name": "Khách sạn trung tâm (Depot)", "category": "depot", "travel_distance": null, "travel_time": null, "arrival": "09:00", "wait": 0, "start": "09:00", "leave": "09:00", "cost": 0.0, "score": 0.0}, {"order": 2, "id": 9, "name": "Bảo tàng Mỹ thuật Việt Nam", "category": "food_drink", "travel_distance": 20.1, "travel_time": 20, "arrival": "09:20", "wait": 0, "start": "09:20", "leave": "10:50", "cost": 300000.0, "score": 11.69}, {"order": 3, "id": 6, "name": "Phố Ẩm thực Tống Duy Tân", "category": "shopping", "travel_distance": 2.24, "travel_time": 2, "arrival": "10:52", "wait": 0, "start": "10:52", "leave": "12:22", "cost": 0.0, "score": 31.17}, {"order": 4, "id": 99, "name": "Chợ Đêm Phố Cổ", "category": "nature_parks", "travel_distance": 18.6, "travel_time": 19, "arrival": "12:41", "wait": 0, "start": "12:41", "leave": "14:11", "cost": 0.0, "score": 0.78}, {"order": 5, "id": 2, "name": "Rạp Xiếc Trung Ương", "category": "entertainment", "travel_distance": 14.14, "travel_time": 14, "arrival": "14:25", "wait": 0, "start": "14:25", "leave": "15:55", "cost": 100000.0, "score": 46.75}, {"order": 6, "id": 75, "name": "Kem Tràng Tiền & Tràng Tiền Plaza", "category": "nightlife_wellness", "travel_distance": 5.0, "travel_time": 5, "arrival": "16:00", "wait": 37, "start": "16:37", "leave": "18:07", "cost": 200000.0, "score": 31.17}, {"order": 7, "id": 47, "name": "Hồ Hoàn Kiếm (Dạo quanh)", "category": "nightlife_wellness", "travel_distance": 33.54, "travel_time": 34, "arrival": "18:41", "wait": 0, "start": "18:41", "leave": "20:11", "cost": 200000.0, "score": 15.58}, {"order": 8, "id": 0, "name": "Khách sạn trung tâm (Depot)", "category": "depot", "travel_distance": 18.03, "travel_time": 18, "arrival": "20:29", "wait": 0, "start": null, "leave": null, "cost": 0.0, "score": 0.0}], "convergence": [{"gen": 1, "best_fitness": 129.7586631590993, "avg_fitness": 85.02719352761488, "score": 137.14285714285714}, {"gen": 2, "best_fitness": 129.7586631590993, "avg_fitness": 82.42478266902181, "score": 137.14285714285714}, {"gen": 3, "best_fitness": 129.7586631590993, "avg_fitness": 90.71600384989488, "score": 137.14285714285714}, {"gen": 4, "best_fitness": 129.7586631590993, "avg_fitness": 93.59122509661141, "score": 137.14285714285714}, {"gen": 5, "best_fitness": 129.7586631590993, "avg_fitness": 97.30298470164644, "score": 137.14285714285714}, {"gen": 6, "best_fitness": 129.7586631590993, "avg_fitness": 100.04855140928548, "score": 137.14285714285714}, {"gen": 7, "best_fitness": 129.7586631590993, "avg_fitness": 101.28448200047687, "score": 137.14285714285714}, {"gen": 8, "best_fitness": 129.7586631590993, "avg_fitness": 102.19339513200035, "score": 137.14285714285714}, {"gen": 9, "best_fitness": 129.7586631590993, "avg_fitness": 103.43796433729875, "score": 137.14285714285714}, {"gen": 10, "best_fitness": 129.7586631590993, "avg_fitness": 104.3068281411118, "score": 137.14285714285714}, {"gen": 11, "best_fitness": 129.7586631590993, "avg_fitness": 104.74158834928255, "score": 137.14285714285714}, {"gen": 12, "best_fitness": 129.7586631590993, "avg_fitness": 105.21312606613111, "score": 137.14285714285714}, {"gen": 13, "best_fitness": 129.7586631590993, "avg_fitness": 105.34561136114054, "score": 137.14285714285714}, {"gen": 14, "best_fitness": 129.7586631590993, "avg_fitness": 106.13834632744367, "score": 137.14285714285714}, {"gen": 15, "best_fitness": 129.7586631590993, "avg_fitness": 106.54232854231174, "score": 137.14285714285714}, {"gen": 16, "best_fitness": 129.7586631590993, "avg_fitness": 106.77966056723466, "score": 137.14285714285714}, {"gen": 17, "best_fitness": 129.7586631590993, "avg_fitness": 106.97632824721653, "score": 137.14285714285714}, {"gen": 18, "best_fitness": 129.7586631590993, "avg_fitness": 106.97632824721653, "score": 137.14285714285714}, {"gen": 19, "best_fitness": 129.7586631590993, "avg_fitness": 107.05438973716268, "score": 137.14285714285714}, {"gen": 20, "best_fitness": 129.7586631590993, "avg_fitness": 107.22833286261006, "score": 137.14285714285714}, {"gen": 21, "best_fitness": 129.7586631590993, "avg_fitness": 107.42170903046294, "score": 137.14285714285714}, {"gen": 22, "best_fitness": 129.7586631590993, "avg_fitness": 107.59648834868214, "score": 137.14285714285714}, {"gen": 23, "best_fitness": 129.7586631590993, "avg_fitness": 107.78387871149894, "score": 137.14285714285714}, {"gen": 24, "best_fitness": 129.7586631590993, "avg_fitness": 107.95835518795268, "score": 137.14285714285714}, {"gen": 25, "best_fitness": 129.7586631590993, "avg_fitness": 108.18972526240601, "score": 137.14285714285714}, {"gen": 26, "best_fitness": 129.7586631590993, "avg_fitness": 108.18972526240601, "score": 137.14285714285714}]}}};
-
+    let DEMO_DATA = {"pois": [{"id": 0, "x": 40.0, "y": 50.0, "open_time": 0.0, "close_time": 1236.0, "duration": 0.0, "base_score": 0.0, "category": "depot", "price": 0.0, "readable_name": "Khách sạn trung tâm (Depot)"}, {"id": 1, "x": 45.0, "y": 68.0, "open_time": 912.0, "close_time": 967.0, "duration": 90.0, "base_score": 10.0, "category": "history_culture", "price": 30000.0, "readable_name": "Văn Miếu - Quốc Tử Giám"}, {"id": 2, "x": 45.0, "y": 70.0, "open_time": 825.0, "close_time": 870.0, "duration": 90.0, "base_score": 30.0, "category": "entertainment", "price": 100000.0, "readable_name": "Rạp Xiếc Trung Ương"}, {"id": 3, "x": 42.0, "y": 66.0, "open_time": 65.0, "close_time": 146.0, "duration": 90.0, "base_score": 10.0, "category": "history_culture", "price": 100000.0, "readable_name": "Hoàng Thành Thăng Long"}, {"id": 4, "x": 42.0, "y": 68.0, "open_time": 727.0, "close_time": 782.0, "duration": 90.0, "base_score": 10.0, "category": "history_culture", "price": 30000.0, "readable_name": "Bảo tàng Lịch sử Quốc gia"}, {"id": 5, "x": 42.0, "y": 65.0, "open_time": 15.0, "close_time": 67.0, "duration": 90.0, "base_score": 10.0, "category": "food_drink", "price": 300000.0, "readable_name": "Chùa Một Cột"}, {"id": 6, "x": 40.0, "y": 69.0, "open_time": 621.0, "close_time": 702.0, "duration": 90.0, "base_score": 20.0, "category": "shopping", "price": 0.0, "readable_name": "Phố Ẩm thực Tống Duy Tân"}, {"id": 7, "x": 40.0, "y": 66.0, "open_time": 170.0, "close_time": 225.0, "duration": 90.0, "base_score": 20.0, "category": "nature_parks", "price": 0.0, "readable_name": "Chợ Đồng Xuân"}, {"id": 8, "x": 38.0, "y": 68.0, "open_time": 255.0, "close_time": 324.0, "duration": 90.0, "base_score": 20.0, "category": "history_culture", "price": 50000.0, "readable_name": "Công viên Thống Nhất"}, {"id": 9, "x": 38.0, "y": 70.0, "open_time": 534.0, "close_time": 605.0, "duration": 90.0, "base_score": 10.0, "category": "food_drink", "price": 300000.0, "readable_name": "Bảo tàng Mỹ thuật Việt Nam"}, {"id": 10, "x": 35.0, "y": 66.0, "open_time": 357.0, "close_time": 410.0, "duration": 90.0, "base_score": 10.0, "category": "food_drink", "price": 800000.0, "readable_name": "Bún chả Hương Liên (Obama)"}, {"id": 11, "x": 35.0, "y": 69.0, "open_time": 448.0, "close_time": 505.0, "duration": 90.0, "base_score": 10.0, "category": "food_drink", "price": 800000.0, "readable_name": "Nhà hàng Chả cá Lã Vọng"}, {"id": 12, "x": 25.0, "y": 85.0, "open_time": 652.0, "close_time": 721.0, "duration": 90.0, "base_score": 20.0, "category": "food_drink", "price": 300000.0, "readable_name": "Ẩm thực Phố Cổ Tạ Hiện"}, {"id": 13, "x": 22.0, "y": 75.0, "open_time": 30.0, "close_time": 92.0, "duration": 90.0, "base_score": 30.0, "category": "history_culture", "price": 100000.0, "readable_name": "Bánh tôm Hồ Tây"}, {"id": 14, "x": 22.0, "y": 85.0, "open_time": 567.0, "close_time": 620.0, "duration": 90.0, "base_score": 10.0, "category": "history_culture", "price": 100000.0, "readable_name": "Nhà tù Hỏa Lò"}, {"id": 15, "x": 20.0, "y": 80.0, "open_time": 384.0, "close_time": 429.0, "duration": 90.0, "base_score": 40.0, "category": "entertainment", "price": 100000.0, "readable_name": "Cột cờ Hà Nội"}, {"id": 16, "x": 20.0, "y": 85.0, "open_time": 475.0, "close_time": 528.0, "duration": 90.0, "base_score": 40.0, "category": "nature_parks", "price": 0.0, "readable_name": "Nhà hát Lớn Hà Nội"}, {"id": 17, "x": 18.0, "y": 75.0, "open_time": 99.0, "close_time": 148.0, "duration": 90.0, "base_score": 20.0, "category": "food_drink", "price": 300000.0, "readable_name": "Vườn bách thảo Hà Nội"}, {"id": 18, "x": 15.0, "y": 75.0, "open_time": 179.0, "close_time": 254.0, "duration": 90.0, "base_score": 20.0, "category": "history_culture", "price": 100000.0, "readable_name": "Phở Bát Đàn truyền thống"}, {"id": 19, "x": 15.0, "y": 80.0, "open_time": 278.0, "close_time": 345.0, "duration": 90.0, "base_score": 10.0, "category": "food_drink", "price": 50000.0, "readable_name": "Đền Quán Thánh"}, {"id": 20, "x": 30.0, "y": 50.0, "open_time": 10.0, "close_time": 73.0, "duration": 90.0, "base_score": 10.0, "category": "entertainment", "price": 500000.0, "readable_name": "Cà phê Trứng Giảng"}, {"id": 21, "x": 30.0, "y": 52.0, "open_time": 914.0, "close_time": 965.0, "duration": 90.0, "base_score": 20.0, "category": "history_culture", "price": 100000.0, "readable_name": "Trung tâm Chiếu phim Quốc gia"}, {"id": 22, "x": 28.0, "y": 52.0, "open_time": 812.0, "close_time": 883.0, "duration": 90.0, "base_score": 20.0, "category": "entertainment", "price": 100000.0, "readable_name": "Đền Ngọc Sơn - Cầu Thê Húc"}, {"id": 23, "x": 28.0, "y": 55.0, "open_time": 732.0, "close_time": 777.0, "duration": 90.0, "base_score": 10.0, "category": "entertainment", "price": 200000.0, "readable_name": "Rạp Múa rối Nước Thăng Long"}, {"id": 24, "x": 25.0, "y": 50.0, "open_time": 65.0, "close_time": 144.0, "duration": 90.0, "base_score": 10.0, "category": "shopping", "price": 100000.0, "readable_name": "Sân vận động Hàng Đẫy"}, {"id": 25, "x": 25.0, "y": 52.0, "open_time": 169.0, "close_time": 224.0, "duration": 90.0, "base_score": 40.0, "category": "nature_parks", "price": 0.0, "readable_name": "Công viên / Thắng cảnh #25"}, {"id": 26, "x": 25.0, "y": 55.0, "open_time": 622.0, "close_time": 701.0, "duration": 90.0, "base_score": 10.0, "category": "shopping", "price": 100000.0, "readable_name": "Trung tâm Mua sắm #26"}, {"id": 27, "x": 23.0, "y": 52.0, "open_time": 261.0, "close_time": 316.0, "duration": 90.0, "base_score": 10.0, "category": "food_drink", "price": 300000.0, "readable_name": "Ẩm thực Hà Nội #27"}, {"id": 28, "x": 23.0, "y": 55.0, "open_time": 546.0, "close_time": 593.0, "duration": 90.0, "base_score": 20.0, "category": "history_culture", "price": 30000.0, "readable_name": "Di tích / Lịch sử #28"}, {"id": 29, "x": 20.0, "y": 50.0, "open_time": 358.0, "close_time": 405.0, "duration": 90.0, "base_score": 10.0, "category": "food_drink", "price": 300000.0, "readable_name": "Ẩm thực Hà Nội #29"}, {"id": 30, "x": 20.0, "y": 55.0, "open_time": 449.0, "close_time": 504.0, "duration": 90.0, "base_score": 10.0, "category": "food_drink", "price": 300000.0, "readable_name": "Ẩm thực Hà Nội #30"}, {"id": 31, "x": 10.0, "y": 35.0, "open_time": 200.0, "close_time": 237.0, "duration": 90.0, "base_score": 20.0, "category": "history_culture", "price": 30000.0, "readable_name": "Di tích / Lịch sử #31"}, {"id": 32, "x": 10.0, "y": 40.0, "open_time": 31.0, "close_time": 100.0, "duration": 90.0, "base_score": 30.0, "category": "history_culture", "price": 30000.0, "readable_name": "Di tích / Lịch sử #32"}, {"id": 33, "x": 8.0, "y": 40.0, "open_time": 87.0, "close_time": 158.0, "duration": 90.0, "base_score": 40.0, "category": "food_drink", "price": 150000.0, "readable_name": "Ẩm thực Hà Nội #33"}, {"id": 34, "x": 8.0, "y": 45.0, "open_time": 751.0, "close_time": 816.0, "duration": 90.0, "base_score": 20.0, "category": "food_drink", "price": 50000.0, "readable_name": "Chợ hoa Quảng Bá"}, {"id": 35, "x": 5.0, "y": 35.0, "open_time": 283.0, "close_time": 344.0, "duration": 90.0, "base_score": 10.0, "category": "food_drink", "price": 150000.0, "readable_name": "Ẩm thực Hà Nội #35"}, {"id": 36, "x": 5.0, "y": 45.0, "open_time": 665.0, "close_time": 716.0, "duration": 90.0, "base_score": 10.0, "category": "nature_parks", "price": 0.0, "readable_name": "Công viên / Thắng cảnh #36"}, {"id": 37, "x": 2.0, "y": 40.0, "open_time": 383.0, "close_time": 434.0, "duration": 90.0, "base_score": 20.0, "category": "food_drink", "price": 50000.0, "readable_name": "Ẩm thực Hà Nội #37"}, {"id": 38, "x": 0.0, "y": 40.0, "open_time": 479.0, "close_time": 522.0, "duration": 90.0, "base_score": 30.0, "category": "food_drink", "price": 800000.0, "readable_name": "Ẩm thực Hà Nội #38"}, {"id": 39, "x": 0.0, "y": 45.0, "open_time": 567.0, "close_time": 624.0, "duration": 90.0, "base_score": 20.0, "category": "history_culture", "price": 50000.0, "readable_name": "Di tích / Lịch sử #39"}, {"id": 40, "x": 35.0, "y": 30.0, "open_time": 264.0, "close_time": 321.0, "duration": 90.0, "base_score": 10.0, "category": "food_drink", "price": 50000.0, "readable_name": "Ẩm thực Hà Nội #40"}, {"id": 41, "x": 35.0, "y": 32.0, "open_time": 166.0, "close_time": 235.0, "duration": 90.0, "base_score": 10.0, "category": "nature_parks", "price": 0.0, "readable_name": "Công viên / Thắng cảnh #41"}, {"id": 42, "x": 33.0, "y": 32.0, "open_time": 68.0, "close_time": 149.0, "duration": 90.0, "base_score": 20.0, "category": "food_drink", "price": 50000.0, "readable_name": "Ẩm thực Hà Nội #42"}, {"id": 43, "x": 33.0, "y": 35.0, "open_time": 16.0, "close_time": 80.0, "duration": 90.0, "base_score": 10.0, "category": "history_culture", "price": 100000.0, "readable_name": "Di tích / Lịch sử #43"}, {"id": 44, "x": 32.0, "y": 30.0, "open_time": 359.0, "close_time": 412.0, "duration": 90.0, "base_score": 10.0, "category": "nature_parks", "price": 0.0, "readable_name": "Công viên / Thắng cảnh #44"}, {"id": 45, "x": 30.0, "y": 30.0, "open_time": 541.0, "close_time": 600.0, "duration": 90.0, "base_score": 10.0, "category": "history_culture", "price": 50000.0, "readable_name": "Di tích / Lịch sử #45"}, {"id": 46, "x": 30.0, "y": 32.0, "open_time": 448.0, "close_time": 509.0, "duration": 90.0, "base_score": 30.0, "category": "entertainment", "price": 200000.0, "readable_name": "Khu Vui chơi / Nghệ thuật #46"}, {"id": 47, "x": 30.0, "y": 35.0, "open_time": 1054.0, "close_time": 1127.0, "duration": 90.0, "base_score": 10.0, "category": "nightlife_wellness", "price": 200000.0, "readable_name": "Hồ Hoàn Kiếm (Dạo quanh)"}, {"id": 48, "x": 28.0, "y": 30.0, "open_time": 632.0, "close_time": 693.0, "duration": 90.0, "base_score": 10.0, "category": "food_drink", "price": 150000.0, "readable_name": "Ẩm thực Hà Nội #48"}, {"id": 49, "x": 28.0, "y": 35.0, "open_time": 1001.0, "close_time": 1066.0, "duration": 90.0, "base_score": 10.0, "category": "nightlife_wellness", "price": 100000.0, "readable_name": "Phố đi bộ / Nightlife #49"}, {"id": 50, "x": 26.0, "y": 32.0, "open_time": 815.0, "close_time": 880.0, "duration": 90.0, "base_score": 10.0, "category": "food_drink", "price": 300000.0, "readable_name": "Ẩm thực Hà Nội #50"}, {"id": 51, "x": 25.0, "y": 30.0, "open_time": 725.0, "close_time": 786.0, "duration": 90.0, "base_score": 10.0, "category": "history_culture", "price": 100000.0, "readable_name": "Di tích / Lịch sử #51"}, {"id": 52, "x": 25.0, "y": 35.0, "open_time": 912.0, "close_time": 969.0, "duration": 90.0, "base_score": 10.0, "category": "entertainment", "price": 100000.0, "readable_name": "Khu Vui chơi / Nghệ thuật #52"}, {"id": 53, "x": 44.0, "y": 5.0, "open_time": 286.0, "close_time": 347.0, "duration": 90.0, "base_score": 20.0, "category": "food_drink", "price": 150000.0, "readable_name": "Ẩm thực Hà Nội #53"}, {"id": 54, "x": 42.0, "y": 10.0, "open_time": 186.0, "close_time": 257.0, "duration": 90.0, "base_score": 40.0, "category": "entertainment", "price": 100000.0, "readable_name": "Khu Vui chơi / Nghệ thuật #54"}, {"id": 55, "x": 42.0, "y": 15.0, "open_time": 95.0, "close_time": 158.0, "duration": 90.0, "base_score": 10.0, "category": "history_culture", "price": 30000.0, "readable_name": "Di tích / Lịch sử #55"}, {"id": 56, "x": 40.0, "y": 5.0, "open_time": 385.0, "close_time": 436.0, "duration": 90.0, "base_score": 30.0, "category": "entertainment", "price": 500000.0, "readable_name": "Khu Vui chơi / Nghệ thuật #56"}, {"id": 57, "x": 40.0, "y": 15.0, "open_time": 35.0, "close_time": 87.0, "duration": 90.0, "base_score": 40.0, "category": "history_culture", "price": 100000.0, "readable_name": "Di tích / Lịch sử #57"}, {"id": 58, "x": 38.0, "y": 5.0, "open_time": 471.0, "close_time": 534.0, "duration": 90.0, "base_score": 30.0, "category": "food_drink", "price": 150000.0, "readable_name": "Bảo tàng Dân tộc học"}, {"id": 59, "x": 38.0, "y": 15.0, "open_time": 651.0, "close_time": 740.0, "duration": 90.0, "base_score": 10.0, "category": "history_culture", "price": 100000.0, "readable_name": "Di tích / Lịch sử #59"}, {"id": 60, "x": 35.0, "y": 5.0, "open_time": 562.0, "close_time": 629.0, "duration": 90.0, "base_score": 20.0, "category": "nature_parks", "price": 0.0, "readable_name": "Hồ Tây - Đường Thanh Niên"}, {"id": 61, "x": 50.0, "y": 30.0, "open_time": 531.0, "close_time": 610.0, "duration": 90.0, "base_score": 10.0, "category": "food_drink", "price": 150000.0, "readable_name": "Ẩm thực Hà Nội #61"}, {"id": 62, "x": 50.0, "y": 35.0, "open_time": 262.0, "close_time": 317.0, "duration": 90.0, "base_score": 20.0, "category": "entertainment", "price": 100000.0, "readable_name": "Khu Vui chơi / Nghệ thuật #62"}, {"id": 63, "x": 50.0, "y": 40.0, "open_time": 171.0, "close_time": 218.0, "duration": 90.0, "base_score": 50.0, "category": "nature_parks", "price": 0.0, "readable_name": "Công viên / Thắng cảnh #63"}, {"id": 64, "x": 48.0, "y": 30.0, "open_time": 632.0, "close_time": 693.0, "duration": 90.0, "base_score": 10.0, "category": "food_drink", "price": 800000.0, "readable_name": "Ẩm thực Hà Nội #64"}, {"id": 65, "x": 48.0, "y": 40.0, "open_time": 76.0, "close_time": 129.0, "duration": 90.0, "base_score": 10.0, "category": "nature_parks", "price": 0.0, "readable_name": "Công viên / Thắng cảnh #65"}, {"id": 66, "x": 47.0, "y": 35.0, "open_time": 826.0, "close_time": 875.0, "duration": 90.0, "base_score": 10.0, "category": "history_culture", "price": 50000.0, "readable_name": "Di tích / Lịch sử #66"}, {"id": 67, "x": 47.0, "y": 40.0, "open_time": 12.0, "close_time": 77.0, "duration": 90.0, "base_score": 10.0, "category": "history_culture", "price": 50000.0, "readable_name": "Di tích / Lịch sử #67"}, {"id": 68, "x": 45.0, "y": 30.0, "open_time": 734.0, "close_time": 777.0, "duration": 90.0, "base_score": 10.0, "category": "shopping", "price": 0.0, "readable_name": "Trung tâm Mua sắm #68"}, {"id": 69, "x": 45.0, "y": 35.0, "open_time": 916.0, "close_time": 969.0, "duration": 90.0, "base_score": 10.0, "category": "food_drink", "price": 50000.0, "readable_name": "Ẩm thực Hà Nội #69"}, {"id": 70, "x": 95.0, "y": 30.0, "open_time": 387.0, "close_time": 456.0, "duration": 90.0, "base_score": 30.0, "category": "entertainment", "price": 200000.0, "readable_name": "Khu Vui chơi / Nghệ thuật #70"}, {"id": 71, "x": 95.0, "y": 35.0, "open_time": 293.0, "close_time": 360.0, "duration": 90.0, "base_score": 20.0, "category": "nature_parks", "price": 0.0, "readable_name": "Công viên / Thắng cảnh #71"}, {"id": 72, "x": 53.0, "y": 30.0, "open_time": 450.0, "close_time": 505.0, "duration": 90.0, "base_score": 10.0, "category": "history_culture", "price": 100000.0, "readable_name": "Di tích / Lịch sử #72"}, {"id": 73, "x": 92.0, "y": 30.0, "open_time": 478.0, "close_time": 551.0, "duration": 90.0, "base_score": 10.0, "category": "history_culture", "price": 100000.0, "readable_name": "Di tích / Lịch sử #73"}, {"id": 74, "x": 53.0, "y": 35.0, "open_time": 353.0, "close_time": 412.0, "duration": 90.0, "base_score": 50.0, "category": "entertainment", "price": 500000.0, "readable_name": "Khu Vui chơi / Nghệ thuật #74"}, {"id": 75, "x": 45.0, "y": 65.0, "open_time": 997.0, "close_time": 1068.0, "duration": 90.0, "base_score": 20.0, "category": "nightlife_wellness", "price": 200000.0, "readable_name": "Kem Tràng Tiền & Tràng Tiền Plaza"}, {"id": 76, "x": 90.0, "y": 35.0, "open_time": 203.0, "close_time": 260.0, "duration": 90.0, "base_score": 10.0, "category": "nature_parks", "price": 0.0, "readable_name": "Công viên / Thắng cảnh #76"}, {"id": 77, "x": 88.0, "y": 30.0, "open_time": 574.0, "close_time": 643.0, "duration": 90.0, "base_score": 10.0, "category": "shopping", "price": 300000.0, "readable_name": "Trung tâm Mua sắm #77"}, {"id": 78, "x": 88.0, "y": 35.0, "open_time": 109.0, "close_time": 170.0, "duration": 90.0, "base_score": 20.0, "category": "shopping", "price": 0.0, "readable_name": "Trung tâm Mua sắm #78"}, {"id": 79, "x": 87.0, "y": 30.0, "open_time": 668.0, "close_time": 731.0, "duration": 90.0, "base_score": 10.0, "category": "history_culture", "price": 50000.0, "readable_name": "Di tích / Lịch sử #79"}, {"id": 80, "x": 85.0, "y": 25.0, "open_time": 769.0, "close_time": 820.0, "duration": 90.0, "base_score": 10.0, "category": "history_culture", "price": 100000.0, "readable_name": "Di tích / Lịch sử #80"}, {"id": 81, "x": 85.0, "y": 35.0, "open_time": 47.0, "close_time": 124.0, "duration": 90.0, "base_score": 30.0, "category": "food_drink", "price": 800000.0, "readable_name": "Ẩm thực Hà Nội #81"}, {"id": 82, "x": 75.0, "y": 55.0, "open_time": 369.0, "close_time": 420.0, "duration": 90.0, "base_score": 20.0, "category": "history_culture", "price": 50000.0, "readable_name": "Di tích / Lịch sử #82"}, {"id": 83, "x": 72.0, "y": 55.0, "open_time": 265.0, "close_time": 338.0, "duration": 90.0, "base_score": 10.0, "category": "food_drink", "price": 800000.0, "readable_name": "Ẩm thực Hà Nội #83"}, {"id": 84, "x": 70.0, "y": 58.0, "open_time": 458.0, "close_time": 523.0, "duration": 90.0, "base_score": 20.0, "category": "shopping", "price": 0.0, "readable_name": "Trung tâm Mua sắm #84"}, {"id": 85, "x": 68.0, "y": 60.0, "open_time": 555.0, "close_time": 612.0, "duration": 90.0, "base_score": 30.0, "category": "history_culture", "price": 100000.0, "readable_name": "Lăng Chủ tịch Hồ Chí Minh"}, {"id": 86, "x": 66.0, "y": 55.0, "open_time": 173.0, "close_time": 238.0, "duration": 90.0, "base_score": 10.0, "category": "shopping", "price": 0.0, "readable_name": "Trung tâm Mua sắm #86"}, {"id": 87, "x": 65.0, "y": 55.0, "open_time": 85.0, "close_time": 144.0, "duration": 90.0, "base_score": 20.0, "category": "history_culture", "price": 30000.0, "readable_name": "Di tích / Lịch sử #87"}, {"id": 88, "x": 65.0, "y": 60.0, "open_time": 645.0, "close_time": 708.0, "duration": 90.0, "base_score": 30.0, "category": "nature_parks", "price": 0.0, "readable_name": "Bảo tàng Phụ nữ Việt Nam"}, {"id": 89, "x": 63.0, "y": 58.0, "open_time": 737.0, "close_time": 802.0, "duration": 90.0, "base_score": 10.0, "category": "history_culture", "price": 100000.0, "readable_name": "Di tích / Lịch sử #89"}, {"id": 90, "x": 60.0, "y": 55.0, "open_time": 20.0, "close_time": 84.0, "duration": 90.0, "base_score": 10.0, "category": "history_culture", "price": 30000.0, "readable_name": "Di tích / Lịch sử #90"}, {"id": 91, "x": 60.0, "y": 60.0, "open_time": 836.0, "close_time": 889.0, "duration": 90.0, "base_score": 10.0, "category": "history_culture", "price": 30000.0, "readable_name": "Di tích / Lịch sử #91"}, {"id": 92, "x": 67.0, "y": 85.0, "open_time": 368.0, "close_time": 441.0, "duration": 90.0, "base_score": 20.0, "category": "nature_parks", "price": 0.0, "readable_name": "Công viên / Thắng cảnh #92"}, {"id": 93, "x": 65.0, "y": 85.0, "open_time": 475.0, "close_time": 518.0, "duration": 90.0, "base_score": 40.0, "category": "entertainment", "price": 200000.0, "readable_name": "Khu Vui chơi / Nghệ thuật #93"}, {"id": 94, "x": 65.0, "y": 82.0, "open_time": 285.0, "close_time": 336.0, "duration": 90.0, "base_score": 10.0, "category": "food_drink", "price": 50000.0, "readable_name": "Ẩm thực Hà Nội #94"}, {"id": 95, "x": 62.0, "y": 80.0, "open_time": 196.0, "close_time": 239.0, "duration": 90.0, "base_score": 30.0, "category": "shopping", "price": 100000.0, "readable_name": "Trung tâm Mua sắm #95"}, {"id": 96, "x": 60.0, "y": 80.0, "open_time": 95.0, "close_time": 156.0, "duration": 90.0, "base_score": 10.0, "category": "nature_parks", "price": 0.0, "readable_name": "Công viên / Thắng cảnh #96"}, {"id": 97, "x": 60.0, "y": 85.0, "open_time": 561.0, "close_time": 622.0, "duration": 90.0, "base_score": 30.0, "category": "history_culture", "price": 50000.0, "readable_name": "Di tích / Lịch sử #97"}, {"id": 98, "x": 58.0, "y": 75.0, "open_time": 30.0, "close_time": 84.0, "duration": 90.0, "base_score": 20.0, "category": "nature_parks", "price": 0.0, "readable_name": "Công viên / Thắng cảnh #98"}, {"id": 99, "x": 55.0, "y": 80.0, "open_time": 743.0, "close_time": 820.0, "duration": 90.0, "base_score": 10.0, "category": "nature_parks", "price": 0.0, "readable_name": "Chợ Đêm Phố Cổ"}, {"id": 100, "x": 55.0, "y": 85.0, "open_time": 647.0, "close_time": 726.0, "duration": 90.0, "base_score": 20.0, "category": "history_culture", "price": 50000.0, "readable_name": "Di tích / Lịch sử #100"}], "presets": {"food_culture": {"preset": {"id": "food_culture", "name": "Food & Heritage Explorer", "subtitle": "Top cultural sights & authentic street cuisine", "budget": 500000, "start_time": 8.0, "end_time": 18.0, "interests": {"history_culture": 5, "food_drink": 5, "nature_parks": 3, "entertainment": 2, "shopping": 1, "nightlife_wellness": 2}}, "summary": {"total_score": 167.21, "total_cost": 400000.0, "total_distance": 129.69, "total_duration": 9.66, "execution_time": 2.445}, "route": [{"order": 1, "id": 0, "name": "Khách sạn trung tâm (Depot)", "category": "depot", "travel_distance": null, "travel_time": null, "arrival": "08:00", "wait": 0, "start": "08:00", "leave": "08:00", "cost": 0.0, "score": 0.0}, {"order": 2, "id": 58, "name": "Bảo tàng Dân tộc học", "category": "food_drink", "travel_distance": 45.04, "travel_time": 45, "arrival": "08:45", "wait": 0, "start": "08:45", "leave": "10:15", "cost": 150000.0, "score": 59.02}, {"order": 3, "id": 60, "name": "Hồ Tây - Đường Thanh Niên", "category": "nature_parks", "travel_distance": 3.0, "travel_time": 3, "arrival": "10:18", "wait": 0, "start": "10:18", "leave": "11:48", "cost": 0.0, "score": 19.67}, {"order": 4, "id": 34, "name": "Chợ hoa Quảng Bá", "category": "food_drink", "travel_distance": 48.26, "travel_time": 48, "arrival": "12:36", "wait": 0, "start": "12:36", "leave": "14:06", "cost": 50000.0, "score": 39.34}, {"order": 5, "id": 22, "name": "Đền Ngọc Sơn - Cầu Thê Húc", "category": "entertainment", "travel_distance": 21.19, "travel_time": 21, "arrival": "14:27", "wait": 0, "start": "14:27", "leave": "15:57", "cost": 100000.0, "score": 9.84}, {"order": 6, "id": 21, "name": "Trung tâm Chiếu phim Quốc gia", "category": "history_culture", "travel_distance": 2.0, "travel_time": 2, "arrival": "15:59", "wait": 0, "start": "15:59", "leave": "17:29", "cost": 100000.0, "score": 39.34}, {"order": 7, "id": 0, "name": "Khách sạn trung tâm (Depot)", "category": "depot", "travel_distance": 10.2, "travel_time": 10, "arrival": "17:40", "wait": 0, "start": null, "leave": null, "cost": 0.0, "score": 0.0}], "convergence": [{"gen": 1, "best_fitness": 149.2393069286264, "avg_fitness": -7201.9834056738555, "score": 157.37704918032787}, {"gen": 2, "best_fitness": 167.21311475409837, "avg_fitness": -5278.644627595735, "score": 167.21311475409837}, {"gen": 3, "best_fitness": 167.21311475409837, "avg_fitness": -4751.768722604702, "score": 167.21311475409837}, {"gen": 4, "best_fitness": 167.21311475409837, "avg_fitness": -3995.5952317293086, "score": 167.21311475409837}, {"gen": 5, "best_fitness": 167.21311475409837, "avg_fitness": -3541.615117741443, "score": 167.21311475409837}, {"gen": 6, "best_fitness": 167.21311475409837, "avg_fitness": -3338.9575759123145, "score": 167.21311475409837}, {"gen": 7, "best_fitness": 167.21311475409837, "avg_fitness": -3240.0561473087064, "score": 167.21311475409837}, {"gen": 8, "best_fitness": 167.21311475409837, "avg_fitness": -2792.825529901396, "score": 167.21311475409837}, {"gen": 9, "best_fitness": 167.21311475409837, "avg_fitness": -2330.2066746053933, "score": 167.21311475409837}, {"gen": 10, "best_fitness": 167.21311475409837, "avg_fitness": -1946.0145377250983, "score": 167.21311475409837}, {"gen": 11, "best_fitness": 167.21311475409837, "avg_fitness": -1655.8001914216647, "score": 167.21311475409837}, {"gen": 12, "best_fitness": 167.21311475409837, "avg_fitness": -1437.7126433845565, "score": 167.21311475409837}, {"gen": 13, "best_fitness": 167.21311475409837, "avg_fitness": -1183.535768246246, "score": 167.21311475409837}, {"gen": 14, "best_fitness": 167.21311475409837, "avg_fitness": -1083.4302785239952, "score": 167.21311475409837}, {"gen": 15, "best_fitness": 167.21311475409837, "avg_fitness": -934.0020477492454, "score": 167.21311475409837}, {"gen": 16, "best_fitness": 167.21311475409837, "avg_fitness": -686.136650148811, "score": 167.21311475409837}, {"gen": 17, "best_fitness": 167.21311475409837, "avg_fitness": -587.6322334433044, "score": 167.21311475409837}, {"gen": 18, "best_fitness": 167.21311475409837, "avg_fitness": -489.8036146672394, "score": 167.21311475409837}, {"gen": 19, "best_fitness": 167.21311475409837, "avg_fitness": -390.9658850301606, "score": 167.21311475409837}, {"gen": 20, "best_fitness": 167.21311475409837, "avg_fitness": -297.0396689082792, "score": 167.21311475409837}, {"gen": 21, "best_fitness": 167.21311475409837, "avg_fitness": -140.2500428213791, "score": 167.21311475409837}, {"gen": 22, "best_fitness": 167.21311475409837, "avg_fitness": -79.03034829055858, "score": 167.21311475409837}, {"gen": 23, "best_fitness": 167.21311475409837, "avg_fitness": -18.307380098067, "score": 167.21311475409837}, {"gen": 24, "best_fitness": 167.21311475409837, "avg_fitness": 12.006806601822802, "score": 167.21311475409837}, {"gen": 25, "best_fitness": 167.21311475409837, "avg_fitness": 118.23447405530005, "score": 167.21311475409837}, {"gen": 26, "best_fitness": 167.21311475409837, "avg_fitness": 118.85258868293884, "score": 167.21311475409837}, {"gen": 27, "best_fitness": 167.21311475409837, "avg_fitness": 118.85258868293884, "score": 167.21311475409837}]}, "history_buff": {"preset": {"id": "history_buff", "name": "History & Culture Buff", "subtitle": "Ancient landmarks, temples & museums", "budget": 350000, "start_time": 8.0, "end_time": 17.5, "interests": {"history_culture": 5, "food_drink": 2, "nature_parks": 3, "entertainment": 1, "shopping": 1, "nightlife_wellness": 1}}, "summary": {"total_score": 252.63, "total_cost": 350000.0, "total_distance": 129.81, "total_duration": 8.92, "execution_time": 2.9267}, "route": [{"order": 1, "id": 0, "name": "Khách sạn trung tâm (Depot)", "category": "depot", "travel_distance": null, "travel_time": null, "arrival": "08:00", "wait": 0, "start": "08:00", "leave": "08:00", "cost": 0.0, "score": 0.0}, {"order": 2, "id": 85, "name": "Lăng Chủ tịch Hồ Chí Minh", "category": "history_culture", "travel_distance": 29.73, "travel_time": 30, "arrival": "08:30", "wait": 45, "start": "09:15", "leave": "10:45", "cost": 100000.0, "score": 94.74}, {"order": 3, "id": 100, "name": "Di tích lịch sử #100", "category": "history_culture", "travel_distance": 28.18, "travel_time": 28, "arrival": "11:13", "wait": 0, "start": "11:13", "leave": "12:43", "cost": 50000.0, "score": 63.16}, {"order": 4, "id": 89, "name": "Di tích lịch sử #89", "category": "history_culture", "travel_distance": 28.16, "travel_time": 28, "arrival": "13:11", "wait": 0, "start": "13:11", "leave": "14:41", "cost": 100000.0, "score": 31.58}, {"order": 5, "id": 21, "name": "Trung tâm Chiếu phim Quốc gia", "category": "history_culture", "travel_distance": 33.54, "travel_time": 34, "arrival": "15:15", "wait": 0, "start": "15:15", "leave": "16:45", "cost": 100000.0, "score": 63.16}, {"order": 6, "id": 0, "name": "Khách sạn trung tâm (Depot)", "category": "depot", "travel_distance": 10.2, "travel_time": 10, "arrival": "16:55", "wait": 0, "start": null, "leave": null, "cost": 0.0, "score": 0.0}], "convergence": [{"gen": 1, "best_fitness": 243.5780064462958, "avg_fitness": -6761.093746682607, "score": 252.6315789473684}, {"gen": 2, "best_fitness": 243.5780064462958, "avg_fitness": -5469.20153818823, "score": 252.6315789473684}, {"gen": 3, "best_fitness": 243.5780064462958, "avg_fitness": -4526.444396704504, "score": 252.6315789473684}, {"gen": 4, "best_fitness": 243.5780064462958, "avg_fitness": -3554.817758469482, "score": 252.6315789473684}, {"gen": 5, "best_fitness": 243.5780064462958, "avg_fitness": -2815.3074912949146, "score": 252.6315789473684}, {"gen": 6, "best_fitness": 243.5780064462958, "avg_fitness": -1857.0881816545818, "score": 252.6315789473684}, {"gen": 7, "best_fitness": 243.5780064462958, "avg_fitness": -1327.7960651547892, "score": 252.6315789473684}, {"gen": 8, "best_fitness": 243.5780064462958, "avg_fitness": -976.7147560985792, "score": 252.6315789473684}, {"gen": 9, "best_fitness": 243.5780064462958, "avg_fitness": -657.680490947013, "score": 252.6315789473684}, {"gen": 10, "best_fitness": 243.5780064462958, "avg_fitness": -415.01029694446913, "score": 252.6315789473684}, {"gen": 11, "best_fitness": 243.5780064462958, "avg_fitness": -311.80289984486205, "score": 252.6315789473684}, {"gen": 12, "best_fitness": 243.5780064462958, "avg_fitness": -179.27356357637134, "score": 252.6315789473684}, {"gen": 13, "best_fitness": 243.5780064462958, "avg_fitness": -93.9834044143192, "score": 252.6315789473684}, {"gen": 14, "best_fitness": 243.5780064462958, "avg_fitness": -70.77602820873007, "score": 252.6315789473684}, {"gen": 15, "best_fitness": 243.5780064462958, "avg_fitness": -47.02545911908149, "score": 252.6315789473684}, {"gen": 16, "best_fitness": 243.5780064462958, "avg_fitness": -43.76889392059203, "score": 252.6315789473684}, {"gen": 17, "best_fitness": 243.5780064462958, "avg_fitness": -16.165791669089632, "score": 252.6315789473684}, {"gen": 18, "best_fitness": 243.5780064462958, "avg_fitness": -13.137367879366058, "score": 252.6315789473684}, {"gen": 19, "best_fitness": 243.5780064462958, "avg_fitness": 1.6821466119309343, "score": 252.6315789473684}, {"gen": 20, "best_fitness": 243.5780064462958, "avg_fitness": 16.394114978558587, "score": 252.6315789473684}, {"gen": 21, "best_fitness": 243.5780064462958, "avg_fitness": 23.6120703148752, "score": 252.6315789473684}, {"gen": 22, "best_fitness": 243.5780064462958, "avg_fitness": 43.072100962237265, "score": 252.6315789473684}, {"gen": 23, "best_fitness": 243.5780064462958, "avg_fitness": 55.65597511335452, "score": 252.6315789473684}, {"gen": 24, "best_fitness": 243.5780064462958, "avg_fitness": 69.95782880506627, "score": 252.6315789473684}, {"gen": 25, "best_fitness": 243.5780064462958, "avg_fitness": 74.81346510928599, "score": 252.6315789473684}]}, "nature_relax": {"preset": {"id": "nature_relax", "name": "Nature & Scenic Leisure", "subtitle": "Lakes, open parks & peaceful relaxation", "budget": 200000, "start_time": 8.5, "end_time": 17.0, "interests": {"history_culture": 2, "food_drink": 3, "nature_parks": 5, "entertainment": 2, "shopping": 1, "nightlife_wellness": 3}}, "summary": {"total_score": 129.41, "total_cost": 200000.0, "total_distance": 89.85, "total_duration": 7.75, "execution_time": 2.5301}, "route": [{"order": 1, "id": 0, "name": "Khách sạn trung tâm (Depot)", "category": "depot", "travel_distance": null, "travel_time": null, "arrival": "08:30", "wait": 0, "start": "08:30", "leave": "08:30", "cost": 0.0, "score": 0.0}, {"order": 2, "id": 85, "name": "Lăng Chủ tịch Hồ Chí Minh", "category": "history_culture", "travel_distance": 29.73, "travel_time": 30, "arrival": "09:00", "wait": 15, "start": "09:15", "leave": "10:45", "cost": 100000.0, "score": 17.65}, {"order": 3, "id": 88, "name": "Bảo tàng Phụ nữ Việt Nam", "category": "nature_parks", "travel_distance": 3.0, "travel_time": 3, "arrival": "10:48", "wait": 0, "start": "10:48", "leave": "12:18", "cost": 0.0, "score": 70.59}, {"order": 4, "id": 99, "name": "Chợ Đêm Phố Cổ", "category": "nature_parks", "travel_distance": 22.36, "travel_time": 22, "arrival": "12:40", "wait": 0, "start": "12:40", "leave": "14:10", "cost": 0.0, "score": 23.53}, {"order": 5, "id": 2, "name": "Rạp Xiếc Trung Ương", "category": "entertainment", "travel_distance": 14.14, "travel_time": 14, "arrival": "14:25", "wait": 0, "start": "14:25", "leave": "15:55", "cost": 100000.0, "score": 17.65}, {"order": 6, "id": 0, "name": "Khách sạn trung tâm (Depot)", "category": "depot", "travel_distance": 20.62, "travel_time": 21, "arrival": "16:15", "wait": 0, "start": null, "leave": null, "cost": 0.0, "score": 0.0}], "convergence": [{"gen": 1, "best_fitness": 126.35819220480977, "avg_fitness": -4776.39205837488, "score": 129.41176470588238}, {"gen": 2, "best_fitness": 126.35819220480977, "avg_fitness": -4357.960819561807, "score": 129.41176470588238}, {"gen": 3, "best_fitness": 126.35819220480977, "avg_fitness": -3033.129372619136, "score": 129.41176470588238}, {"gen": 4, "best_fitness": 126.35819220480977, "avg_fitness": -2324.584071222008, "score": 129.41176470588238}, {"gen": 5, "best_fitness": 126.35819220480977, "avg_fitness": -1943.3473807176013, "score": 129.41176470588238}, {"gen": 6, "best_fitness": 126.35819220480977, "avg_fitness": -1877.5223324304275, "score": 129.41176470588238}, {"gen": 7, "best_fitness": 126.35819220480977, "avg_fitness": -1642.3224363958032, "score": 129.41176470588238}, {"gen": 8, "best_fitness": 126.35819220480977, "avg_fitness": -1458.7278864007917, "score": 129.41176470588238}, {"gen": 9, "best_fitness": 126.35819220480977, "avg_fitness": -1391.0350850677476, "score": 129.41176470588238}, {"gen": 10, "best_fitness": 126.35819220480977, "avg_fitness": -1222.0285536334518, "score": 129.41176470588238}, {"gen": 11, "best_fitness": 126.35819220480977, "avg_fitness": -1041.2286314179228, "score": 129.41176470588238}, {"gen": 12, "best_fitness": 126.35819220480977, "avg_fitness": -988.090495781033, "score": 129.41176470588238}, {"gen": 13, "best_fitness": 126.35819220480977, "avg_fitness": -937.342383683686, "score": 129.41176470588238}, {"gen": 14, "best_fitness": 126.35819220480977, "avg_fitness": -826.5744093746736, "score": 129.41176470588238}, {"gen": 15, "best_fitness": 126.35819220480977, "avg_fitness": -733.6941887094725, "score": 129.41176470588238}, {"gen": 16, "best_fitness": 126.35819220480977, "avg_fitness": -691.2727610056646, "score": 129.41176470588238}, {"gen": 17, "best_fitness": 126.35819220480977, "avg_fitness": -633.4347367580971, "score": 129.41176470588238}, {"gen": 18, "best_fitness": 126.35819220480977, "avg_fitness": -605.1141370054344, "score": 129.41176470588238}, {"gen": 19, "best_fitness": 126.35819220480977, "avg_fitness": -526.9960123773723, "score": 129.41176470588238}, {"gen": 20, "best_fitness": 126.35819220480977, "avg_fitness": -477.9219947462035, "score": 129.41176470588238}, {"gen": 21, "best_fitness": 126.35819220480977, "avg_fitness": -430.12544825916353, "score": 129.41176470588238}, {"gen": 22, "best_fitness": 126.35819220480977, "avg_fitness": -337.7441629272426, "score": 129.41176470588238}, {"gen": 23, "best_fitness": 126.35819220480977, "avg_fitness": -315.7300557098472, "score": 129.41176470588238}, {"gen": 24, "best_fitness": 126.35819220480977, "avg_fitness": -294.8678789388663, "score": 129.41176470588238}, {"gen": 25, "best_fitness": 126.35819220480977, "avg_fitness": -239.8881843025996, "score": 129.41176470588238}, {"gen": 26, "best_fitness": 126.35819220480977, "avg_fitness": -220.40629908459996, "score": 129.41176470588238}]}, "urban_lifestyle": {"preset": {"id": "urban_lifestyle", "name": "City Life & Entertainment", "subtitle": "Shopping districts, theaters & vibrant night venues", "budget": 800000, "start_time": 9.0, "end_time": 21.0, "interests": {"history_culture": 1, "food_drink": 4, "nature_parks": 1, "entertainment": 5, "shopping": 5, "nightlife_wellness": 5}}, "summary": {"total_score": 137.14, "total_cost": 800000.0, "total_distance": 111.65, "total_duration": 11.48, "execution_time": 3.0185}, "route": [{"order": 1, "id": 0, "name": "Khách sạn trung tâm (Depot)", "category": "depot", "travel_distance": null, "travel_time": null, "arrival": "09:00", "wait": 0, "start": "09:00", "leave": "09:00", "cost": 0.0, "score": 0.0}, {"order": 2, "id": 9, "name": "Bảo tàng Mỹ thuật Việt Nam", "category": "food_drink", "travel_distance": 20.1, "travel_time": 20, "arrival": "09:20", "wait": 0, "start": "09:20", "leave": "10:50", "cost": 300000.0, "score": 11.69}, {"order": 3, "id": 6, "name": "Phố Ẩm thực Tống Duy Tân", "category": "shopping", "travel_distance": 2.24, "travel_time": 2, "arrival": "10:52", "wait": 0, "start": "10:52", "leave": "12:22", "cost": 0.0, "score": 31.17}, {"order": 4, "id": 99, "name": "Chợ Đêm Phố Cổ", "category": "nature_parks", "travel_distance": 18.6, "travel_time": 19, "arrival": "12:41", "wait": 0, "start": "12:41", "leave": "14:11", "cost": 0.0, "score": 0.78}, {"order": 5, "id": 2, "name": "Rạp Xiếc Trung Ương", "category": "entertainment", "travel_distance": 14.14, "travel_time": 14, "arrival": "14:25", "wait": 0, "start": "14:25", "leave": "15:55", "cost": 100000.0, "score": 46.75}, {"order": 6, "id": 75, "name": "Kem Tràng Tiền & Tràng Tiền Plaza", "category": "nightlife_wellness", "travel_distance": 5.0, "travel_time": 5, "arrival": "16:00", "wait": 37, "start": "16:37", "leave": "18:07", "cost": 200000.0, "score": 31.17}, {"order": 7, "id": 47, "name": "Hồ Hoàn Kiếm (Dạo quanh)", "category": "nightlife_wellness", "travel_distance": 33.54, "travel_time": 34, "arrival": "18:41", "wait": 0, "start": "18:41", "leave": "20:11", "cost": 200000.0, "score": 15.58}, {"order": 8, "id": 0, "name": "Khách sạn trung tâm (Depot)", "category": "depot", "travel_distance": 18.03, "travel_time": 18, "arrival": "20:29", "wait": 0, "start": null, "leave": null, "cost": 0.0, "score": 0.0}], "convergence": [{"gen": 1, "best_fitness": 129.7586631590993, "avg_fitness": 85.02719352761488, "score": 137.14285714285714}, {"gen": 2, "best_fitness": 129.7586631590993, "avg_fitness": 82.42478266902181, "score": 137.14285714285714}, {"gen": 3, "best_fitness": 129.7586631590993, "avg_fitness": 90.71600384989488, "score": 137.14285714285714}, {"gen": 4, "best_fitness": 129.7586631590993, "avg_fitness": 93.59122509661141, "score": 137.14285714285714}, {"gen": 5, "best_fitness": 129.7586631590993, "avg_fitness": 97.30298470164644, "score": 137.14285714285714}, {"gen": 6, "best_fitness": 129.7586631590993, "avg_fitness": 100.04855140928548, "score": 137.14285714285714}, {"gen": 7, "best_fitness": 129.7586631590993, "avg_fitness": 101.28448200047687, "score": 137.14285714285714}, {"gen": 8, "best_fitness": 129.7586631590993, "avg_fitness": 102.19339513200035, "score": 137.14285714285714}, {"gen": 9, "best_fitness": 129.7586631590993, "avg_fitness": 103.43796433729875, "score": 137.14285714285714}, {"gen": 10, "best_fitness": 129.7586631590993, "avg_fitness": 104.3068281411118, "score": 137.14285714285714}, {"gen": 11, "best_fitness": 129.7586631590993, "avg_fitness": 104.74158834928255, "score": 137.14285714285714}, {"gen": 12, "best_fitness": 129.7586631590993, "avg_fitness": 105.21312606613111, "score": 137.14285714285714}, {"gen": 13, "best_fitness": 129.7586631590993, "avg_fitness": 105.34561136114054, "score": 137.14285714285714}, {"gen": 14, "best_fitness": 129.7586631590993, "avg_fitness": 106.13834632744367, "score": 137.14285714285714}, {"gen": 15, "best_fitness": 129.7586631590993, "avg_fitness": 106.54232854231174, "score": 137.14285714285714}, {"gen": 16, "best_fitness": 129.7586631590993, "avg_fitness": 106.77966056723466, "score": 137.14285714285714}, {"gen": 17, "best_fitness": 129.7586631590993, "avg_fitness": 106.97632824721653, "score": 137.14285714285714}, {"gen": 18, "best_fitness": 129.7586631590993, "avg_fitness": 106.97632824721653, "score": 137.14285714285714}, {"gen": 19, "best_fitness": 129.7586631590993, "avg_fitness": 107.05438973716268, "score": 137.14285714285714}, {"gen": 20, "best_fitness": 129.7586631590993, "avg_fitness": 107.22833286261006, "score": 137.14285714285714}, {"gen": 21, "best_fitness": 129.7586631590993, "avg_fitness": 107.42170903046294, "score": 137.14285714285714}, {"gen": 22, "best_fitness": 129.7586631590993, "avg_fitness": 107.59648834868214, "score": 137.14285714285714}, {"gen": 23, "best_fitness": 129.7586631590993, "avg_fitness": 107.78387871149894, "score": 137.14285714285714}, {"gen": 24, "best_fitness": 129.7586631590993, "avg_fitness": 107.95835518795268, "score": 137.14285714285714}, {"gen": 25, "best_fitness": 129.7586631590993, "avg_fitness": 108.18972526240601, "score": 137.14285714285714}, {"gen": 26, "best_fitness": 129.7586631590993, "avg_fitness": 108.18972526240601, "score": 137.14285714285714}]}}};
     let currentPreset = 'food_culture';
     let activeRoute = DEMO_DATA.presets[currentPreset].route;
     let animProgress = 1.0;
@@ -638,8 +435,8 @@
 
     function mapCoords(x, y) {
       const rect = canvas.getBoundingClientRect();
-      const padX = 60;
-      const padY = 50;
+      const padX = 85;
+      const padY = 70;
       const w = rect.width - padX * 2;
       const h = rect.height - padY * 2;
       const sx = padX + (x / 75) * w;
@@ -648,44 +445,49 @@
     }
 
     function renderMap() {
+      if (!DEMO_DATA) return;
       const rect = canvas.getBoundingClientRect();
       ctx.clearRect(0, 0, rect.width, rect.height);
 
-      ctx.strokeStyle = 'rgba(255, 255, 255, 0.04)';
+      // Subtle tech background grid
+      ctx.strokeStyle = 'rgba(255, 255, 255, 0.05)';
       ctx.lineWidth = 1;
-      for (let x = 40; x < rect.width; x += 40) {
+      for (let x = 50; x < rect.width; x += 50) {
         ctx.beginPath(); ctx.moveTo(x, 0); ctx.lineTo(x, rect.height); ctx.stroke();
       }
-      for (let y = 40; y < rect.height; y += 40) {
+      for (let y = 50; y < rect.height; y += 50) {
         ctx.beginPath(); ctx.moveTo(0, y); ctx.lineTo(rect.width, y); ctx.stroke();
       }
 
+      // Background POIs: Crisp dots
       const visitedIds = new Set(activeRoute.map(r => r.id));
       DEMO_DATA.pois.forEach(p => {
         if (!visitedIds.has(p.id)) {
           const pt = mapCoords(p.x, p.y);
           ctx.fillStyle = catColors[p.category] || '#64748b';
-          ctx.globalAlpha = 0.28;
+          ctx.globalAlpha = 0.35;
           ctx.beginPath();
-          ctx.arc(pt.x, pt.y, 4, 0, Math.PI * 2);
+          ctx.arc(pt.x, pt.y, 5, 0, Math.PI * 2);
           ctx.fill();
         }
       });
       ctx.globalAlpha = 1.0;
 
+      // Active Route: High visibility glowing cyan path
       if (activeRoute && activeRoute.length > 1) {
         const poiMap = {};
         DEMO_DATA.pois.forEach(p => { poiMap[p.id] = p; });
 
         ctx.strokeStyle = '#38bdf8';
-        ctx.lineWidth = 3;
+        ctx.lineWidth = 4;
         ctx.shadowColor = '#38bdf8';
-        ctx.shadowBlur = 10;
+        ctx.shadowBlur = 16;
         ctx.beginPath();
 
         const maxPoints = Math.max(2, Math.floor(activeRoute.length * animProgress));
         for (let i = 0; i < maxPoints; i++) {
-          const poi = poiMap[activeRoute[i].id];
+          const item = activeRoute[i];
+          const poi = poiMap[item.id];
           if (!poi) continue;
           const pt = mapCoords(poi.x, poi.y);
           if (i === 0) ctx.moveTo(pt.x, pt.y);
@@ -694,27 +496,56 @@
         ctx.stroke();
         ctx.shadowBlur = 0;
 
+        // Big, clear visited markers with POI labels right on map
         for (let i = 0; i < maxPoints; i++) {
           const item = activeRoute[i];
           const poi = poiMap[item.id];
           if (!poi) continue;
           const pt = mapCoords(poi.x, poi.y);
 
+          // Outer halo
           ctx.fillStyle = catColors[item.category] || '#38bdf8';
           ctx.beginPath();
-          ctx.arc(pt.x, pt.y, item.id === 0 ? 12 : 9, 0, Math.PI * 2);
+          ctx.arc(pt.x, pt.y, item.id === 0 ? 16 : 14, 0, Math.PI * 2);
           ctx.fill();
 
-          ctx.fillStyle = item.id === 0 ? '#f59e0b' : '#0f172a';
+          // Inner core
+          ctx.fillStyle = item.id === 0 ? '#f59e0b' : '#070b14';
           ctx.beginPath();
-          ctx.arc(pt.x, pt.y, item.id === 0 ? 7 : 5, 0, Math.PI * 2);
+          ctx.arc(pt.x, pt.y, item.id === 0 ? 9 : 8, 0, Math.PI * 2);
           ctx.fill();
+
+          // Order text badge
+          ctx.fillStyle = '#ffffff';
+          ctx.font = '800 13px Plus Jakarta Sans';
+          ctx.textAlign = 'center';
+          ctx.textBaseline = 'middle';
+          ctx.fillText(item.order, pt.x, pt.y);
+
+          // Name label with dark background badge for perfect legibility
+          const shortName = item.name.length > 24 ? item.name.substring(0, 22) + '...' : item.name;
+          ctx.font = '700 12px Plus Jakarta Sans';
+          const textMetrics = ctx.measureText(shortName);
+          const bgW = textMetrics.width + 12;
+          const bgH = 22;
+          const bgX = pt.x + 18;
+          const bgY = pt.y - 11;
+
+          ctx.fillStyle = 'rgba(15, 23, 42, 0.88)';
+          ctx.strokeStyle = 'rgba(255, 255, 255, 0.18)';
+          ctx.lineWidth = 1;
+          ctx.beginPath();
+          ctx.roundRect(bgX, bgY, bgW, bgH, 6);
+          ctx.fill();
+          ctx.stroke();
 
           ctx.fillStyle = '#ffffff';
-          ctx.font = '700 11px Plus Jakarta Sans';
-          ctx.fillText(item.order, pt.x + 10, pt.y - 6);
+          ctx.textAlign = 'left';
+          ctx.textBaseline = 'middle';
+          ctx.fillText(shortName, bgX + 6, bgY + bgH / 2);
         }
 
+        // Moving vehicle dot
         if (animProgress >= 1.0) {
           const totalLegs = activeRoute.length - 1;
           const legIdx = Math.min(Math.floor(travelerPos * totalLegs), totalLegs - 1);
@@ -722,6 +553,7 @@
 
           const pA = poiMap[activeRoute[legIdx].id];
           const pB = poiMap[activeRoute[legIdx + 1].id];
+
           if (pA && pB) {
             const ptA = mapCoords(pA.x, pA.y);
             const ptB = mapCoords(pB.x, pB.y);
@@ -730,9 +562,9 @@
 
             ctx.fillStyle = '#f59e0b';
             ctx.shadowColor = '#f59e0b';
-            ctx.shadowBlur = 12;
+            ctx.shadowBlur = 18;
             ctx.beginPath();
-            ctx.arc(curX, curY, 6, 0, Math.PI * 2);
+            ctx.arc(curX, curY, 8, 0, Math.PI * 2);
             ctx.fill();
             ctx.shadowBlur = 0;
           }
@@ -745,7 +577,7 @@
       function loop(t) {
         const dt = (t - lastTime) / 1000;
         lastTime = t;
-        travelerPos = (travelerPos + dt * 0.12) % 1.0;
+        travelerPos = (travelerPos + dt * 0.15) % 1.0;
         renderMap();
         requestAnimationFrame(loop);
       }
@@ -754,50 +586,48 @@
 
     function triggerOptimization() {
       animProgress = 0.1;
-      const statusStep = document.getElementById('statusStep');
-      const progressBar = document.getElementById('progressBar');
-
-      statusStep.innerText = '1. Khởi tạo quần thể (80% Heuristic)...';
-      progressBar.style.width = '25%';
+      const badge = document.getElementById('algoBadge');
+      badge.innerText = '⚙️ Đang tối ưu (Gen 1: Heuristic)...';
+      badge.style.color = '#38bdf8';
+      badge.style.borderColor = '#38bdf8';
 
       setTimeout(() => {
-        statusStep.innerText = '2. Đột biến thích nghi 2-opt & Crossover...';
-        progressBar.style.width = '60%';
+        badge.innerText = '⚙️ Đột biến thích nghi 2-opt & OX1...';
         animProgress = 0.5;
         renderMap();
-      }, 350);
+      }, 300);
 
       setTimeout(() => {
-        statusStep.innerText = '3. Hủy-Dựng: Smart Repair & Greedy Refill...';
-        progressBar.style.width = '85%';
+        badge.innerText = '⚙️ Smart Repair & Greedy Refill...';
         animProgress = 0.8;
         renderMap();
-      }, 700);
+      }, 650);
 
       setTimeout(() => {
-        statusStep.innerText = 'Hội tụ tối ưu thành công!';
-        progressBar.style.width = '100%';
+        badge.innerText = '● Hội tụ tối ưu thành công!';
+        badge.style.color = '#10b981';
+        badge.style.borderColor = '#10b981';
         animProgress = 1.0;
         renderMap();
         updateUI();
-      }, 1050);
+      }, 1000);
     }
 
     function updateUI() {
       const data = DEMO_DATA.presets[currentPreset];
       const sum = data.summary;
 
-      document.getElementById('metricScore').innerText = sum.total_score.toFixed(1);
-      document.getElementById('metricCost').innerText = (sum.total_cost).toLocaleString('vi-VN') + ' đ';
-      document.getElementById('metricDistance').innerText = sum.total_distance.toFixed(1) + ' km';
-      document.getElementById('metricWait').innerText = '0 phút';
+      document.getElementById('kpiScore').innerText = sum.total_score.toFixed(1);
+      document.getElementById('kpiCost').innerText = (sum.total_cost / 1000).toFixed(0) + 'k đ';
+      document.getElementById('kpiDist').innerText = sum.total_distance.toFixed(1) + ' km';
+      document.getElementById('kpiWait').innerText = '0 phút';
 
       const timelineEl = document.getElementById('timelineList');
       timelineEl.innerHTML = '';
 
       data.route.forEach((item, idx) => {
         const el = document.createElement('div');
-        el.className = 'timeline-item';
+        el.className = 't-item';
 
         const isDepot = item.id === 0;
         const catBadgeClass = 'bg-' + (item.category === 'history_culture' ? 'history' :
@@ -817,18 +647,18 @@
           depot: 'Depot'
         }[item.category] || item.category;
 
-        const timeStr = isDepot ? (idx === 0 ? item.arrival : item.arrival) : `${item.arrival} → ${item.leave}`;
+        const timeStr = isDepot ? item.arrival : `${item.arrival} → ${item.leave}`;
 
         el.innerHTML = `
-          <div class="t-step">${item.order}</div>
-          <div class="t-content">
-            <div class="t-header">
+          <div class="t-circle">${item.order}</div>
+          <div class="t-body">
+            <div class="t-top">
               <span class="t-name">${item.name}</span>
               <span class="t-time">${timeStr}</span>
             </div>
-            <div class="t-sub">
-              <span class="t-badge ${catBadgeClass}">${catNameVi}</span>
-              <span>${item.cost > 0 ? item.cost.toLocaleString('vi-VN') + ' đ' : 'Miễn phí'}</span>
+            <div class="t-bottom">
+              <span class="t-pill ${catBadgeClass}">${catNameVi}</span>
+              <span style="font-weight: 700; color: #cbd5e1;">${item.cost > 0 ? item.cost.toLocaleString('vi-VN') + ' đ' : 'Miễn phí'}</span>
             </div>
           </div>
         `;
@@ -836,39 +666,23 @@
       });
     }
 
+    setTimeout(() => {
+      resizeCanvas();
+      updateUI();
+      startTravelerAnimation();
+    }, 100);
+
     document.querySelectorAll('.preset-btn').forEach(btn => {
       btn.addEventListener('click', () => {
         document.querySelectorAll('.preset-btn').forEach(b => b.classList.remove('active'));
         btn.classList.add('active');
         currentPreset = btn.dataset.preset;
         activeRoute = DEMO_DATA.presets[currentPreset].route;
-
-        const p = DEMO_DATA.presets[currentPreset].preset;
-        document.getElementById('budgetInput').value = p.budget;
-        document.getElementById('budgetVal').innerText = p.budget.toLocaleString('vi-VN') + ' VND';
-
-        Object.entries(p.interests).forEach(([cat, val]) => {
-          const starsEl = document.getElementById('stars_' + cat);
-          if (starsEl) {
-            const stars = starsEl.querySelectorAll('.star');
-            stars.forEach((s, i) => {
-              if (i < val) s.classList.add('active');
-              else s.classList.remove('active');
-            });
-          }
-        });
-
         triggerOptimization();
       });
     });
 
     document.getElementById('btnOptimize').addEventListener('click', triggerOptimization);
-
-    setTimeout(() => {
-      resizeCanvas();
-      updateUI();
-      startTravelerAnimation();
-    }, 100);
   </script>
 </body>
 </html>

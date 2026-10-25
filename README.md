@@ -17,10 +17,10 @@
 </p>
 
 <p align="center">
-  <em>🎮 <b>Real-Time End-to-End Workflow:</b> Traveler specifies budget & interest ratings &rarr; PADCS solves multi-constraint TOPTW &rarr; Generates an optimal minute-by-minute day tour.</em>
+  <em>🎮 <b>Quy trình tối ưu hóa lộ trình thực tế:</b> Du khách chọn ngân sách & sở thích &rarr; PADCS giải bài toán TOPTW đa ràng buộc &rarr; Xuất lịch trình du lịch từng giờ tối ưu.</em>
+  <br/>
+  <sub>✨ <i>Độ phân giải cao HD Widescreen. Có thể xem định dạng <a href="docs/assets/demo.webp">True-Color WebP</a> hoặc mở trực tiếp mô phỏng tại <a href="docs/demo.html"><code>docs/demo.html</code></a>.</i></sub>
 </p>
-
-> 💡 **Interactive Web App**: You can also open [`docs/demo.html`](docs/demo.html) directly in any web browser to play with preset profiles, adjust sliders, and watch real-time route evolution.
 
 ---
 
