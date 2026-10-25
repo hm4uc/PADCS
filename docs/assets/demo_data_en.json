@@ -1251,7 +1251,10 @@
           "start": "08:00",
           "leave": "08:00",
           "cost": 0.0,
-          "score": 0.0
+          "score": 0.0,
+          "step_type": "start",
+          "display_tag": "START",
+          "poi_order": null
         },
         {
           "order": 2,
@@ -1265,7 +1268,10 @@
           "start": "08:45",
           "leave": "10:15",
           "cost": 150000.0,
-          "score": 59.02
+          "score": 59.02,
+          "step_type": "poi",
+          "poi_order": 1,
+          "display_tag": "01"
         },
         {
           "order": 3,
@@ -1279,7 +1285,10 @@
           "start": "10:18",
           "leave": "11:48",
           "cost": 0.0,
-          "score": 19.67
+          "score": 19.67,
+          "step_type": "poi",
+          "poi_order": 2,
+          "display_tag": "02"
         },
         {
           "order": 4,
@@ -1293,7 +1302,10 @@
           "start": "12:36",
           "leave": "14:06",
           "cost": 50000.0,
-          "score": 39.34
+          "score": 39.34,
+          "step_type": "poi",
+          "poi_order": 3,
+          "display_tag": "03"
         },
         {
           "order": 5,
@@ -1307,7 +1319,10 @@
           "start": "14:27",
           "leave": "15:57",
           "cost": 100000.0,
-          "score": 9.84
+          "score": 9.84,
+          "step_type": "poi",
+          "poi_order": 4,
+          "display_tag": "04"
         },
         {
           "order": 6,
@@ -1321,7 +1336,10 @@
           "start": "15:59",
           "leave": "17:29",
           "cost": 100000.0,
-          "score": 39.34
+          "score": 39.34,
+          "step_type": "poi",
+          "poi_order": 5,
+          "display_tag": "05"
         },
         {
           "order": 7,
@@ -1335,7 +1353,10 @@
           "start": null,
           "leave": null,
           "cost": 0.0,
-          "score": 0.0
+          "score": 0.0,
+          "step_type": "return",
+          "display_tag": "RETURN",
+          "poi_order": null
         }
       ],
       "convergence": [
@@ -1540,7 +1561,10 @@
           "start": "08:00",
           "leave": "08:00",
           "cost": 0.0,
-          "score": 0.0
+          "score": 0.0,
+          "step_type": "start",
+          "display_tag": "START",
+          "poi_order": null
         },
         {
           "order": 2,
@@ -1554,7 +1578,10 @@
           "start": "09:15",
           "leave": "10:45",
           "cost": 100000.0,
-          "score": 94.74
+          "score": 94.74,
+          "step_type": "poi",
+          "poi_order": 1,
+          "display_tag": "01"
         },
         {
           "order": 3,
@@ -1568,7 +1595,10 @@
           "start": "11:13",
           "leave": "12:43",
           "cost": 50000.0,
-          "score": 63.16
+          "score": 63.16,
+          "step_type": "poi",
+          "poi_order": 2,
+          "display_tag": "02"
         },
         {
           "order": 4,
@@ -1582,7 +1612,10 @@
           "start": "13:11",
           "leave": "14:41",
           "cost": 100000.0,
-          "score": 31.58
+          "score": 31.58,
+          "step_type": "poi",
+          "poi_order": 3,
+          "display_tag": "03"
         },
         {
           "order": 5,
@@ -1596,7 +1629,10 @@
           "start": "15:15",
           "leave": "16:45",
           "cost": 100000.0,
-          "score": 63.16
+          "score": 63.16,
+          "step_type": "poi",
+          "poi_order": 4,
+          "display_tag": "04"
         },
         {
           "order": 6,
@@ -1610,7 +1646,10 @@
           "start": null,
           "leave": null,
           "cost": 0.0,
-          "score": 0.0
+          "score": 0.0,
+          "step_type": "return",
+          "display_tag": "RETURN",
+          "poi_order": null
         }
       ],
       "convergence": [
@@ -1803,7 +1842,10 @@
           "start": "08:30",
           "leave": "08:30",
           "cost": 0.0,
-          "score": 0.0
+          "score": 0.0,
+          "step_type": "start",
+          "display_tag": "START",
+          "poi_order": null
         },
         {
           "order": 2,
@@ -1817,7 +1859,10 @@
           "start": "09:15",
           "leave": "10:45",
           "cost": 100000.0,
-          "score": 17.65
+          "score": 17.65,
+          "step_type": "poi",
+          "poi_order": 1,
+          "display_tag": "01"
         },
         {
           "order": 3,
@@ -1831,7 +1876,10 @@
           "start": "10:48",
           "leave": "12:18",
           "cost": 0.0,
-          "score": 70.59
+          "score": 70.59,
+          "step_type": "poi",
+          "poi_order": 2,
+          "display_tag": "02"
         },
         {
           "order": 4,
@@ -1845,7 +1893,10 @@
           "start": "12:40",
           "leave": "14:10",
           "cost": 0.0,
-          "score": 23.53
+          "score": 23.53,
+          "step_type": "poi",
+          "poi_order": 3,
+          "display_tag": "03"
         },
         {
           "order": 5,
@@ -1859,7 +1910,10 @@
           "start": "14:25",
           "leave": "15:55",
           "cost": 100000.0,
-          "score": 17.65
+          "score": 17.65,
+          "step_type": "poi",
+          "poi_order": 4,
+          "display_tag": "04"
         },
         {
           "order": 6,
@@ -1873,7 +1927,10 @@
           "start": null,
           "leave": null,
           "cost": 0.0,
-          "score": 0.0
+          "score": 0.0,
+          "step_type": "return",
+          "display_tag": "RETURN",
+          "poi_order": null
         }
       ],
       "convergence": [
@@ -2072,7 +2129,10 @@
           "start": "09:00",
           "leave": "09:00",
           "cost": 0.0,
-          "score": 0.0
+          "score": 0.0,
+          "step_type": "start",
+          "display_tag": "START",
+          "poi_order": null
         },
         {
           "order": 2,
@@ -2086,7 +2146,10 @@
           "start": "09:20",
           "leave": "10:50",
           "cost": 300000.0,
-          "score": 11.69
+          "score": 11.69,
+          "step_type": "poi",
+          "poi_order": 1,
+          "display_tag": "01"
         },
         {
           "order": 3,
@@ -2100,7 +2163,10 @@
           "start": "10:52",
           "leave": "12:22",
           "cost": 0.0,
-          "score": 31.17
+          "score": 31.17,
+          "step_type": "poi",
+          "poi_order": 2,
+          "display_tag": "02"
         },
         {
           "order": 4,
@@ -2114,7 +2180,10 @@
           "start": "12:41",
           "leave": "14:11",
           "cost": 0.0,
-          "score": 0.78
+          "score": 0.78,
+          "step_type": "poi",
+          "poi_order": 3,
+          "display_tag": "03"
         },
         {
           "order": 5,
@@ -2128,7 +2197,10 @@
           "start": "14:25",
           "leave": "15:55",
           "cost": 100000.0,
-          "score": 46.75
+          "score": 46.75,
+          "step_type": "poi",
+          "poi_order": 4,
+          "display_tag": "04"
         },
         {
           "order": 6,
@@ -2142,7 +2214,10 @@
           "start": "16:37",
           "leave": "18:07",
           "cost": 200000.0,
-          "score": 31.17
+          "score": 31.17,
+          "step_type": "poi",
+          "poi_order": 5,
+          "display_tag": "05"
         },
         {
           "order": 7,
@@ -2156,7 +2231,10 @@
           "start": "18:41",
           "leave": "20:11",
           "cost": 200000.0,
-          "score": 15.58
+          "score": 15.58,
+          "step_type": "poi",
+          "poi_order": 6,
+          "display_tag": "06"
         },
         {
           "order": 8,
@@ -2170,7 +2248,10 @@
           "start": null,
           "leave": null,
           "cost": 0.0,
-          "score": 0.0
+          "score": 0.0,
+          "step_type": "return",
+          "display_tag": "RETURN",
+          "poi_order": null
         }
       ],
       "convergence": [
