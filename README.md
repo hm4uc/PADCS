@@ -20,22 +20,22 @@
 
 <p align="center">
   <a href="https://hm4uc.github.io/PADCS/" target="_blank">
-    <img src="https://img.shields.io/badge/🚀_Dùng_thử_trực_tiếp-Live_Web_Simulation-2563eb?style=for-the-badge&logo=googlechrome&logoColor=white" alt="Live Demo"/>
+    <img src="https://img.shields.io/badge/🚀_Live_Demo-Interactive_Web_Simulation-2563eb?style=for-the-badge&logo=googlechrome&logoColor=white" alt="Live Demo"/>
   </a>
   <a href="docs/assets/demo.webp" target="_blank">
-    <img src="https://img.shields.io/badge/🎞️_Xem_chuyển_động-True--Color_WebP-7c3aed?style=for-the-badge&logo=webm&logoColor=white" alt="WebP Animation"/>
+    <img src="https://img.shields.io/badge/🎞️_Workflow_Animation-True--Color_WebP-0f172a?style=for-the-badge&logo=webm&logoColor=white" alt="WebP Animation"/>
   </a>
-  <a href="docs/demo.html" target="_blank">
-    <img src="https://img.shields.io/badge/💻_Mã_nguồn_Demo-docs%2Fdemo.html-10b981?style=for-the-badge&logo=html5&logoColor=white" alt="HTML Source"/>
+  <a href="docs/index.html" target="_blank">
+    <img src="https://img.shields.io/badge/💻_Client_Source-docs%2Findex.html-334155?style=for-the-badge&logo=html5&logoColor=white" alt="HTML Source"/>
   </a>
 </p>
 
 <p align="center">
-  <em>🎮 <b>Quy trình tối ưu hóa lộ trình thực tế:</b> Du khách nhập ngân sách & sở thích &rarr; PADCS giải bài toán TOPTW đa ràng buộc &rarr; Xuất lịch trình du lịch từng giờ tối ưu. Nhấp vào ảnh hoặc nút bấm bên trên để mở bản chạy thử trực tiếp trên trình duyệt.</em>
+  <em>🎮 <b>Real-time TOPTW Route Optimization:</b> User configures interest profiles & budget constraints &rarr; PADCS executes memetic destructive-constructive search &rarr; Yields an optimal minute-by-minute itinerary schedule. Click the preview image or badges above to interact with the live simulation.</em>
 </p>
 
 <details>
-<summary><b>🎞️ Nhấp vào đây để xem video ảnh động mô phỏng (Animation) ngay trên trang</b></summary>
+<summary><b>🎞️ Click to expand recorded route optimization animation</b></summary>
 <br/>
 <p align="center">
   <img src="docs/assets/demo.gif" alt="PADCS Tour Optimization Animation" width="100%"/>

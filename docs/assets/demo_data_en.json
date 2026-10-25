@@ -1,0 +1,2336 @@
+{
+  "pois": [
+    {
+      "id": 0,
+      "x": 40.0,
+      "y": 50.0,
+      "open_time": 0.0,
+      "close_time": 1236.0,
+      "duration": 0.0,
+      "base_score": 0.0,
+      "category": "depot",
+      "price": 0.0,
+      "readable_name": "Hotel Central (Depot)"
+    },
+    {
+      "id": 1,
+      "x": 45.0,
+      "y": 68.0,
+      "open_time": 912.0,
+      "close_time": 967.0,
+      "duration": 90.0,
+      "base_score": 10.0,
+      "category": "history_culture",
+      "price": 30000.0,
+      "readable_name": "Temple of Literature (Van Mieu)"
+    },
+    {
+      "id": 2,
+      "x": 45.0,
+      "y": 70.0,
+      "open_time": 825.0,
+      "close_time": 870.0,
+      "duration": 90.0,
+      "base_score": 30.0,
+      "category": "entertainment",
+      "price": 100000.0,
+      "readable_name": "Central Circus Theater"
+    },
+    {
+      "id": 3,
+      "x": 42.0,
+      "y": 66.0,
+      "open_time": 65.0,
+      "close_time": 146.0,
+      "duration": 90.0,
+      "base_score": 10.0,
+      "category": "history_culture",
+      "price": 100000.0,
+      "readable_name": "Imperial Citadel of Thang Long"
+    },
+    {
+      "id": 4,
+      "x": 42.0,
+      "y": 68.0,
+      "open_time": 727.0,
+      "close_time": 782.0,
+      "duration": 90.0,
+      "base_score": 10.0,
+      "category": "history_culture",
+      "price": 30000.0,
+      "readable_name": "National Museum of Vietnamese History"
+    },
+    {
+      "id": 5,
+      "x": 42.0,
+      "y": 65.0,
+      "open_time": 15.0,
+      "close_time": 67.0,
+      "duration": 90.0,
+      "base_score": 10.0,
+      "category": "food_drink",
+      "price": 300000.0,
+      "readable_name": "One Pillar Pagoda"
+    },
+    {
+      "id": 6,
+      "x": 40.0,
+      "y": 69.0,
+      "open_time": 621.0,
+      "close_time": 702.0,
+      "duration": 90.0,
+      "base_score": 20.0,
+      "category": "shopping",
+      "price": 0.0,
+      "readable_name": "Tong Duy Tan Culinary Street"
+    },
+    {
+      "id": 7,
+      "x": 40.0,
+      "y": 66.0,
+      "open_time": 170.0,
+      "close_time": 225.0,
+      "duration": 90.0,
+      "base_score": 20.0,
+      "category": "nature_parks",
+      "price": 0.0,
+      "readable_name": "Dong Xuan Market"
+    },
+    {
+      "id": 8,
+      "x": 38.0,
+      "y": 68.0,
+      "open_time": 255.0,
+      "close_time": 324.0,
+      "duration": 90.0,
+      "base_score": 20.0,
+      "category": "history_culture",
+      "price": 50000.0,
+      "readable_name": "Thong Nhat Park"
+    },
+    {
+      "id": 9,
+      "x": 38.0,
+      "y": 70.0,
+      "open_time": 534.0,
+      "close_time": 605.0,
+      "duration": 90.0,
+      "base_score": 10.0,
+      "category": "food_drink",
+      "price": 300000.0,
+      "readable_name": "Vietnam National Fine Arts Museum"
+    },
+    {
+      "id": 10,
+      "x": 35.0,
+      "y": 66.0,
+      "open_time": 357.0,
+      "close_time": 410.0,
+      "duration": 90.0,
+      "base_score": 10.0,
+      "category": "food_drink",
+      "price": 800000.0,
+      "readable_name": "Huong Lien Grilled Pork Noodles"
+    },
+    {
+      "id": 11,
+      "x": 35.0,
+      "y": 69.0,
+      "open_time": 448.0,
+      "close_time": 505.0,
+      "duration": 90.0,
+      "base_score": 10.0,
+      "category": "food_drink",
+      "price": 800000.0,
+      "readable_name": "Cha Ca La Vong Traditional Eatery"
+    },
+    {
+      "id": 12,
+      "x": 25.0,
+      "y": 85.0,
+      "open_time": 652.0,
+      "close_time": 721.0,
+      "duration": 90.0,
+      "base_score": 20.0,
+      "category": "food_drink",
+      "price": 300000.0,
+      "readable_name": "Ta Hien Old Quarter Street Food"
+    },
+    {
+      "id": 13,
+      "x": 22.0,
+      "y": 75.0,
+      "open_time": 30.0,
+      "close_time": 92.0,
+      "duration": 90.0,
+      "base_score": 30.0,
+      "category": "history_culture",
+      "price": 100000.0,
+      "readable_name": "West Lake Shrimp Cake Dining"
+    },
+    {
+      "id": 14,
+      "x": 22.0,
+      "y": 85.0,
+      "open_time": 567.0,
+      "close_time": 620.0,
+      "duration": 90.0,
+      "base_score": 10.0,
+      "category": "history_culture",
+      "price": 100000.0,
+      "readable_name": "Hoa Lo Prison Historical Relic"
+    },
+    {
+      "id": 15,
+      "x": 20.0,
+      "y": 80.0,
+      "open_time": 384.0,
+      "close_time": 429.0,
+      "duration": 90.0,
+      "base_score": 40.0,
+      "category": "entertainment",
+      "price": 100000.0,
+      "readable_name": "Hanoi Flag Tower"
+    },
+    {
+      "id": 16,
+      "x": 20.0,
+      "y": 85.0,
+      "open_time": 475.0,
+      "close_time": 528.0,
+      "duration": 90.0,
+      "base_score": 40.0,
+      "category": "nature_parks",
+      "price": 0.0,
+      "readable_name": "Hanoi Opera House"
+    },
+    {
+      "id": 17,
+      "x": 18.0,
+      "y": 75.0,
+      "open_time": 99.0,
+      "close_time": 148.0,
+      "duration": 90.0,
+      "base_score": 20.0,
+      "category": "food_drink",
+      "price": 300000.0,
+      "readable_name": "Hanoi Botanical Garden"
+    },
+    {
+      "id": 18,
+      "x": 15.0,
+      "y": 75.0,
+      "open_time": 179.0,
+      "close_time": 254.0,
+      "duration": 90.0,
+      "base_score": 20.0,
+      "category": "history_culture",
+      "price": 100000.0,
+      "readable_name": "Bat Dan Traditional Pho"
+    },
+    {
+      "id": 19,
+      "x": 15.0,
+      "y": 80.0,
+      "open_time": 278.0,
+      "close_time": 345.0,
+      "duration": 90.0,
+      "base_score": 10.0,
+      "category": "food_drink",
+      "price": 50000.0,
+      "readable_name": "Quan Thanh Temple"
+    },
+    {
+      "id": 20,
+      "x": 30.0,
+      "y": 50.0,
+      "open_time": 10.0,
+      "close_time": 73.0,
+      "duration": 90.0,
+      "base_score": 10.0,
+      "category": "entertainment",
+      "price": 500000.0,
+      "readable_name": "Giang Egg Coffee"
+    },
+    {
+      "id": 21,
+      "x": 30.0,
+      "y": 52.0,
+      "open_time": 914.0,
+      "close_time": 965.0,
+      "duration": 90.0,
+      "base_score": 20.0,
+      "category": "history_culture",
+      "price": 100000.0,
+      "readable_name": "National Cinema Center"
+    },
+    {
+      "id": 22,
+      "x": 28.0,
+      "y": 52.0,
+      "open_time": 812.0,
+      "close_time": 883.0,
+      "duration": 90.0,
+      "base_score": 20.0,
+      "category": "entertainment",
+      "price": 100000.0,
+      "readable_name": "Ngoc Son Temple — The Huc Bridge"
+    },
+    {
+      "id": 23,
+      "x": 28.0,
+      "y": 55.0,
+      "open_time": 732.0,
+      "close_time": 777.0,
+      "duration": 90.0,
+      "base_score": 10.0,
+      "category": "entertainment",
+      "price": 200000.0,
+      "readable_name": "Thang Long Water Puppet Theater"
+    },
+    {
+      "id": 24,
+      "x": 25.0,
+      "y": 50.0,
+      "open_time": 65.0,
+      "close_time": 144.0,
+      "duration": 90.0,
+      "base_score": 10.0,
+      "category": "shopping",
+      "price": 100000.0,
+      "readable_name": "Hang Day Stadium"
+    },
+    {
+      "id": 25,
+      "x": 25.0,
+      "y": 52.0,
+      "open_time": 169.0,
+      "close_time": 224.0,
+      "duration": 90.0,
+      "base_score": 40.0,
+      "category": "nature_parks",
+      "price": 0.0,
+      "readable_name": "Scenic Park & Garden #25"
+    },
+    {
+      "id": 26,
+      "x": 25.0,
+      "y": 55.0,
+      "open_time": 622.0,
+      "close_time": 701.0,
+      "duration": 90.0,
+      "base_score": 10.0,
+      "category": "shopping",
+      "price": 100000.0,
+      "readable_name": "Commercial Shopping Hub #26"
+    },
+    {
+      "id": 27,
+      "x": 23.0,
+      "y": 52.0,
+      "open_time": 261.0,
+      "close_time": 316.0,
+      "duration": 90.0,
+      "base_score": 10.0,
+      "category": "food_drink",
+      "price": 300000.0,
+      "readable_name": "Hanoi Culinary Spot #27"
+    },
+    {
+      "id": 28,
+      "x": 23.0,
+      "y": 55.0,
+      "open_time": 546.0,
+      "close_time": 593.0,
+      "duration": 90.0,
+      "base_score": 20.0,
+      "category": "history_culture",
+      "price": 30000.0,
+      "readable_name": "Historic Heritage Site #28"
+    },
+    {
+      "id": 29,
+      "x": 20.0,
+      "y": 50.0,
+      "open_time": 358.0,
+      "close_time": 405.0,
+      "duration": 90.0,
+      "base_score": 10.0,
+      "category": "food_drink",
+      "price": 300000.0,
+      "readable_name": "Hanoi Culinary Spot #29"
+    },
+    {
+      "id": 30,
+      "x": 20.0,
+      "y": 55.0,
+      "open_time": 449.0,
+      "close_time": 504.0,
+      "duration": 90.0,
+      "base_score": 10.0,
+      "category": "food_drink",
+      "price": 300000.0,
+      "readable_name": "Hanoi Culinary Spot #30"
+    },
+    {
+      "id": 31,
+      "x": 10.0,
+      "y": 35.0,
+      "open_time": 200.0,
+      "close_time": 237.0,
+      "duration": 90.0,
+      "base_score": 20.0,
+      "category": "history_culture",
+      "price": 30000.0,
+      "readable_name": "Historic Heritage Site #31"
+    },
+    {
+      "id": 32,
+      "x": 10.0,
+      "y": 40.0,
+      "open_time": 31.0,
+      "close_time": 100.0,
+      "duration": 90.0,
+      "base_score": 30.0,
+      "category": "history_culture",
+      "price": 30000.0,
+      "readable_name": "Historic Heritage Site #32"
+    },
+    {
+      "id": 33,
+      "x": 8.0,
+      "y": 40.0,
+      "open_time": 87.0,
+      "close_time": 158.0,
+      "duration": 90.0,
+      "base_score": 40.0,
+      "category": "food_drink",
+      "price": 150000.0,
+      "readable_name": "Hanoi Culinary Spot #33"
+    },
+    {
+      "id": 34,
+      "x": 8.0,
+      "y": 45.0,
+      "open_time": 751.0,
+      "close_time": 816.0,
+      "duration": 90.0,
+      "base_score": 20.0,
+      "category": "food_drink",
+      "price": 50000.0,
+      "readable_name": "Quang Ba Night Flower Market"
+    },
+    {
+      "id": 35,
+      "x": 5.0,
+      "y": 35.0,
+      "open_time": 283.0,
+      "close_time": 344.0,
+      "duration": 90.0,
+      "base_score": 10.0,
+      "category": "food_drink",
+      "price": 150000.0,
+      "readable_name": "Hanoi Culinary Spot #35"
+    },
+    {
+      "id": 36,
+      "x": 5.0,
+      "y": 45.0,
+      "open_time": 665.0,
+      "close_time": 716.0,
+      "duration": 90.0,
+      "base_score": 10.0,
+      "category": "nature_parks",
+      "price": 0.0,
+      "readable_name": "Scenic Park & Garden #36"
+    },
+    {
+      "id": 37,
+      "x": 2.0,
+      "y": 40.0,
+      "open_time": 383.0,
+      "close_time": 434.0,
+      "duration": 90.0,
+      "base_score": 20.0,
+      "category": "food_drink",
+      "price": 50000.0,
+      "readable_name": "Hanoi Culinary Spot #37"
+    },
+    {
+      "id": 38,
+      "x": 0.0,
+      "y": 40.0,
+      "open_time": 479.0,
+      "close_time": 522.0,
+      "duration": 90.0,
+      "base_score": 30.0,
+      "category": "food_drink",
+      "price": 800000.0,
+      "readable_name": "Hanoi Culinary Spot #38"
+    },
+    {
+      "id": 39,
+      "x": 0.0,
+      "y": 45.0,
+      "open_time": 567.0,
+      "close_time": 624.0,
+      "duration": 90.0,
+      "base_score": 20.0,
+      "category": "history_culture",
+      "price": 50000.0,
+      "readable_name": "Historic Heritage Site #39"
+    },
+    {
+      "id": 40,
+      "x": 35.0,
+      "y": 30.0,
+      "open_time": 264.0,
+      "close_time": 321.0,
+      "duration": 90.0,
+      "base_score": 10.0,
+      "category": "food_drink",
+      "price": 50000.0,
+      "readable_name": "Hanoi Culinary Spot #40"
+    },
+    {
+      "id": 41,
+      "x": 35.0,
+      "y": 32.0,
+      "open_time": 166.0,
+      "close_time": 235.0,
+      "duration": 90.0,
+      "base_score": 10.0,
+      "category": "nature_parks",
+      "price": 0.0,
+      "readable_name": "Scenic Park & Garden #41"
+    },
+    {
+      "id": 42,
+      "x": 33.0,
+      "y": 32.0,
+      "open_time": 68.0,
+      "close_time": 149.0,
+      "duration": 90.0,
+      "base_score": 20.0,
+      "category": "food_drink",
+      "price": 50000.0,
+      "readable_name": "Hanoi Culinary Spot #42"
+    },
+    {
+      "id": 43,
+      "x": 33.0,
+      "y": 35.0,
+      "open_time": 16.0,
+      "close_time": 80.0,
+      "duration": 90.0,
+      "base_score": 10.0,
+      "category": "history_culture",
+      "price": 100000.0,
+      "readable_name": "Historic Heritage Site #43"
+    },
+    {
+      "id": 44,
+      "x": 32.0,
+      "y": 30.0,
+      "open_time": 359.0,
+      "close_time": 412.0,
+      "duration": 90.0,
+      "base_score": 10.0,
+      "category": "nature_parks",
+      "price": 0.0,
+      "readable_name": "Scenic Park & Garden #44"
+    },
+    {
+      "id": 45,
+      "x": 30.0,
+      "y": 30.0,
+      "open_time": 541.0,
+      "close_time": 600.0,
+      "duration": 90.0,
+      "base_score": 10.0,
+      "category": "history_culture",
+      "price": 50000.0,
+      "readable_name": "Historic Heritage Site #45"
+    },
+    {
+      "id": 46,
+      "x": 30.0,
+      "y": 32.0,
+      "open_time": 448.0,
+      "close_time": 509.0,
+      "duration": 90.0,
+      "base_score": 30.0,
+      "category": "entertainment",
+      "price": 200000.0,
+      "readable_name": "Arts & Entertainment Venue #46"
+    },
+    {
+      "id": 47,
+      "x": 30.0,
+      "y": 35.0,
+      "open_time": 1054.0,
+      "close_time": 1127.0,
+      "duration": 90.0,
+      "base_score": 10.0,
+      "category": "nightlife_wellness",
+      "price": 200000.0,
+      "readable_name": "Hoan Kiem Lake Promenade"
+    },
+    {
+      "id": 48,
+      "x": 28.0,
+      "y": 30.0,
+      "open_time": 632.0,
+      "close_time": 693.0,
+      "duration": 90.0,
+      "base_score": 10.0,
+      "category": "food_drink",
+      "price": 150000.0,
+      "readable_name": "Hanoi Culinary Spot #48"
+    },
+    {
+      "id": 49,
+      "x": 28.0,
+      "y": 35.0,
+      "open_time": 1001.0,
+      "close_time": 1066.0,
+      "duration": 90.0,
+      "base_score": 10.0,
+      "category": "nightlife_wellness",
+      "price": 100000.0,
+      "readable_name": "Nightlife Promenade #49"
+    },
+    {
+      "id": 50,
+      "x": 26.0,
+      "y": 32.0,
+      "open_time": 815.0,
+      "close_time": 880.0,
+      "duration": 90.0,
+      "base_score": 10.0,
+      "category": "food_drink",
+      "price": 300000.0,
+      "readable_name": "Hanoi Culinary Spot #50"
+    },
+    {
+      "id": 51,
+      "x": 25.0,
+      "y": 30.0,
+      "open_time": 725.0,
+      "close_time": 786.0,
+      "duration": 90.0,
+      "base_score": 10.0,
+      "category": "history_culture",
+      "price": 100000.0,
+      "readable_name": "Historic Heritage Site #51"
+    },
+    {
+      "id": 52,
+      "x": 25.0,
+      "y": 35.0,
+      "open_time": 912.0,
+      "close_time": 969.0,
+      "duration": 90.0,
+      "base_score": 10.0,
+      "category": "entertainment",
+      "price": 100000.0,
+      "readable_name": "Arts & Entertainment Venue #52"
+    },
+    {
+      "id": 53,
+      "x": 44.0,
+      "y": 5.0,
+      "open_time": 286.0,
+      "close_time": 347.0,
+      "duration": 90.0,
+      "base_score": 20.0,
+      "category": "food_drink",
+      "price": 150000.0,
+      "readable_name": "Hanoi Culinary Spot #53"
+    },
+    {
+      "id": 54,
+      "x": 42.0,
+      "y": 10.0,
+      "open_time": 186.0,
+      "close_time": 257.0,
+      "duration": 90.0,
+      "base_score": 40.0,
+      "category": "entertainment",
+      "price": 100000.0,
+      "readable_name": "Arts & Entertainment Venue #54"
+    },
+    {
+      "id": 55,
+      "x": 42.0,
+      "y": 15.0,
+      "open_time": 95.0,
+      "close_time": 158.0,
+      "duration": 90.0,
+      "base_score": 10.0,
+      "category": "history_culture",
+      "price": 30000.0,
+      "readable_name": "Historic Heritage Site #55"
+    },
+    {
+      "id": 56,
+      "x": 40.0,
+      "y": 5.0,
+      "open_time": 385.0,
+      "close_time": 436.0,
+      "duration": 90.0,
+      "base_score": 30.0,
+      "category": "entertainment",
+      "price": 500000.0,
+      "readable_name": "Arts & Entertainment Venue #56"
+    },
+    {
+      "id": 57,
+      "x": 40.0,
+      "y": 15.0,
+      "open_time": 35.0,
+      "close_time": 87.0,
+      "duration": 90.0,
+      "base_score": 40.0,
+      "category": "history_culture",
+      "price": 100000.0,
+      "readable_name": "Historic Heritage Site #57"
+    },
+    {
+      "id": 58,
+      "x": 38.0,
+      "y": 5.0,
+      "open_time": 471.0,
+      "close_time": 534.0,
+      "duration": 90.0,
+      "base_score": 30.0,
+      "category": "food_drink",
+      "price": 150000.0,
+      "readable_name": "Vietnam Museum of Ethnology"
+    },
+    {
+      "id": 59,
+      "x": 38.0,
+      "y": 15.0,
+      "open_time": 651.0,
+      "close_time": 740.0,
+      "duration": 90.0,
+      "base_score": 10.0,
+      "category": "history_culture",
+      "price": 100000.0,
+      "readable_name": "Historic Heritage Site #59"
+    },
+    {
+      "id": 60,
+      "x": 35.0,
+      "y": 5.0,
+      "open_time": 562.0,
+      "close_time": 629.0,
+      "duration": 90.0,
+      "base_score": 20.0,
+      "category": "nature_parks",
+      "price": 0.0,
+      "readable_name": "West Lake — Thanh Nien Promenade"
+    },
+    {
+      "id": 61,
+      "x": 50.0,
+      "y": 30.0,
+      "open_time": 531.0,
+      "close_time": 610.0,
+      "duration": 90.0,
+      "base_score": 10.0,
+      "category": "food_drink",
+      "price": 150000.0,
+      "readable_name": "Hanoi Culinary Spot #61"
+    },
+    {
+      "id": 62,
+      "x": 50.0,
+      "y": 35.0,
+      "open_time": 262.0,
+      "close_time": 317.0,
+      "duration": 90.0,
+      "base_score": 20.0,
+      "category": "entertainment",
+      "price": 100000.0,
+      "readable_name": "Arts & Entertainment Venue #62"
+    },
+    {
+      "id": 63,
+      "x": 50.0,
+      "y": 40.0,
+      "open_time": 171.0,
+      "close_time": 218.0,
+      "duration": 90.0,
+      "base_score": 50.0,
+      "category": "nature_parks",
+      "price": 0.0,
+      "readable_name": "Scenic Park & Garden #63"
+    },
+    {
+      "id": 64,
+      "x": 48.0,
+      "y": 30.0,
+      "open_time": 632.0,
+      "close_time": 693.0,
+      "duration": 90.0,
+      "base_score": 10.0,
+      "category": "food_drink",
+      "price": 800000.0,
+      "readable_name": "Hanoi Culinary Spot #64"
+    },
+    {
+      "id": 65,
+      "x": 48.0,
+      "y": 40.0,
+      "open_time": 76.0,
+      "close_time": 129.0,
+      "duration": 90.0,
+      "base_score": 10.0,
+      "category": "nature_parks",
+      "price": 0.0,
+      "readable_name": "Scenic Park & Garden #65"
+    },
+    {
+      "id": 66,
+      "x": 47.0,
+      "y": 35.0,
+      "open_time": 826.0,
+      "close_time": 875.0,
+      "duration": 90.0,
+      "base_score": 10.0,
+      "category": "history_culture",
+      "price": 50000.0,
+      "readable_name": "Historic Heritage Site #66"
+    },
+    {
+      "id": 67,
+      "x": 47.0,
+      "y": 40.0,
+      "open_time": 12.0,
+      "close_time": 77.0,
+      "duration": 90.0,
+      "base_score": 10.0,
+      "category": "history_culture",
+      "price": 50000.0,
+      "readable_name": "Historic Heritage Site #67"
+    },
+    {
+      "id": 68,
+      "x": 45.0,
+      "y": 30.0,
+      "open_time": 734.0,
+      "close_time": 777.0,
+      "duration": 90.0,
+      "base_score": 10.0,
+      "category": "shopping",
+      "price": 0.0,
+      "readable_name": "Commercial Shopping Hub #68"
+    },
+    {
+      "id": 69,
+      "x": 45.0,
+      "y": 35.0,
+      "open_time": 916.0,
+      "close_time": 969.0,
+      "duration": 90.0,
+      "base_score": 10.0,
+      "category": "food_drink",
+      "price": 50000.0,
+      "readable_name": "Hanoi Culinary Spot #69"
+    },
+    {
+      "id": 70,
+      "x": 95.0,
+      "y": 30.0,
+      "open_time": 387.0,
+      "close_time": 456.0,
+      "duration": 90.0,
+      "base_score": 30.0,
+      "category": "entertainment",
+      "price": 200000.0,
+      "readable_name": "Arts & Entertainment Venue #70"
+    },
+    {
+      "id": 71,
+      "x": 95.0,
+      "y": 35.0,
+      "open_time": 293.0,
+      "close_time": 360.0,
+      "duration": 90.0,
+      "base_score": 20.0,
+      "category": "nature_parks",
+      "price": 0.0,
+      "readable_name": "Scenic Park & Garden #71"
+    },
+    {
+      "id": 72,
+      "x": 53.0,
+      "y": 30.0,
+      "open_time": 450.0,
+      "close_time": 505.0,
+      "duration": 90.0,
+      "base_score": 10.0,
+      "category": "history_culture",
+      "price": 100000.0,
+      "readable_name": "Historic Heritage Site #72"
+    },
+    {
+      "id": 73,
+      "x": 92.0,
+      "y": 30.0,
+      "open_time": 478.0,
+      "close_time": 551.0,
+      "duration": 90.0,
+      "base_score": 10.0,
+      "category": "history_culture",
+      "price": 100000.0,
+      "readable_name": "Historic Heritage Site #73"
+    },
+    {
+      "id": 74,
+      "x": 53.0,
+      "y": 35.0,
+      "open_time": 353.0,
+      "close_time": 412.0,
+      "duration": 90.0,
+      "base_score": 50.0,
+      "category": "entertainment",
+      "price": 500000.0,
+      "readable_name": "Arts & Entertainment Venue #74"
+    },
+    {
+      "id": 75,
+      "x": 45.0,
+      "y": 65.0,
+      "open_time": 997.0,
+      "close_time": 1068.0,
+      "duration": 90.0,
+      "base_score": 20.0,
+      "category": "nightlife_wellness",
+      "price": 200000.0,
+      "readable_name": "Trang Tien Plaza & Gelato"
+    },
+    {
+      "id": 76,
+      "x": 90.0,
+      "y": 35.0,
+      "open_time": 203.0,
+      "close_time": 260.0,
+      "duration": 90.0,
+      "base_score": 10.0,
+      "category": "nature_parks",
+      "price": 0.0,
+      "readable_name": "Scenic Park & Garden #76"
+    },
+    {
+      "id": 77,
+      "x": 88.0,
+      "y": 30.0,
+      "open_time": 574.0,
+      "close_time": 643.0,
+      "duration": 90.0,
+      "base_score": 10.0,
+      "category": "shopping",
+      "price": 300000.0,
+      "readable_name": "Commercial Shopping Hub #77"
+    },
+    {
+      "id": 78,
+      "x": 88.0,
+      "y": 35.0,
+      "open_time": 109.0,
+      "close_time": 170.0,
+      "duration": 90.0,
+      "base_score": 20.0,
+      "category": "shopping",
+      "price": 0.0,
+      "readable_name": "Commercial Shopping Hub #78"
+    },
+    {
+      "id": 79,
+      "x": 87.0,
+      "y": 30.0,
+      "open_time": 668.0,
+      "close_time": 731.0,
+      "duration": 90.0,
+      "base_score": 10.0,
+      "category": "history_culture",
+      "price": 50000.0,
+      "readable_name": "Historic Heritage Site #79"
+    },
+    {
+      "id": 80,
+      "x": 85.0,
+      "y": 25.0,
+      "open_time": 769.0,
+      "close_time": 820.0,
+      "duration": 90.0,
+      "base_score": 10.0,
+      "category": "history_culture",
+      "price": 100000.0,
+      "readable_name": "Historic Heritage Site #80"
+    },
+    {
+      "id": 81,
+      "x": 85.0,
+      "y": 35.0,
+      "open_time": 47.0,
+      "close_time": 124.0,
+      "duration": 90.0,
+      "base_score": 30.0,
+      "category": "food_drink",
+      "price": 800000.0,
+      "readable_name": "Hanoi Culinary Spot #81"
+    },
+    {
+      "id": 82,
+      "x": 75.0,
+      "y": 55.0,
+      "open_time": 369.0,
+      "close_time": 420.0,
+      "duration": 90.0,
+      "base_score": 20.0,
+      "category": "history_culture",
+      "price": 50000.0,
+      "readable_name": "Historic Heritage Site #82"
+    },
+    {
+      "id": 83,
+      "x": 72.0,
+      "y": 55.0,
+      "open_time": 265.0,
+      "close_time": 338.0,
+      "duration": 90.0,
+      "base_score": 10.0,
+      "category": "food_drink",
+      "price": 800000.0,
+      "readable_name": "Hanoi Culinary Spot #83"
+    },
+    {
+      "id": 84,
+      "x": 70.0,
+      "y": 58.0,
+      "open_time": 458.0,
+      "close_time": 523.0,
+      "duration": 90.0,
+      "base_score": 20.0,
+      "category": "shopping",
+      "price": 0.0,
+      "readable_name": "Commercial Shopping Hub #84"
+    },
+    {
+      "id": 85,
+      "x": 68.0,
+      "y": 60.0,
+      "open_time": 555.0,
+      "close_time": 612.0,
+      "duration": 90.0,
+      "base_score": 30.0,
+      "category": "history_culture",
+      "price": 100000.0,
+      "readable_name": "Ho Chi Minh Mausoleum Complex"
+    },
+    {
+      "id": 86,
+      "x": 66.0,
+      "y": 55.0,
+      "open_time": 173.0,
+      "close_time": 238.0,
+      "duration": 90.0,
+      "base_score": 10.0,
+      "category": "shopping",
+      "price": 0.0,
+      "readable_name": "Commercial Shopping Hub #86"
+    },
+    {
+      "id": 87,
+      "x": 65.0,
+      "y": 55.0,
+      "open_time": 85.0,
+      "close_time": 144.0,
+      "duration": 90.0,
+      "base_score": 20.0,
+      "category": "history_culture",
+      "price": 30000.0,
+      "readable_name": "Historic Heritage Site #87"
+    },
+    {
+      "id": 88,
+      "x": 65.0,
+      "y": 60.0,
+      "open_time": 645.0,
+      "close_time": 708.0,
+      "duration": 90.0,
+      "base_score": 30.0,
+      "category": "nature_parks",
+      "price": 0.0,
+      "readable_name": "Vietnamese Women's Museum"
+    },
+    {
+      "id": 89,
+      "x": 63.0,
+      "y": 58.0,
+      "open_time": 737.0,
+      "close_time": 802.0,
+      "duration": 90.0,
+      "base_score": 10.0,
+      "category": "history_culture",
+      "price": 100000.0,
+      "readable_name": "Historic Heritage Site #89"
+    },
+    {
+      "id": 90,
+      "x": 60.0,
+      "y": 55.0,
+      "open_time": 20.0,
+      "close_time": 84.0,
+      "duration": 90.0,
+      "base_score": 10.0,
+      "category": "history_culture",
+      "price": 30000.0,
+      "readable_name": "Historic Heritage Site #90"
+    },
+    {
+      "id": 91,
+      "x": 60.0,
+      "y": 60.0,
+      "open_time": 836.0,
+      "close_time": 889.0,
+      "duration": 90.0,
+      "base_score": 10.0,
+      "category": "history_culture",
+      "price": 30000.0,
+      "readable_name": "Historic Heritage Site #91"
+    },
+    {
+      "id": 92,
+      "x": 67.0,
+      "y": 85.0,
+      "open_time": 368.0,
+      "close_time": 441.0,
+      "duration": 90.0,
+      "base_score": 20.0,
+      "category": "nature_parks",
+      "price": 0.0,
+      "readable_name": "Scenic Park & Garden #92"
+    },
+    {
+      "id": 93,
+      "x": 65.0,
+      "y": 85.0,
+      "open_time": 475.0,
+      "close_time": 518.0,
+      "duration": 90.0,
+      "base_score": 40.0,
+      "category": "entertainment",
+      "price": 200000.0,
+      "readable_name": "Arts & Entertainment Venue #93"
+    },
+    {
+      "id": 94,
+      "x": 65.0,
+      "y": 82.0,
+      "open_time": 285.0,
+      "close_time": 336.0,
+      "duration": 90.0,
+      "base_score": 10.0,
+      "category": "food_drink",
+      "price": 50000.0,
+      "readable_name": "Hanoi Culinary Spot #94"
+    },
+    {
+      "id": 95,
+      "x": 62.0,
+      "y": 80.0,
+      "open_time": 196.0,
+      "close_time": 239.0,
+      "duration": 90.0,
+      "base_score": 30.0,
+      "category": "shopping",
+      "price": 100000.0,
+      "readable_name": "Commercial Shopping Hub #95"
+    },
+    {
+      "id": 96,
+      "x": 60.0,
+      "y": 80.0,
+      "open_time": 95.0,
+      "close_time": 156.0,
+      "duration": 90.0,
+      "base_score": 10.0,
+      "category": "nature_parks",
+      "price": 0.0,
+      "readable_name": "Scenic Park & Garden #96"
+    },
+    {
+      "id": 97,
+      "x": 60.0,
+      "y": 85.0,
+      "open_time": 561.0,
+      "close_time": 622.0,
+      "duration": 90.0,
+      "base_score": 30.0,
+      "category": "history_culture",
+      "price": 50000.0,
+      "readable_name": "Historic Heritage Site #97"
+    },
+    {
+      "id": 98,
+      "x": 58.0,
+      "y": 75.0,
+      "open_time": 30.0,
+      "close_time": 84.0,
+      "duration": 90.0,
+      "base_score": 20.0,
+      "category": "nature_parks",
+      "price": 0.0,
+      "readable_name": "Scenic Park & Garden #98"
+    },
+    {
+      "id": 99,
+      "x": 55.0,
+      "y": 80.0,
+      "open_time": 743.0,
+      "close_time": 820.0,
+      "duration": 90.0,
+      "base_score": 10.0,
+      "category": "nature_parks",
+      "price": 0.0,
+      "readable_name": "Old Quarter Night Market"
+    },
+    {
+      "id": 100,
+      "x": 55.0,
+      "y": 85.0,
+      "open_time": 647.0,
+      "close_time": 726.0,
+      "duration": 90.0,
+      "base_score": 20.0,
+      "category": "history_culture",
+      "price": 50000.0,
+      "readable_name": "Historic Heritage Site #100"
+    }
+  ],
+  "presets": {
+    "food_culture": {
+      "preset": {
+        "id": "food_culture",
+        "name": "Culinary & Heritage",
+        "subtitle": "Traditional Hanoi cuisine, local street markets & ancient temples",
+        "budget": 500000,
+        "start_time": 8.0,
+        "end_time": 18.0,
+        "interests": {
+          "history_culture": 5,
+          "food_drink": 5,
+          "nature_parks": 3,
+          "entertainment": 2,
+          "shopping": 1,
+          "nightlife_wellness": 2
+        }
+      },
+      "summary": {
+        "total_score": 167.21,
+        "total_cost": 400000.0,
+        "total_distance": 129.69,
+        "total_duration": 9.66,
+        "execution_time": 2.445
+      },
+      "route": [
+        {
+          "order": 1,
+          "id": 0,
+          "name": "Hotel Central (Depot)",
+          "category": "depot",
+          "travel_distance": null,
+          "travel_time": null,
+          "arrival": "08:00",
+          "wait": 0,
+          "start": "08:00",
+          "leave": "08:00",
+          "cost": 0.0,
+          "score": 0.0
+        },
+        {
+          "order": 2,
+          "id": 58,
+          "name": "Vietnam Museum of Ethnology",
+          "category": "food_drink",
+          "travel_distance": 45.04,
+          "travel_time": 45,
+          "arrival": "08:45",
+          "wait": 0,
+          "start": "08:45",
+          "leave": "10:15",
+          "cost": 150000.0,
+          "score": 59.02
+        },
+        {
+          "order": 3,
+          "id": 60,
+          "name": "West Lake — Thanh Nien Promenade",
+          "category": "nature_parks",
+          "travel_distance": 3.0,
+          "travel_time": 3,
+          "arrival": "10:18",
+          "wait": 0,
+          "start": "10:18",
+          "leave": "11:48",
+          "cost": 0.0,
+          "score": 19.67
+        },
+        {
+          "order": 4,
+          "id": 34,
+          "name": "Quang Ba Night Flower Market",
+          "category": "food_drink",
+          "travel_distance": 48.26,
+          "travel_time": 48,
+          "arrival": "12:36",
+          "wait": 0,
+          "start": "12:36",
+          "leave": "14:06",
+          "cost": 50000.0,
+          "score": 39.34
+        },
+        {
+          "order": 5,
+          "id": 22,
+          "name": "Ngoc Son Temple — The Huc Bridge",
+          "category": "entertainment",
+          "travel_distance": 21.19,
+          "travel_time": 21,
+          "arrival": "14:27",
+          "wait": 0,
+          "start": "14:27",
+          "leave": "15:57",
+          "cost": 100000.0,
+          "score": 9.84
+        },
+        {
+          "order": 6,
+          "id": 21,
+          "name": "National Cinema Center",
+          "category": "history_culture",
+          "travel_distance": 2.0,
+          "travel_time": 2,
+          "arrival": "15:59",
+          "wait": 0,
+          "start": "15:59",
+          "leave": "17:29",
+          "cost": 100000.0,
+          "score": 39.34
+        },
+        {
+          "order": 7,
+          "id": 0,
+          "name": "Hotel Central (Depot)",
+          "category": "depot",
+          "travel_distance": 10.2,
+          "travel_time": 10,
+          "arrival": "17:40",
+          "wait": 0,
+          "start": null,
+          "leave": null,
+          "cost": 0.0,
+          "score": 0.0
+        }
+      ],
+      "convergence": [
+        {
+          "gen": 1,
+          "best_fitness": 149.2393069286264,
+          "avg_fitness": -7201.9834056738555,
+          "score": 157.37704918032787
+        },
+        {
+          "gen": 2,
+          "best_fitness": 167.21311475409837,
+          "avg_fitness": -5278.644627595735,
+          "score": 167.21311475409837
+        },
+        {
+          "gen": 3,
+          "best_fitness": 167.21311475409837,
+          "avg_fitness": -4751.768722604702,
+          "score": 167.21311475409837
+        },
+        {
+          "gen": 4,
+          "best_fitness": 167.21311475409837,
+          "avg_fitness": -3995.5952317293086,
+          "score": 167.21311475409837
+        },
+        {
+          "gen": 5,
+          "best_fitness": 167.21311475409837,
+          "avg_fitness": -3541.615117741443,
+          "score": 167.21311475409837
+        },
+        {
+          "gen": 6,
+          "best_fitness": 167.21311475409837,
+          "avg_fitness": -3338.9575759123145,
+          "score": 167.21311475409837
+        },
+        {
+          "gen": 7,
+          "best_fitness": 167.21311475409837,
+          "avg_fitness": -3240.0561473087064,
+          "score": 167.21311475409837
+        },
+        {
+          "gen": 8,
+          "best_fitness": 167.21311475409837,
+          "avg_fitness": -2792.825529901396,
+          "score": 167.21311475409837
+        },
+        {
+          "gen": 9,
+          "best_fitness": 167.21311475409837,
+          "avg_fitness": -2330.2066746053933,
+          "score": 167.21311475409837
+        },
+        {
+          "gen": 10,
+          "best_fitness": 167.21311475409837,
+          "avg_fitness": -1946.0145377250983,
+          "score": 167.21311475409837
+        },
+        {
+          "gen": 11,
+          "best_fitness": 167.21311475409837,
+          "avg_fitness": -1655.8001914216647,
+          "score": 167.21311475409837
+        },
+        {
+          "gen": 12,
+          "best_fitness": 167.21311475409837,
+          "avg_fitness": -1437.7126433845565,
+          "score": 167.21311475409837
+        },
+        {
+          "gen": 13,
+          "best_fitness": 167.21311475409837,
+          "avg_fitness": -1183.535768246246,
+          "score": 167.21311475409837
+        },
+        {
+          "gen": 14,
+          "best_fitness": 167.21311475409837,
+          "avg_fitness": -1083.4302785239952,
+          "score": 167.21311475409837
+        },
+        {
+          "gen": 15,
+          "best_fitness": 167.21311475409837,
+          "avg_fitness": -934.0020477492454,
+          "score": 167.21311475409837
+        },
+        {
+          "gen": 16,
+          "best_fitness": 167.21311475409837,
+          "avg_fitness": -686.136650148811,
+          "score": 167.21311475409837
+        },
+        {
+          "gen": 17,
+          "best_fitness": 167.21311475409837,
+          "avg_fitness": -587.6322334433044,
+          "score": 167.21311475409837
+        },
+        {
+          "gen": 18,
+          "best_fitness": 167.21311475409837,
+          "avg_fitness": -489.8036146672394,
+          "score": 167.21311475409837
+        },
+        {
+          "gen": 19,
+          "best_fitness": 167.21311475409837,
+          "avg_fitness": -390.9658850301606,
+          "score": 167.21311475409837
+        },
+        {
+          "gen": 20,
+          "best_fitness": 167.21311475409837,
+          "avg_fitness": -297.0396689082792,
+          "score": 167.21311475409837
+        },
+        {
+          "gen": 21,
+          "best_fitness": 167.21311475409837,
+          "avg_fitness": -140.2500428213791,
+          "score": 167.21311475409837
+        },
+        {
+          "gen": 22,
+          "best_fitness": 167.21311475409837,
+          "avg_fitness": -79.03034829055858,
+          "score": 167.21311475409837
+        },
+        {
+          "gen": 23,
+          "best_fitness": 167.21311475409837,
+          "avg_fitness": -18.307380098067,
+          "score": 167.21311475409837
+        },
+        {
+          "gen": 24,
+          "best_fitness": 167.21311475409837,
+          "avg_fitness": 12.006806601822802,
+          "score": 167.21311475409837
+        },
+        {
+          "gen": 25,
+          "best_fitness": 167.21311475409837,
+          "avg_fitness": 118.23447405530005,
+          "score": 167.21311475409837
+        },
+        {
+          "gen": 26,
+          "best_fitness": 167.21311475409837,
+          "avg_fitness": 118.85258868293884,
+          "score": 167.21311475409837
+        },
+        {
+          "gen": 27,
+          "best_fitness": 167.21311475409837,
+          "avg_fitness": 118.85258868293884,
+          "score": 167.21311475409837
+        }
+      ]
+    },
+    "history_buff": {
+      "preset": {
+        "id": "history_buff",
+        "name": "Historical Landmarks",
+        "subtitle": "Colonial architecture, war relics, imperial citadels & national museums",
+        "budget": 350000,
+        "start_time": 8.0,
+        "end_time": 17.5,
+        "interests": {
+          "history_culture": 5,
+          "food_drink": 2,
+          "nature_parks": 3,
+          "entertainment": 1,
+          "shopping": 1,
+          "nightlife_wellness": 1
+        }
+      },
+      "summary": {
+        "total_score": 252.63,
+        "total_cost": 350000.0,
+        "total_distance": 129.81,
+        "total_duration": 8.92,
+        "execution_time": 2.9267
+      },
+      "route": [
+        {
+          "order": 1,
+          "id": 0,
+          "name": "Hotel Central (Depot)",
+          "category": "depot",
+          "travel_distance": null,
+          "travel_time": null,
+          "arrival": "08:00",
+          "wait": 0,
+          "start": "08:00",
+          "leave": "08:00",
+          "cost": 0.0,
+          "score": 0.0
+        },
+        {
+          "order": 2,
+          "id": 85,
+          "name": "Ho Chi Minh Mausoleum Complex",
+          "category": "history_culture",
+          "travel_distance": 29.73,
+          "travel_time": 30,
+          "arrival": "08:30",
+          "wait": 45,
+          "start": "09:15",
+          "leave": "10:45",
+          "cost": 100000.0,
+          "score": 94.74
+        },
+        {
+          "order": 3,
+          "id": 100,
+          "name": "Historic Heritage Site #100",
+          "category": "history_culture",
+          "travel_distance": 28.18,
+          "travel_time": 28,
+          "arrival": "11:13",
+          "wait": 0,
+          "start": "11:13",
+          "leave": "12:43",
+          "cost": 50000.0,
+          "score": 63.16
+        },
+        {
+          "order": 4,
+          "id": 89,
+          "name": "Historic Heritage Site #89",
+          "category": "history_culture",
+          "travel_distance": 28.16,
+          "travel_time": 28,
+          "arrival": "13:11",
+          "wait": 0,
+          "start": "13:11",
+          "leave": "14:41",
+          "cost": 100000.0,
+          "score": 31.58
+        },
+        {
+          "order": 5,
+          "id": 21,
+          "name": "National Cinema Center",
+          "category": "history_culture",
+          "travel_distance": 33.54,
+          "travel_time": 34,
+          "arrival": "15:15",
+          "wait": 0,
+          "start": "15:15",
+          "leave": "16:45",
+          "cost": 100000.0,
+          "score": 63.16
+        },
+        {
+          "order": 6,
+          "id": 0,
+          "name": "Hotel Central (Depot)",
+          "category": "depot",
+          "travel_distance": 10.2,
+          "travel_time": 10,
+          "arrival": "16:55",
+          "wait": 0,
+          "start": null,
+          "leave": null,
+          "cost": 0.0,
+          "score": 0.0
+        }
+      ],
+      "convergence": [
+        {
+          "gen": 1,
+          "best_fitness": 243.5780064462958,
+          "avg_fitness": -6761.093746682607,
+          "score": 252.6315789473684
+        },
+        {
+          "gen": 2,
+          "best_fitness": 243.5780064462958,
+          "avg_fitness": -5469.20153818823,
+          "score": 252.6315789473684
+        },
+        {
+          "gen": 3,
+          "best_fitness": 243.5780064462958,
+          "avg_fitness": -4526.444396704504,
+          "score": 252.6315789473684
+        },
+        {
+          "gen": 4,
+          "best_fitness": 243.5780064462958,
+          "avg_fitness": -3554.817758469482,
+          "score": 252.6315789473684
+        },
+        {
+          "gen": 5,
+          "best_fitness": 243.5780064462958,
+          "avg_fitness": -2815.3074912949146,
+          "score": 252.6315789473684
+        },
+        {
+          "gen": 6,
+          "best_fitness": 243.5780064462958,
+          "avg_fitness": -1857.0881816545818,
+          "score": 252.6315789473684
+        },
+        {
+          "gen": 7,
+          "best_fitness": 243.5780064462958,
+          "avg_fitness": -1327.7960651547892,
+          "score": 252.6315789473684
+        },
+        {
+          "gen": 8,
+          "best_fitness": 243.5780064462958,
+          "avg_fitness": -976.7147560985792,
+          "score": 252.6315789473684
+        },
+        {
+          "gen": 9,
+          "best_fitness": 243.5780064462958,
+          "avg_fitness": -657.680490947013,
+          "score": 252.6315789473684
+        },
+        {
+          "gen": 10,
+          "best_fitness": 243.5780064462958,
+          "avg_fitness": -415.01029694446913,
+          "score": 252.6315789473684
+        },
+        {
+          "gen": 11,
+          "best_fitness": 243.5780064462958,
+          "avg_fitness": -311.80289984486205,
+          "score": 252.6315789473684
+        },
+        {
+          "gen": 12,
+          "best_fitness": 243.5780064462958,
+          "avg_fitness": -179.27356357637134,
+          "score": 252.6315789473684
+        },
+        {
+          "gen": 13,
+          "best_fitness": 243.5780064462958,
+          "avg_fitness": -93.9834044143192,
+          "score": 252.6315789473684
+        },
+        {
+          "gen": 14,
+          "best_fitness": 243.5780064462958,
+          "avg_fitness": -70.77602820873007,
+          "score": 252.6315789473684
+        },
+        {
+          "gen": 15,
+          "best_fitness": 243.5780064462958,
+          "avg_fitness": -47.02545911908149,
+          "score": 252.6315789473684
+        },
+        {
+          "gen": 16,
+          "best_fitness": 243.5780064462958,
+          "avg_fitness": -43.76889392059203,
+          "score": 252.6315789473684
+        },
+        {
+          "gen": 17,
+          "best_fitness": 243.5780064462958,
+          "avg_fitness": -16.165791669089632,
+          "score": 252.6315789473684
+        },
+        {
+          "gen": 18,
+          "best_fitness": 243.5780064462958,
+          "avg_fitness": -13.137367879366058,
+          "score": 252.6315789473684
+        },
+        {
+          "gen": 19,
+          "best_fitness": 243.5780064462958,
+          "avg_fitness": 1.6821466119309343,
+          "score": 252.6315789473684
+        },
+        {
+          "gen": 20,
+          "best_fitness": 243.5780064462958,
+          "avg_fitness": 16.394114978558587,
+          "score": 252.6315789473684
+        },
+        {
+          "gen": 21,
+          "best_fitness": 243.5780064462958,
+          "avg_fitness": 23.6120703148752,
+          "score": 252.6315789473684
+        },
+        {
+          "gen": 22,
+          "best_fitness": 243.5780064462958,
+          "avg_fitness": 43.072100962237265,
+          "score": 252.6315789473684
+        },
+        {
+          "gen": 23,
+          "best_fitness": 243.5780064462958,
+          "avg_fitness": 55.65597511335452,
+          "score": 252.6315789473684
+        },
+        {
+          "gen": 24,
+          "best_fitness": 243.5780064462958,
+          "avg_fitness": 69.95782880506627,
+          "score": 252.6315789473684
+        },
+        {
+          "gen": 25,
+          "best_fitness": 243.5780064462958,
+          "avg_fitness": 74.81346510928599,
+          "score": 252.6315789473684
+        }
+      ]
+    },
+    "nature_relax": {
+      "preset": {
+        "id": "nature_relax",
+        "name": "Nature & Leisure",
+        "subtitle": "Lakeside walks, botanical gardens & serene urban landscapes",
+        "budget": 200000,
+        "start_time": 8.5,
+        "end_time": 17.0,
+        "interests": {
+          "history_culture": 2,
+          "food_drink": 3,
+          "nature_parks": 5,
+          "entertainment": 2,
+          "shopping": 1,
+          "nightlife_wellness": 3
+        }
+      },
+      "summary": {
+        "total_score": 129.41,
+        "total_cost": 200000.0,
+        "total_distance": 89.85,
+        "total_duration": 7.75,
+        "execution_time": 2.5301
+      },
+      "route": [
+        {
+          "order": 1,
+          "id": 0,
+          "name": "Hotel Central (Depot)",
+          "category": "depot",
+          "travel_distance": null,
+          "travel_time": null,
+          "arrival": "08:30",
+          "wait": 0,
+          "start": "08:30",
+          "leave": "08:30",
+          "cost": 0.0,
+          "score": 0.0
+        },
+        {
+          "order": 2,
+          "id": 85,
+          "name": "Ho Chi Minh Mausoleum Complex",
+          "category": "history_culture",
+          "travel_distance": 29.73,
+          "travel_time": 30,
+          "arrival": "09:00",
+          "wait": 15,
+          "start": "09:15",
+          "leave": "10:45",
+          "cost": 100000.0,
+          "score": 17.65
+        },
+        {
+          "order": 3,
+          "id": 88,
+          "name": "Vietnamese Women's Museum",
+          "category": "nature_parks",
+          "travel_distance": 3.0,
+          "travel_time": 3,
+          "arrival": "10:48",
+          "wait": 0,
+          "start": "10:48",
+          "leave": "12:18",
+          "cost": 0.0,
+          "score": 70.59
+        },
+        {
+          "order": 4,
+          "id": 99,
+          "name": "Old Quarter Night Market",
+          "category": "nature_parks",
+          "travel_distance": 22.36,
+          "travel_time": 22,
+          "arrival": "12:40",
+          "wait": 0,
+          "start": "12:40",
+          "leave": "14:10",
+          "cost": 0.0,
+          "score": 23.53
+        },
+        {
+          "order": 5,
+          "id": 2,
+          "name": "Central Circus Theater",
+          "category": "entertainment",
+          "travel_distance": 14.14,
+          "travel_time": 14,
+          "arrival": "14:25",
+          "wait": 0,
+          "start": "14:25",
+          "leave": "15:55",
+          "cost": 100000.0,
+          "score": 17.65
+        },
+        {
+          "order": 6,
+          "id": 0,
+          "name": "Hotel Central (Depot)",
+          "category": "depot",
+          "travel_distance": 20.62,
+          "travel_time": 21,
+          "arrival": "16:15",
+          "wait": 0,
+          "start": null,
+          "leave": null,
+          "cost": 0.0,
+          "score": 0.0
+        }
+      ],
+      "convergence": [
+        {
+          "gen": 1,
+          "best_fitness": 126.35819220480977,
+          "avg_fitness": -4776.39205837488,
+          "score": 129.41176470588238
+        },
+        {
+          "gen": 2,
+          "best_fitness": 126.35819220480977,
+          "avg_fitness": -4357.960819561807,
+          "score": 129.41176470588238
+        },
+        {
+          "gen": 3,
+          "best_fitness": 126.35819220480977,
+          "avg_fitness": -3033.129372619136,
+          "score": 129.41176470588238
+        },
+        {
+          "gen": 4,
+          "best_fitness": 126.35819220480977,
+          "avg_fitness": -2324.584071222008,
+          "score": 129.41176470588238
+        },
+        {
+          "gen": 5,
+          "best_fitness": 126.35819220480977,
+          "avg_fitness": -1943.3473807176013,
+          "score": 129.41176470588238
+        },
+        {
+          "gen": 6,
+          "best_fitness": 126.35819220480977,
+          "avg_fitness": -1877.5223324304275,
+          "score": 129.41176470588238
+        },
+        {
+          "gen": 7,
+          "best_fitness": 126.35819220480977,
+          "avg_fitness": -1642.3224363958032,
+          "score": 129.41176470588238
+        },
+        {
+          "gen": 8,
+          "best_fitness": 126.35819220480977,
+          "avg_fitness": -1458.7278864007917,
+          "score": 129.41176470588238
+        },
+        {
+          "gen": 9,
+          "best_fitness": 126.35819220480977,
+          "avg_fitness": -1391.0350850677476,
+          "score": 129.41176470588238
+        },
+        {
+          "gen": 10,
+          "best_fitness": 126.35819220480977,
+          "avg_fitness": -1222.0285536334518,
+          "score": 129.41176470588238
+        },
+        {
+          "gen": 11,
+          "best_fitness": 126.35819220480977,
+          "avg_fitness": -1041.2286314179228,
+          "score": 129.41176470588238
+        },
+        {
+          "gen": 12,
+          "best_fitness": 126.35819220480977,
+          "avg_fitness": -988.090495781033,
+          "score": 129.41176470588238
+        },
+        {
+          "gen": 13,
+          "best_fitness": 126.35819220480977,
+          "avg_fitness": -937.342383683686,
+          "score": 129.41176470588238
+        },
+        {
+          "gen": 14,
+          "best_fitness": 126.35819220480977,
+          "avg_fitness": -826.5744093746736,
+          "score": 129.41176470588238
+        },
+        {
+          "gen": 15,
+          "best_fitness": 126.35819220480977,
+          "avg_fitness": -733.6941887094725,
+          "score": 129.41176470588238
+        },
+        {
+          "gen": 16,
+          "best_fitness": 126.35819220480977,
+          "avg_fitness": -691.2727610056646,
+          "score": 129.41176470588238
+        },
+        {
+          "gen": 17,
+          "best_fitness": 126.35819220480977,
+          "avg_fitness": -633.4347367580971,
+          "score": 129.41176470588238
+        },
+        {
+          "gen": 18,
+          "best_fitness": 126.35819220480977,
+          "avg_fitness": -605.1141370054344,
+          "score": 129.41176470588238
+        },
+        {
+          "gen": 19,
+          "best_fitness": 126.35819220480977,
+          "avg_fitness": -526.9960123773723,
+          "score": 129.41176470588238
+        },
+        {
+          "gen": 20,
+          "best_fitness": 126.35819220480977,
+          "avg_fitness": -477.9219947462035,
+          "score": 129.41176470588238
+        },
+        {
+          "gen": 21,
+          "best_fitness": 126.35819220480977,
+          "avg_fitness": -430.12544825916353,
+          "score": 129.41176470588238
+        },
+        {
+          "gen": 22,
+          "best_fitness": 126.35819220480977,
+          "avg_fitness": -337.7441629272426,
+          "score": 129.41176470588238
+        },
+        {
+          "gen": 23,
+          "best_fitness": 126.35819220480977,
+          "avg_fitness": -315.7300557098472,
+          "score": 129.41176470588238
+        },
+        {
+          "gen": 24,
+          "best_fitness": 126.35819220480977,
+          "avg_fitness": -294.8678789388663,
+          "score": 129.41176470588238
+        },
+        {
+          "gen": 25,
+          "best_fitness": 126.35819220480977,
+          "avg_fitness": -239.8881843025996,
+          "score": 129.41176470588238
+        },
+        {
+          "gen": 26,
+          "best_fitness": 126.35819220480977,
+          "avg_fitness": -220.40629908459996,
+          "score": 129.41176470588238
+        }
+      ]
+    },
+    "urban_lifestyle": {
+      "preset": {
+        "id": "urban_lifestyle",
+        "name": "Urban & Nightlife",
+        "subtitle": "Contemporary art, shopping complexes, cinemas & evening venues",
+        "budget": 800000,
+        "start_time": 9.0,
+        "end_time": 21.0,
+        "interests": {
+          "history_culture": 1,
+          "food_drink": 4,
+          "nature_parks": 1,
+          "entertainment": 5,
+          "shopping": 5,
+          "nightlife_wellness": 5
+        }
+      },
+      "summary": {
+        "total_score": 137.14,
+        "total_cost": 800000.0,
+        "total_distance": 111.65,
+        "total_duration": 11.48,
+        "execution_time": 3.0185
+      },
+      "route": [
+        {
+          "order": 1,
+          "id": 0,
+          "name": "Hotel Central (Depot)",
+          "category": "depot",
+          "travel_distance": null,
+          "travel_time": null,
+          "arrival": "09:00",
+          "wait": 0,
+          "start": "09:00",
+          "leave": "09:00",
+          "cost": 0.0,
+          "score": 0.0
+        },
+        {
+          "order": 2,
+          "id": 9,
+          "name": "Vietnam National Fine Arts Museum",
+          "category": "food_drink",
+          "travel_distance": 20.1,
+          "travel_time": 20,
+          "arrival": "09:20",
+          "wait": 0,
+          "start": "09:20",
+          "leave": "10:50",
+          "cost": 300000.0,
+          "score": 11.69
+        },
+        {
+          "order": 3,
+          "id": 6,
+          "name": "Tong Duy Tan Culinary Street",
+          "category": "shopping",
+          "travel_distance": 2.24,
+          "travel_time": 2,
+          "arrival": "10:52",
+          "wait": 0,
+          "start": "10:52",
+          "leave": "12:22",
+          "cost": 0.0,
+          "score": 31.17
+        },
+        {
+          "order": 4,
+          "id": 99,
+          "name": "Old Quarter Night Market",
+          "category": "nature_parks",
+          "travel_distance": 18.6,
+          "travel_time": 19,
+          "arrival": "12:41",
+          "wait": 0,
+          "start": "12:41",
+          "leave": "14:11",
+          "cost": 0.0,
+          "score": 0.78
+        },
+        {
+          "order": 5,
+          "id": 2,
+          "name": "Central Circus Theater",
+          "category": "entertainment",
+          "travel_distance": 14.14,
+          "travel_time": 14,
+          "arrival": "14:25",
+          "wait": 0,
+          "start": "14:25",
+          "leave": "15:55",
+          "cost": 100000.0,
+          "score": 46.75
+        },
+        {
+          "order": 6,
+          "id": 75,
+          "name": "Trang Tien Plaza & Gelato",
+          "category": "nightlife_wellness",
+          "travel_distance": 5.0,
+          "travel_time": 5,
+          "arrival": "16:00",
+          "wait": 37,
+          "start": "16:37",
+          "leave": "18:07",
+          "cost": 200000.0,
+          "score": 31.17
+        },
+        {
+          "order": 7,
+          "id": 47,
+          "name": "Hoan Kiem Lake Promenade",
+          "category": "nightlife_wellness",
+          "travel_distance": 33.54,
+          "travel_time": 34,
+          "arrival": "18:41",
+          "wait": 0,
+          "start": "18:41",
+          "leave": "20:11",
+          "cost": 200000.0,
+          "score": 15.58
+        },
+        {
+          "order": 8,
+          "id": 0,
+          "name": "Hotel Central (Depot)",
+          "category": "depot",
+          "travel_distance": 18.03,
+          "travel_time": 18,
+          "arrival": "20:29",
+          "wait": 0,
+          "start": null,
+          "leave": null,
+          "cost": 0.0,
+          "score": 0.0
+        }
+      ],
+      "convergence": [
+        {
+          "gen": 1,
+          "best_fitness": 129.7586631590993,
+          "avg_fitness": 85.02719352761488,
+          "score": 137.14285714285714
+        },
+        {
+          "gen": 2,
+          "best_fitness": 129.7586631590993,
+          "avg_fitness": 82.42478266902181,
+          "score": 137.14285714285714
+        },
+        {
+          "gen": 3,
+          "best_fitness": 129.7586631590993,
+          "avg_fitness": 90.71600384989488,
+          "score": 137.14285714285714
+        },
+        {
+          "gen": 4,
+          "best_fitness": 129.7586631590993,
+          "avg_fitness": 93.59122509661141,
+          "score": 137.14285714285714
+        },
+        {
+          "gen": 5,
+          "best_fitness": 129.7586631590993,
+          "avg_fitness": 97.30298470164644,
+          "score": 137.14285714285714
+        },
+        {
+          "gen": 6,
+          "best_fitness": 129.7586631590993,
+          "avg_fitness": 100.04855140928548,
+          "score": 137.14285714285714
+        },
+        {
+          "gen": 7,
+          "best_fitness": 129.7586631590993,
+          "avg_fitness": 101.28448200047687,
+          "score": 137.14285714285714
+        },
+        {
+          "gen": 8,
+          "best_fitness": 129.7586631590993,
+          "avg_fitness": 102.19339513200035,
+          "score": 137.14285714285714
+        },
+        {
+          "gen": 9,
+          "best_fitness": 129.7586631590993,
+          "avg_fitness": 103.43796433729875,
+          "score": 137.14285714285714
+        },
+        {
+          "gen": 10,
+          "best_fitness": 129.7586631590993,
+          "avg_fitness": 104.3068281411118,
+          "score": 137.14285714285714
+        },
+        {
+          "gen": 11,
+          "best_fitness": 129.7586631590993,
+          "avg_fitness": 104.74158834928255,
+          "score": 137.14285714285714
+        },
+        {
+          "gen": 12,
+          "best_fitness": 129.7586631590993,
+          "avg_fitness": 105.21312606613111,
+          "score": 137.14285714285714
+        },
+        {
+          "gen": 13,
+          "best_fitness": 129.7586631590993,
+          "avg_fitness": 105.34561136114054,
+          "score": 137.14285714285714
+        },
+        {
+          "gen": 14,
+          "best_fitness": 129.7586631590993,
+          "avg_fitness": 106.13834632744367,
+          "score": 137.14285714285714
+        },
+        {
+          "gen": 15,
+          "best_fitness": 129.7586631590993,
+          "avg_fitness": 106.54232854231174,
+          "score": 137.14285714285714
+        },
+        {
+          "gen": 16,
+          "best_fitness": 129.7586631590993,
+          "avg_fitness": 106.77966056723466,
+          "score": 137.14285714285714
+        },
+        {
+          "gen": 17,
+          "best_fitness": 129.7586631590993,
+          "avg_fitness": 106.97632824721653,
+          "score": 137.14285714285714
+        },
+        {
+          "gen": 18,
+          "best_fitness": 129.7586631590993,
+          "avg_fitness": 106.97632824721653,
+          "score": 137.14285714285714
+        },
+        {
+          "gen": 19,
+          "best_fitness": 129.7586631590993,
+          "avg_fitness": 107.05438973716268,
+          "score": 137.14285714285714
+        },
+        {
+          "gen": 20,
+          "best_fitness": 129.7586631590993,
+          "avg_fitness": 107.22833286261006,
+          "score": 137.14285714285714
+        },
+        {
+          "gen": 21,
+          "best_fitness": 129.7586631590993,
+          "avg_fitness": 107.42170903046294,
+          "score": 137.14285714285714
+        },
+        {
+          "gen": 22,
+          "best_fitness": 129.7586631590993,
+          "avg_fitness": 107.59648834868214,
+          "score": 137.14285714285714
+        },
+        {
+          "gen": 23,
+          "best_fitness": 129.7586631590993,
+          "avg_fitness": 107.78387871149894,
+          "score": 137.14285714285714
+        },
+        {
+          "gen": 24,
+          "best_fitness": 129.7586631590993,
+          "avg_fitness": 107.95835518795268,
+          "score": 137.14285714285714
+        },
+        {
+          "gen": 25,
+          "best_fitness": 129.7586631590993,
+          "avg_fitness": 108.18972526240601,
+          "score": 137.14285714285714
+        },
+        {
+          "gen": 26,
+          "best_fitness": 129.7586631590993,
+          "avg_fitness": 108.18972526240601,
+          "score": 137.14285714285714
+        }
+      ]
+    }
+  }
+}
